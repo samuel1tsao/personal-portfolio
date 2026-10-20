@@ -2,7 +2,9 @@
 
 Public source: [samuel1tsao/personal-portfolio](https://github.com/samuel1tsao/personal-portfolio).
 
-Planning a public software engineering and applied ML portfolio, intended for Vercel hosting.
+Live portfolio: [samuel-tsao.vercel.app](https://samuel-tsao.vercel.app).
+
+Personal software engineering and applied ML portfolio, deployed as Vercel services.
 
 Stack: React/Next.js frontend, Python/FastAPI content backend, and an owner-only Vercel AI Gateway routing experiment using available free credits.
 

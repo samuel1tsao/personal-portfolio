@@ -1,5 +1,7 @@
 # Development and deployment
 
+Production: [samuel-tsao.vercel.app](https://samuel-tsao.vercel.app). Vercel project: `samuel-tsao` in `samuel-tsao-s-projects`, linked to GitHub `main`. `SITE_URL=https://samuel-tsao.vercel.app`; production is indexable and previews are noindex. Only the frontend is public. Backend API paths return 404 on the public site.
+
 ## Local setup
 
 Requires Node 22 or 24, pnpm 11.25.0, uv, and Python 3.12. Locked dependencies are in `frontend/pnpm-lock.yaml` and `backend/uv.lock`. The bundled pnpm runtime used Node 24 locally; CI is configured for Node 22.

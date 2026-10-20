@@ -38,7 +38,7 @@ jobs:
       - name: Start content service after build
         working-directory: backend
         run: |
-          uv run uvicorn app:app --host 127.0.0.1 --port 8000 > /tmp/portfolio-api.log 2>&1 &
+          ./.venv/bin/python -m uvicorn app:app --host 127.0.0.1 --port 8000 > /tmp/portfolio-api.log 2>&1 &
           for attempt in {1..20}; do curl --fail http://127.0.0.1:8000/api/v1/portfolio && break; sleep 1; done
       - name: Browser checks
         working-directory: frontend
