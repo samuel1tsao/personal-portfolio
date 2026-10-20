@@ -2,7 +2,7 @@
 
 Source: [implementation plan](docs/features/personal-portfolio-implementation.md).
 Goal: recruiter portfolio with React, Python content service, and private Gateway CLI.
-Status: local implementation complete and verified on 2026-10-20. Publishing source to the authorized public GitHub repository; Vercel device login is pending. No paid LLM requests performed.
+Status: source published to public `samuel1tsao/personal-portfolio` on 2026-10-20. Remote Python and frontend check steps passed. Vercel device login is pending. No paid LLM requests performed.
 
 ## Working agreements
 
@@ -21,7 +21,7 @@ Status: local implementation complete and verified on 2026-10-20. Publishing sou
 | DONE | Performance/load | 20 concurrent reads pass; modern JS ~134 KiB gzip; indexable mobile Lighthouse 99 performance / 100 accessibility / 100 SEO |
 | DONE | Race/idempotency | Concurrent/repeat API reads identical and isolated; no persistent writes or shared counters |
 | DONE | Deployment/CI/runbook | GitHub workflow and deployment guide added; local rewrite/revision build verified |
-| IN_PROGRESS | GitHub publication | Public `samuel1tsao/personal-portfolio` created; reviewed source staged, private research excluded |
+| DONE | GitHub publication | Public `samuel1tsao/personal-portfolio`, default branch `main`; source pushed and remote Python/frontend checks passed; private research excluded |
 | BLOCKED | Remote Vercel rollout | Official device login awaiting user authentication; project deployment follows login |
 
 ## Verification and fixes
@@ -37,4 +37,4 @@ Fixed low-contrast decorative numbers, enlarged-text overflow, wordmark wrapping
 
 ## Remaining rollout inputs
 
-Use [development and deployment guide](docs/development-and-deployment.md). Configure Vercel project pair/domain and verify remote previews, protection, HTTPS and DNS. Set Gateway key/eligible IDs privately before owner-run experiments. Review public email, roles, optional PDF and any future employer metrics/repository links before publishing. GitHub workflows are configured but have not run remotely. Field vitals and actual indexing require deployment and traffic. No coding work remains pending those external inputs.
+Use [development and deployment guide](docs/development-and-deployment.md). Complete the Vercel device login already initiated, then configure the project pair and verify remote previews/protection/HTTPS. A custom domain can follow the initial Vercel-hosted release. Set Gateway key/eligible IDs privately before owner-run experiments. Original PDF and unreviewed metrics/client details are not published. GitHub Actions has passed the remote Python and frontend check steps. Field vitals and actual indexing require deployment and traffic.
