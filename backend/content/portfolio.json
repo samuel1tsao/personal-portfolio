@@ -1,0 +1,70 @@
+{
+  "schema_version": "1",
+  "updated": "2026-10-20",
+  "profile": {
+    "name": "Samuel Tsao",
+    "headline": "Reliable systems. Thoughtful intelligence.",
+    "intro": "I'm a senior software engineer building production systems and exploring applied machine learning. My work spans financial technology, marketplaces, and cloud infrastructure.",
+    "location": "San Jose, California",
+    "email": "tsao1samuel@gmail.com",
+    "about": "I care about the space between an idea and a system people can rely on. My experience ranges from financial workflows and marketplace search to infrastructure automation. Today, I'm deepening that foundation through graduate study in artificial intelligence and hands-on work with recommendation systems.",
+    "education": ["M.S. Artificial Intelligence · San José State University · Expected 2027", "B.S. Computer Science · University of California, San Diego · 2017"],
+    "skills": ["Python", "TypeScript", "Kotlin", "Java", "SQL", "AWS", "Docker", "Kubernetes", "Terraform", "PostgreSQL", "PyTorch", "Recommendation systems"],
+    "links": [
+      {"label": "GitHub", "url": "https://github.com/samuel1tsao"},
+      {"label": "LinkedIn", "url": "https://www.linkedin.com/in/samuel-tsao/"}
+    ],
+    "roles": [
+      {"company": "Human Interest", "title": "Senior Software Engineer", "start": "2025-07-01", "summary": "Record keeping, financial workflows, and cloud infrastructure automation."},
+      {"company": "Nursa", "title": "Senior Software Engineer", "start": "2023-05-01", "end": "2025-03-01", "summary": "Marketplace search, geographic discovery, and recommendation infrastructure."},
+      {"company": "Affirm", "title": "Software Engineer", "start": "2021-12-01", "end": "2023-03-01", "summary": "Marketplace monetization, advertising backend infrastructure, and experimentation."},
+      {"company": "Proofpoint", "title": "Software Engineer", "start": "2019-03-01", "end": "2021-12-01", "summary": "Identity management, data migration, search, and developer tooling."},
+      {"company": "Kaiser Permanente", "title": "IT Rotational Associate", "start": "2017-07-01", "end": "2019-03-01", "summary": "Early-career foundation in enterprise technology."}
+    ]
+  },
+  "stories": [
+    {
+      "slug": "asset-recommendation-engine", "kind": "project", "order": 0, "published": true,
+      "title": "Recommendations with a longer horizon",
+      "summary": "Exploring how Transformer models and reinforcement learning can connect financial goals, risk, and portfolio decisions.",
+      "role": "ML engineering & application development", "period": "Applied ML project",
+      "contribution": "Architected Transformer-based models for financial data and a reinforcement-learning recommendation policy, supported by a React interface and Python API.",
+      "skills": ["Python", "PyTorch", "React", "FastAPI", "Reinforcement learning"],
+      "sections": [
+        {"title": "The problem", "body": "Asset recommendations need to account for more than similarity or historical returns. This project explores goal fulfillment, volatility, and drawdown together, across different risk profiles."},
+        {"title": "The approach", "body": "Historical market data feeds Transformer models and a Gaussian policy-gradient recommendation model. Block bootstrap and Monte Carlo simulations support evaluation under a range of market scenarios."},
+        {"title": "Evaluation and boundaries", "body": "The evaluation considers policy convergence, risk-profile behavior, and comparisons with S&P 500 and 60/40 baselines. Published comparative results are not yet available. Simulations are experimental and do not establish future investment performance."}
+      ],
+      "diagram": ["Market history", "Transformer models", "Recommendation policy", "Scenario evaluation"],
+      "evidence": "Project summary based on my resume. This diagram is a conceptual overview, not a complete deployment architecture."
+    },
+    {
+      "slug": "infrastructure-autoscaling", "kind": "experience", "order": 1, "published": true,
+      "title": "Infrastructure that adapts to demand",
+      "summary": "Cloud automation and financial workflows at Human Interest, with reliability and operational efficiency in view.",
+      "role": "Senior Software Engineer · Human Interest", "period": "July 2025–present",
+      "contribution": "Worked on enterprise ECS autoscaling frameworks and automation for dividend allocation, reinvestment, and liquidation workflows.",
+      "skills": ["AWS", "ECS", "Backend systems", "Financial workflows"],
+      "sections": [
+        {"title": "The engineering context", "body": "Financial record keeping combines operational scale with workflows that need careful, predictable behavior. Infrastructure efficiency and dependable execution both matter."},
+        {"title": "My contribution", "body": "My work includes ECS autoscaling frameworks and automated dividend allocation workflows. This overview describes the scope of my work without exposing internal implementation details."},
+        {"title": "What I can share", "body": "Specific internal designs and detailed measurements are omitted here. I'm happy to discuss the engineering principles and my role at an appropriate level of detail."}
+      ],
+      "evidence": "Experience summary based on my resume; employer code and architecture are private."
+    },
+    {
+      "slug": "marketplace-search", "kind": "experience", "order": 2, "published": true,
+      "title": "Helping people find the right opportunity",
+      "summary": "Search, geographic discovery, and recommendation systems for Nursa's marketplace.",
+      "role": "Senior Software Engineer · Nursa", "period": "May 2023–March 2025",
+      "contribution": "Developed backend recommendation infrastructure, maps and geographic search, and core search with Algolia fuzzy matching and filtering.",
+      "skills": ["Search", "Recommendations", "Algolia", "Backend systems"],
+      "sections": [
+        {"title": "The problem", "body": "Marketplace discovery depends on making relevant opportunities easy to find. Search quality, geographic context, and the freshness of ranking updates each shape that experience."},
+        {"title": "My contribution", "body": "I worked on recommendation backend performance, geographic search capabilities, and Algolia-based search with fuzzy matching and filtering."},
+        {"title": "Product and engineering", "body": "This work connected backend performance with user-facing discovery. Detailed employer measurements and internal designs are omitted; the emphasis here is the problem space and my contribution."}
+      ],
+      "evidence": "Experience summary based on my resume; public repository and demo links are not available."
+    }
+  ]
+}

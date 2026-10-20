@@ -1,0 +1,114 @@
+import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+
+const VIEWPORTS = [320, 768, 1440];
+const STORY_PATH = "/work/asset-recommendation-engine";
+const JS_BUDGET = 150 * 1024;
+
+test("recruiter paths, API rewrite, metadata and recovery", async ({ page, request }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle(/Samuel Tsao/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Reliable systems");
+  await page
+    .getByRole("link", { name: "Recommendations with a longer horizon", exact: true })
+    .click();
+  await expect(page.getByText("My contribution", { exact: true })).toBeVisible();
+  await expect(page.getByText("Architected Transformer-based models")).toBeVisible();
+  await expect(page.locator("figure")).toBeVisible();
+  await page.getByRole("link", { name: "Resume", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Samuel Tsao", exact: true })).toBeVisible();
+  expect((await request.get("/api/v1/portfolio")).status()).toBe(200);
+  const missing = await page.goto("/work/missing-story");
+  expect(missing?.status()).toBe(404);
+  await page.getByRole("link", { name: "Back to home" }).click();
+  await expect(page).toHaveURL("/");
+  const html = await (await request.get("/")).text();
+  expect(html).toContain("application/ld+json");
+  expect(html).toContain('rel="canonical"');
+  expect(html).not.toContain("AI_GATEWAY_API_KEY");
+});
+
+for (const width of VIEWPORTS) {
+  test(`responsive and accessible at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    const results = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+      .analyze();
+    expect(results.violations).toEqual([]);
+    await page.screenshot({ path: `artifacts/home-${width}.png`, fullPage: true });
+    await page.goto(STORY_PATH);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    const storyResults = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze();
+    expect(storyResults.violations).toEqual([]);
+  });
+}
+
+test("clipboard failure retains contact recovery", async ({ page }) => {
+  await page.addInitScript(() =>
+    Object.defineProperty(navigator, "clipboard", {
+      value: { writeText: () => Promise.reject(new Error("denied")) },
+    }),
+  );
+  await page.goto("/#connect");
+  await page.getByRole("button", { name: "Copy email" }).click();
+  await expect(page.getByRole("status")).toContainText("Select this address");
+  await expect(page.getByRole("link", { name: /tsao1samuel@gmail.com/ })).toHaveAttribute(
+    "href",
+    "mailto:tsao1samuel@gmail.com",
+  );
+});
+
+test("copy success, keyboard focus, reduced motion and zoom", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
+  await page.getByRole("button", { name: "Copy email" }).click();
+  await expect(page.getByRole("status")).toHaveText("Email copied.");
+  await page.setViewportSize({ width: 640, height: 450 });
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("core paths work without JavaScript", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("http://127.0.0.1:3000/");
+  await page
+    .getByRole("link", { name: "Recommendations with a longer horizon", exact: true })
+    .click();
+  await expect(page.getByRole("heading", { name: "The problem" })).toBeVisible();
+  await context.close();
+});
+
+test("20 simultaneous API requests are identical", async ({ request }) => {
+  const responses = await Promise.all(
+    Array.from({ length: 20 }, () => request.get("/api/v1/portfolio")),
+  );
+  expect(responses.every((response) => response.status() === 200)).toBe(true);
+  const bodies = await Promise.all(responses.map((response) => response.text()));
+  expect(new Set(bodies).size).toBe(1);
+});
+
+test("initial JavaScript transfer stays within budget", async ({ page }) => {
+  await page.goto("/");
+  const scripts = await page
+    .locator("script[src]:not([nomodule])")
+    .evaluateAll((nodes) => nodes.map((node) => (node as HTMLScriptElement).src));
+  let bytes = 0;
+  for (const url of scripts) {
+    const response = await page.request.get(url);
+    const { gzipSync } = await import("node:zlib");
+    bytes += gzipSync(await response.body()).byteLength;
+  }
+  expect(bytes).toBeLessThanOrEqual(JS_BUDGET);
+});

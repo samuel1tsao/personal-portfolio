@@ -1,0 +1,50 @@
+name: Portfolio checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.2"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: pnpm/action-setup@v4
+        with:
+          version: "11.25.0"
+      - name: Python contracts and format
+        working-directory: backend
+        run: |
+          uv sync --frozen
+          uv run ruff check .
+          uv run ruff format --check .
+          uv run pytest -q
+      - name: Start content service
+        working-directory: backend
+        run: |
+          uv run uvicorn app:app --host 127.0.0.1 --port 8000 > /tmp/portfolio-api.log 2>&1 &
+          for attempt in {1..20}; do curl --fail http://127.0.0.1:8000/api/v1/portfolio && break; sleep 1; done
+      - name: Frontend checks
+        working-directory: frontend
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm format:check
+          pnpm lint
+          pnpm test
+          pnpm build
+          pnpm typecheck
+          pnpm exec playwright install --with-deps chromium
+          pnpm test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-verification
+          path: |
+            frontend/artifacts
+            frontend/test-results

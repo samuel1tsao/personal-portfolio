@@ -1,0 +1,14 @@
+node_modules/
+.next/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.env*
+!.env.example
+.vercel/
+test-results/
+playwright-report/
+artifacts/
+*.tsbuildinfo
+docs/content-inventory.md
