@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import lighthouse from "lighthouse";
 import { chromium } from "@playwright/test";
 
-const TARGET = "http://127.0.0.1:3000";
+const TARGET = process.env.AUDIT_URL || "http://127.0.0.1:3000";
 const OUTPUT = "artifacts/lighthouse.json";
 const MIN_SCORE = 0.95;
 const DEBUG_PORT = 9222;

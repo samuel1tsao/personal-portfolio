@@ -18,33 +18,59 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Visit `http://127.0.0.1:3000`. Content is served by FastAPI and rendered into HTML by Next.js. The local API rewrite is `/api/v1/portfolio`; deployed and build-time requests use `CONTENT_API_URL`. Copy `.env.example` to `.env.local` in the frontend when configuring a deployment. Local defaults require no secrets.
+Visit `http://127.0.0.1:3000`. Content is served by FastAPI and rendered into HTML by Next.js. Next.js has no browser-facing API proxy; both separate-server development and deployed server rendering fetch content server-side. Deployed functions use the runtime `CONTENT_SERVICE_URL` binding, and builds make no content requests. Copy `.env.example` to `.env.local` in the frontend when configuring a deployment. Local defaults require no secrets.
 
 ## Checks
 
 Backend: `uv run pytest -q`, `uv run ruff check .`, `uv run ruff format --check .`.
 
-Frontend: `pnpm format:check`, `pnpm lint`, `pnpm test`, `pnpm build`, `pnpm typecheck`. Keep the Python API running during build. For browser tests run `pnpm exec playwright install chromium` followed by `pnpm test:e2e`; Playwright starts a production Next.js server. It checks recruiter paths, accessibility, narrow screens, no-JS navigation, clipboard success/failure, concurrent reads and JavaScript budget. Screenshots go to ignored `frontend/artifacts/`.
+Frontend: `pnpm format:check`, `pnpm lint`, `pnpm test`, `pnpm build`, `pnpm typecheck`. Builds require no backend or binding; the API is needed only when serving content at runtime. For browser tests run `pnpm exec playwright install chromium` followed by `pnpm test:e2e`; Playwright starts a production Next.js server. It checks recruiter paths, accessibility, narrow screens, no-JS navigation, clipboard success/failure, concurrent reads and JavaScript budget. Screenshots go to ignored `frontend/artifacts/`.
 
 For the mobile Lighthouse audit, keep `pnpm start` running and run `pnpm audit:performance`. The report is local lab evidence, not field Core Web Vitals. Field INP and indexing cannot be verified before launch and sufficient real traffic.
 
 ## Editing content
 
-Edit `backend/content/portfolio.json`. Pydantic forbids extra/private fields and malformed links; `published: false` excludes a story from API responses, generated routes, and sitemap. Keep unpublished notes outside this public data file. Duplicate slugs/orders fail validation. `updated` is the actual editorial update date. API content revisions are SHA-256 hashes of normalized public content. The frontend rejects schema/revision mismatches and failed API builds rather than deploying partial pages.
+Edit `backend/content/portfolio.json`. Pydantic forbids extra/private fields and malformed links; `published: false` excludes a story from API responses, runtime pages, and sitemap. Keep unpublished notes outside this public data file. Duplicate slugs/orders fail validation. `updated` is the actual editorial update date. API content revisions are SHA-256 hashes of normalized public content. Runtime responses are schema-validated; service bindings target the backend from the same deployment, without a manually pinned revision. Content failures stop rendering rather than inventing missing information.
 
 Current content omits unreviewed employer metrics, client identity, repository/demo links and the original PDF. `/resume` is an HTML resume with a print layout. Before launch, review the public email and facts. Add a PDF only after reviewing its contact information; do not create a broken PDF link. The experience stories intentionally avoid reconstructed proprietary diagrams.
 
-## Two Vercel projects
+## One Vercel project with services
 
-No deployment or DNS change has been made by this implementation.
+The root `vercel.json` replaces the earlier two-project proposal. Set the Vercel project's Root Directory to the repository root, not `frontend/` or `backend/`. Do not add top-level build/runtime overrides; the frontend build command belongs to its service. The user confirmed the service names and requested an internal-only backend on 2026-10-20.
 
-1. Connect the Git repository to two projects. Backend root directory: `backend`; FastAPI framework with `app:app` entrypoint and supported Python 3.12. Use the checked-in uv lock. Frontend root: `frontend`; Next.js preset, pnpm install, `pnpm build`. Check current Hobby eligibility before publishing commercial functionality.
-2. Deploy the backend first. Confirm `GET /api/v1/portfolio` returns 200, schema `1`, published stories, and a revision. Runtime bundled content is read-only; no local storage is used.
-3. Set frontend `CONTENT_API_URL` to that backend's origin and `CONTENT_REVISION` to its returned hash. Use an immutable backend deployment URL where possible. Set `SITE_URL` to the intended canonical HTTPS origin. Set `SITE_INDEXABLE=false` until public launch. Vercel builds require both site URL and revision; credentials never use a `NEXT_PUBLIC_` variable.
-4. Backend production content reads must be public for frontend runtime rewrites. Protect draft previews with Vercel Authentication. If fetching a protected backend preview at build time, use `CONTENT_API_BYPASS_SECRET` server-side. This secret is only attached to build fetches; browser API rewrites do not bypass backend protection. For anonymous rewrite tests, use a public backend containing only publishable content. Never disable protection on private drafts merely to make rewrites work.
-5. Pair previews with the matching backend revision. For the deployment spike verify: direct backend GET, frontend rewrite GET, matching revisions, correct 404, preview authentication, noindex headers, and no credential leakage. Account/project access is required to verify this remotely; local rewrite checks do not establish Vercel preview behavior.
-6. Run CI and inspect preview pages before promoting the frontend. Use backward-compatible `/v1` responses when updating Python first. On failure retain the existing frontend; rollback backend/frontend to the recorded matching pair. If slugs change, add explicit permanent redirects in `next.config.ts`.
-7. Connect the chosen domain using Vercel's displayed DNS records, preserving mail records. Redirect alternate hosts to the canonical domain, verify HTTPS, then set `SITE_INDEXABLE=true` and rebuild only the final public production site. Verify generated HTML robots, robots.txt, sitemap, canonical and social preview. Keep all previews noindex/protected. Verify domain ownership in Search Console and submit the sitemap.
+Confirmed services:
+
+| Service    | Directory/framework            | Public ingress       | Internal calls                              |
+| ---------- | ------------------------------ | -------------------- | ------------------------------------------- |
+| `backend`  | `backend/`, FastAPI, `app:app` | None (internal-only) | None                                        |
+| `frontend` | `frontend/`, Next.js           | Catch-all `/(.*)`    | Calls backend through `CONTENT_SERVICE_URL` |
+
+Only the frontend receives public traffic. The backend has no public rewrite and remains internal. `/api/v1/portfolio`, `/api/v1/stories/*`, and `/backend/*` on the public site return 404; there is no public proxy to Python or LLM inference. Server-rendered pages fetch Python content privately through the binding. FastAPI still handles its original `/api/v1/...` paths internally.
+
+The frontend declares one binding: `{ "type": "service", "service": "backend", "format": "url", "env": "CONTENT_SERVICE_URL" }`. Vercel injects that variable; **do not set it yourself**. Server functions read it when handling requests. They preserve any path prefix in the generated base URL and do not send public Deployment Protection bypass credentials. A binding grants reachability, not application-level authorization.
+
+The homepage, resume, stories, and sitemap now render at runtime. Builds never contact the backend or enumerate story slugs. Core content is still returned as server-rendered HTML, including metadata and structured data. Schema validation, bounded GET retry and timeout remain. The old `CONTENT_REVISION` pin and `CONTENT_API_BYPASS_SECRET` are removed; a shared deployment and deployment-aware binding replace manual project pairing. `CONTENT_API_URL` is only a fallback for separate local Next.js/uvicorn development, not a hosted service-discovery setting.
+
+Project environment settings:
+
+- Set `SITE_URL` to the intended canonical HTTPS production origin. This is required for metadata during build; use the assigned production Vercel hostname until a custom domain is connected.
+- Set `SITE_INDEXABLE=true` only for the reviewed public production site; Vercel preview builds stay noindex. Keep it false during setup.
+- Remove any manually configured `CONTENT_SERVICE_URL`, `CONTENT_API_URL`, `CONTENT_REVISION`, and `CONTENT_API_BYPASS_SECRET` from Vercel project settings. The binding supplies the service URL automatically.
+- Gateway experiments remain owner-only CLI operations; no Gateway key is needed to deploy or browse the portfolio. Shared project environment variables are not service-specific secrets, so do not add unrelated private credentials.
+
+To test the actual multi-service routing locally from the repository root (PowerShell):
+
+```powershell
+$env:SITE_URL = 'http://127.0.0.1:3010'
+$env:SITE_INDEXABLE = 'false'
+npm exec --yes --package=vercel@64.7.0 -- vercel dev -L --listen 127.0.0.1:3010
+```
+
+This starts both services and injects the binding without a cloud login. The frontend service explicitly uses `pnpm dev`, with webpack matching production builds; this avoids the observed Turbopack hydration/HMR issue behind the local services router. Never run `next build` and `vercel dev` concurrently against the same frontend directory; they share `.next` artifacts. For browser regression against this router, run `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3010` through your shell and `pnpm test:e2e --grep-invert 'initial JavaScript'` in `frontend/`. The JS budget applies to production builds, not development bundles.
+
+Push to the linked GitHub `main` branch and deploy the root Vercel project. Check homepage/resume/story HTML, public API 404 behavior, frontend assets, runtime binding, preview protection, canonical/robots/sitemap and absence of binding URLs/secrets in HTML. Rollback operates on the single deployment. Custom domain DNS and Search Console verification can follow. Runtime backend failures now affect page rendering; monitor API latency and errors, and measure field vitals after deployment.
+
+Sources: [Vercel Services](https://vercel.com/docs/services), [runtime-only bindings](https://vercel.com/docs/services/bindings), [path-preserving routing](https://vercel.com/docs/services/routing).
 
 ## Owner-only AI Gateway lab
 

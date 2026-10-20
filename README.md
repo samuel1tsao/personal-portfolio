@@ -12,6 +12,8 @@ Stack: React/Next.js frontend, Python/FastAPI content backend, and an owner-only
 - [Development, tests, and Vercel deployment](docs/development-and-deployment.md)
 - [Implementation progress and verification](progress.md)
 
-Implementation: React/Next.js in `frontend/`, Python/FastAPI in `backend/`. Start the API on port 8000 and frontend on port 3000 using the development guide. No remote deployment has been created.
+Implementation: React/Next.js in `frontend/`, Python/FastAPI in `backend/`. Root `vercel.json` configures both as services in one project, with a frontend-to-backend runtime binding. Follow the development guide for `vercel dev -L` or separate local servers.
+
+The current deployment guide supersedes the earlier plans' two-project hosting and build-time content-fetch design. Only the frontend is public; the FastAPI backend is internal-only and reachable through its service binding.
 
 Local source research is excluded from the public repository until publication details are reviewed.

@@ -5,7 +5,7 @@ const VIEWPORTS = [320, 768, 1440];
 const STORY_PATH = "/work/asset-recommendation-engine";
 const JS_BUDGET = 150 * 1024;
 
-test("recruiter paths, API rewrite, metadata and recovery", async ({ page, request }) => {
+test("recruiter paths, private backend, metadata and recovery", async ({ page, request }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Samuel Tsao/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Reliable systems");
@@ -17,7 +17,9 @@ test("recruiter paths, API rewrite, metadata and recovery", async ({ page, reque
   await expect(page.locator("figure")).toBeVisible();
   await page.getByRole("link", { name: "Resume", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Samuel Tsao", exact: true })).toBeVisible();
-  expect((await request.get("/api/v1/portfolio")).status()).toBe(200);
+  expect((await request.get("/api/v1/portfolio")).status()).toBe(404);
+  expect((await request.get("/api/v1/stories/asset-recommendation-engine")).status()).toBe(404);
+  expect((await request.get("/backend/api/v1/portfolio")).status()).toBe(404);
   const missing = await page.goto("/work/missing-story");
   expect(missing?.status()).toBe(404);
   await page.getByRole("link", { name: "Back to home" }).click();
@@ -79,10 +81,10 @@ test("copy success, keyboard focus, reduced motion and zoom", async ({ page, con
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test("core paths work without JavaScript", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
+test("core paths work without JavaScript", async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:3000/");
+  await page.goto("/");
   await page
     .getByRole("link", { name: "Recommendations with a longer horizon", exact: true })
     .click();
@@ -90,13 +92,13 @@ test("core paths work without JavaScript", async ({ browser }) => {
   await context.close();
 });
 
-test("20 simultaneous API requests are identical", async ({ request }) => {
-  const responses = await Promise.all(
-    Array.from({ length: 20 }, () => request.get("/api/v1/portfolio")),
-  );
+test("20 simultaneous server-rendered pages retain profile content", async ({ request }) => {
+  const responses = await Promise.all(Array.from({ length: 20 }, () => request.get("/")));
   expect(responses.every((response) => response.status() === 200)).toBe(true);
   const bodies = await Promise.all(responses.map((response) => response.text()));
-  expect(new Set(bodies).size).toBe(1);
+  expect(
+    bodies.every((body) => body.includes("Samuel Tsao") && body.includes("application/ld+json")),
+  ).toBe(true);
 });
 
 test("initial JavaScript transfer stays within budget", async ({ page }) => {

@@ -7,7 +7,7 @@ export const metadata = pageMetadata(
   "Samuel Tsao's software engineering experience, skills, and education.",
   "/resume",
 );
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export default async function Resume() {
   const { profile } = await getPortfolio();

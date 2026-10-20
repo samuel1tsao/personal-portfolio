@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getPortfolio } from "@/lib/api";
 import { siteOrigin, isIndexable } from "@/lib/config";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (!isIndexable) return [];

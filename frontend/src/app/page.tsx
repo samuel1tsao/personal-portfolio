@@ -2,7 +2,7 @@ import { About, Contact, Experience, Focus, Hero, Work } from "@/components/Port
 import { getPortfolio } from "@/lib/api";
 import { profileData, safeJsonLd } from "@/lib/seo";
 
-export const dynamic = "force-static";
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const { profile, stories } = await getPortfolio();
