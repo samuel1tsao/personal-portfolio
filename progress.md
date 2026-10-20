@@ -2,7 +2,7 @@
 
 Source: [implementation plan](docs/features/personal-portfolio-implementation.md).
 Goal: recruiter portfolio with React, Python content service, and private Gateway CLI.
-Status: deployed and anonymously verified at https://samuel-tsao.vercel.app on 2026-10-20. Frontend is public; backend is internal-only. GitHub main is connected for automatic deployment. Final CI cache-lock fix is being published. No paid LLM requests performed.
+Status: deployed and anonymously verified at https://samuel-tsao.vercel.app on 2026-10-20. Frontend is public; backend is internal-only. GitHub main is connected for automatic deployment. Final CI, including uv cleanup, passed for application commit f009fd7. No paid LLM requests performed.
 
 ## Working agreements
 
@@ -15,21 +15,21 @@ Status: deployed and anonymously verified at https://samuel-tsao.vercel.app on 2
 
 ## Work items
 
-| Status | Item/files                           | Acceptance / verification                                                                                                                               |
-| ------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DONE   | Vercel services migration            | Root config; frontend -> backend `CONTENT_SERVICE_URL` binding; runtime-render pages/sitemap; local-only until confirmation                             |
-| DONE   | Services positive/negative checks    | 19 unit tests pass; missing/malformed binding, prefix preservation, schema/failure recovery; Vercel-style build passes without binding or reachable API |
-| DONE   | Services performance/concurrency     | 9 production browser tests pass, including JS budget/20 concurrent reads; runtime SSR mobile Lighthouse 97 performance / 100 accessibility / 100 SEO    |
-| DONE   | Services local integration           | `vercel dev -L` detects both services; 8 functional/axe/no-JS/concurrency tests pass through generated binding; API and frontend assets/404s verified   |
-| DONE   | Python content/models/API            | 31 backend/content/Gateway tests pass; draft filtering, safe errors, no writes/inference endpoint                                                       |
-| DONE   | React UI/SEO/content contract        | Home, 3 stories, print resume statically built; API/schema and rendering checks pass                                                                    |
-| DONE   | Gateway CLI                          | Mocked validation/auth/quota/fallback/timeout checks pass; no live calls                                                                                |
-| DONE   | Positive/negative integration checks | 9 browser tests pass; API rewrite, no-JS, clipboard denial, 404 recovery, keyboard/axe at 3 widths                                                      |
-| DONE   | Performance/load                     | 20 concurrent reads pass; modern JS ~134 KiB gzip; indexable mobile Lighthouse 99 performance / 100 accessibility / 100 SEO                             |
-| DONE   | Race/idempotency                     | Concurrent/repeat API reads identical and isolated; no persistent writes or shared counters                                                             |
-| DONE   | Deployment/CI/runbook                | GitHub workflow and deployment guide added; local rewrite/revision build verified                                                                       |
-| DONE   | GitHub publication                   | Public `samuel1tsao/personal-portfolio`, default branch `main`; source pushed and remote Python/frontend checks passed; private research excluded       |
-| DONE   | Services push/rollout                | samuel-tsao.vercel.app deployed; live pages 200; public backend paths 404; all 9 live browser tests passed                                              |
+| Status | Item/files                           | Acceptance / verification                                                                                                                                |
+| ------ | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DONE   | Vercel services migration            | Root config; frontend -> backend `CONTENT_SERVICE_URL` binding; runtime-render pages/sitemap; deployed after confirmation; backend has no public ingress |
+| DONE   | Services positive/negative checks    | 19 unit tests pass; missing/malformed binding, prefix preservation, schema/failure recovery; Vercel-style build passes without binding or reachable API  |
+| DONE   | Services performance/concurrency     | 9 production browser tests pass, including JS budget/20 concurrent reads; runtime SSR mobile Lighthouse 97 performance / 100 accessibility / 100 SEO     |
+| DONE   | Services local integration           | `vercel dev -L` detects both services; 8 functional/axe/no-JS/concurrency tests pass through generated binding; API and frontend assets/404s verified    |
+| DONE   | Python content/models/API            | 31 backend/content/Gateway tests pass; draft filtering, safe errors, no writes/inference endpoint                                                        |
+| DONE   | React UI/SEO/content contract        | Home, 3 stories, print resume server-rendered; API/schema and rendering checks pass                                                                      |
+| DONE   | Gateway CLI                          | Mocked validation/auth/quota/fallback/timeout checks pass; no live calls                                                                                 |
+| DONE   | Positive/negative integration checks | 9 browser tests pass; API rewrite, no-JS, clipboard denial, 404 recovery, keyboard/axe at 3 widths                                                       |
+| DONE   | Performance/load                     | 20 concurrent reads pass; modern JS ~134 KiB gzip; indexable mobile Lighthouse 99 performance / 100 accessibility / 100 SEO                              |
+| DONE   | Race/idempotency                     | Concurrent/repeat API reads identical and isolated; no persistent writes or shared counters                                                              |
+| DONE   | Deployment/CI/runbook                | GitHub workflow and deployment guide added; local rewrite/revision build verified                                                                        |
+| DONE   | GitHub publication                   | Public `samuel1tsao/personal-portfolio`, default branch `main`; source pushed and remote Python/frontend checks passed; private research excluded        |
+| DONE   | Services push/rollout                | samuel-tsao.vercel.app deployed; live pages 200; public backend paths 404; all 9 live browser tests passed                                               |
 
 ## Verification and fixes
 
@@ -46,9 +46,9 @@ Fixed low-contrast decorative numbers, enlarged-text overflow, wordmark wrapping
 - Unit tests cover failed dependencies, schema/revision mismatch, preview noindex, training/search bot separation, Gateway authentication/quota/fallback/ambiguous timeout, draft exclusion and repeated-read isolation. No real Gateway requests.
 - No pagination, migrations, persistent writes, or shared transactional state; concurrent reads are exercised instead. Hosted LLM auth/quota races do not apply to the owner-only CLI.
 
-## Remaining rollout inputs
+## Release complete
 
-Confirm the proposed `backend`/`frontend` service names, backend public `/api/v1/*`, frontend catch-all, and frontend-to-backend `CONTENT_SERVICE_URL` binding before pushing or deploying this revision. Then use the existing project at repository root, set its canonical `SITE_URL`, and verify deployment via the [guide](docs/development-and-deployment.md). Do not manually set the binding variable. No custom domain or Gateway key is required for the initial content site. Earlier GitHub Actions passed for the published version; the local services revision has not run remotely. Field vitals and indexing require deployment and traffic.
+User confirmed the names and internal-only backend. Production is https://samuel-tsao.vercel.app with correct canonical, public frontend, private Python binding, and GitHub automatic deployments. No manual binding URL is configured. Final application CI succeeded: [run 39473511950](https://github.com/samuel1tsao/personal-portfolio/actions/runs/39473511950), including cache cleanup. Git-triggered deployment `dpl_DcBvYxH83q8r7djMVGNwkbR48qx7` is READY. Field vitals and indexing are post-launch observations, not blockers. Gateway key/model configuration remains optional for owner-run experiments; no live AI endpoint was deployed.
 
 ## Production release verification — 2026-10-20
 
@@ -57,5 +57,5 @@ Confirm the proposed `backend`/`frontend` service names, backend public `/api/v1
 - Anonymous homepage, resume and case study return 200 with profile HTML and correct canonical. Robots and sitemap return 200 and reference the production origin. `/api/v1/portfolio`, `/api/v1/stories/asset-recommendation-engine`, and `/backend/api/v1/portfolio` return 404.
 - All **9 Playwright tests passed against the live production site**, including axe at 320/768/1440px, clipboard recovery, no-JS, 20 concurrent SSR pages and JS budget. Latest unit suite: 19 passed; backend suite: 31 passed.
 - Vercel dry-run inputs: 59 files, about 346KB; no root `.env.local`, private research or dependency directories in uploaded files. `.env.local` contains local CLI credentials and is excluded from both Git and deployment via `.gitignore`/`.vercelignore`.
-- Earlier workflow failures were post-job uv cache pruning, after app checks passed: background `uv run uvicorn` retained the cache lock. CI now starts `.venv/bin/python -m uvicorn` directly to avoid holding the uv cache lock for the server lifetime. The final run must confirm cleanup succeeds.
+- Earlier workflow failures were post-job uv cache pruning, after app checks passed: background `uv run uvicorn` retained the cache lock. CI now starts `.venv/bin/python -m uvicorn` directly to avoid holding the uv cache lock for the server lifetime. Final application run 39473511950 completed successfully, including cache cleanup.
 - No Gateway key, paid model call, domain purchase or paid plan upgrade was needed. A name-based Vercel hostname satisfies the requested URL preference.
