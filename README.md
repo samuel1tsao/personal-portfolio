@@ -1,21 +1,23 @@
 # Samuel Tsao personal portfolio
 
-Public source: [samuel1tsao/personal-portfolio](https://github.com/samuel1tsao/personal-portfolio).
+[Live portfolio](https://samuel-tsao.vercel.app) · [Public source](https://github.com/samuel1tsao/personal-portfolio)
 
-Live portfolio: [samuel-tsao.vercel.app](https://samuel-tsao.vercel.app).
+A personal portfolio for software engineering and applied ML work. The site brings together career history, selected projects, a web resume, and ways to connect.
 
-Personal software engineering and applied ML portfolio, deployed as Vercel services.
+## What’s here
 
-Stack: React/Next.js frontend, Python/FastAPI content backend, and an owner-only Vercel AI Gateway routing experiment using available free credits.
+- **Home:** A short introduction, areas of focus, selected work, experience, background, and contact links.
+- **Projects and case studies:** Browse published projects at `/projects` or read a project story at `/work/<slug>`.
+- **Web resume:** Experience, accomplishments, skills, education, and projects at `/resume`; use the browser’s Print / Save as PDF option for a copy.
+- **Portfolio chat:** Ask about Samuel’s experience, projects, or how to connect at `/chat`. A pinned button also opens chat while browsing. Responses use published portfolio content; email and profile links are available directly.
+- **Accessible and discoverable pages:** Responsive layouts, keyboard navigation, page metadata, structured profile data, sitemap, and production-only indexing.
 
-- [Website feature plan](docs/features/personal-portfolio.md)
-- [Implementation plan](docs/features/personal-portfolio-implementation.md)
-- [UX, Vercel hosting, and search discoverability decisions](docs/portfolio-ux-and-discoverability.md)
-- [Development, tests, and Vercel deployment](docs/development-and-deployment.md)
-- [Implementation progress and verification](progress.md)
+## How it works
 
-Implementation: React/Next.js in `frontend/`, Python/FastAPI in `backend/`. Root `vercel.json` configures both as services in one project, with a frontend-to-backend runtime binding. Follow the development guide for `vercel dev -L` or separate local servers.
+The site uses a Next.js and TypeScript frontend in `frontend/`. A FastAPI backend in `backend/` validates and serves the published portfolio content from `backend/content/portfolio.json`. Vercel runs these as connected services: only the frontend is public, and it calls the backend through a private service binding. Chat generation runs through AI Gateway from the frontend server when enabled.
 
-The current deployment guide supersedes the earlier plans' two-project hosting and build-time content-fetch design. Only the frontend is public; the FastAPI backend is internal-only and reachable through its service binding.
+## Develop and deploy
+
+See [Development and deployment](docs/development-and-deployment.md) for local setup, content editing, checks, and Vercel configuration. The local portfolio can run without Gateway credentials; configure chat separately when needed.
 
 Local source research is excluded from the public repository until publication details are reviewed.

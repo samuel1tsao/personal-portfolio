@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { cacheLife, io } from "next/cache";
 import { FETCH_TIMEOUT_MS, MAX_ATTEMPTS, MAX_RESPONSE_BYTES, contentEndpoint } from "./config";
 import { portfolioSchema } from "./schema";
 import { log } from "./logger";
@@ -25,4 +26,13 @@ export async function fetchPortfolio(fetcher: typeof fetch = fetch) {
   throw new Error("Unable to load validated portfolio content; service unavailable.");
 }
 
-export const getPortfolio = cache(() => fetchPortfolio());
+async function getCachedPortfolio() {
+  "use cache";
+  cacheLife("hours");
+  return fetchPortfolio();
+}
+
+export const getPortfolio = cache(async () => {
+  await io();
+  return getCachedPortfolio();
+});

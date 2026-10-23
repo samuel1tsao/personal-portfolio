@@ -4,9 +4,9 @@ import { Contact, Diagram } from "@/components/Portfolio";
 import { getPortfolio } from "@/lib/api";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: Promise<{ slug: string }> };
-export const dynamic = "force-dynamic";
+export const instant = false;
 
+type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const data = await getPortfolio();
@@ -20,15 +20,16 @@ export default async function StoryPage({ params }: Props) {
   const { profile, stories } = await getPortfolio();
   const story = stories.find((item) => item.slug === slug);
   if (!story) notFound();
+  const projects = stories.filter((item) => item.kind === "project" && item.slug !== slug);
   return (
     <main id="main">
       <article className="story-page wrap">
-        <Link href="/#work" className="back-link">
-          ← All work
+        <Link href={story.kind === "project" ? "/projects" : "/#work"} className="back-link">
+          ← {story.kind === "project" ? "All projects" : "All work"}
         </Link>
         <header className="story-header">
           <p className="eyebrow">
-            {story.kind === "project" ? "Applied ML project" : "Experience story"} / {story.period}
+            {story.kind === "project" ? "Project case study" : "Experience story"} / {story.period}
           </p>
           <h1>{story.title}</h1>
           <p className="story-lede">{story.summary}</p>
@@ -43,14 +44,46 @@ export default async function StoryPage({ params }: Props) {
           <p className="eyebrow">My contribution</p>
           <p>{story.contribution}</p>
         </div>
-        {story.diagram.length > 0 && <Diagram steps={story.diagram} />}
+        <nav className="story-contents" aria-label="On this page">
+          {story.sections.map((section, index) => (
+            <a key={section.title} href={`#section-${index}`}>
+              {section.title}
+            </a>
+          ))}
+          {story.decisions.length > 0 && <a href="#decisions">Design choices & tradeoffs</a>}
+        </nav>
+        {story.diagram.length > 0 && (
+          <Diagram
+            steps={story.diagram}
+            caption={story.diagram_caption}
+            description={story.diagram_description}
+          />
+        )}
         <div className="story-prose">
-          {story.sections.map((section) => (
-            <section key={section.title}>
+          {story.sections.map((section, index) => (
+            <section key={section.title} id={`section-${index}`}>
               <h2>{section.title}</h2>
               <p>{section.body}</p>
             </section>
           ))}
+          {story.decisions.length > 0 && (
+            <section id="decisions" aria-labelledby="decisions-heading">
+              <h2 id="decisions-heading">Design choices & tradeoffs</h2>
+              {story.decisions.map((decision) => (
+                <article key={decision.title} className="decision-card">
+                  <h3>{decision.title}</h3>
+                  <dl>
+                    <dt>Choice</dt>
+                    <dd>{decision.choice}</dd>
+                    <dt>Why this approach</dt>
+                    <dd>{decision.rationale}</dd>
+                    <dt>Tradeoff</dt>
+                    <dd>{decision.tradeoff}</dd>
+                  </dl>
+                </article>
+              ))}
+            </section>
+          )}
           <aside className="evidence">
             <h2>Source & scope</h2>
             <p>{story.evidence}</p>
@@ -65,6 +98,18 @@ export default async function StoryPage({ params }: Props) {
               View resume ↗
             </Link>
           </div>
+          {story.kind === "project" && (
+            <section className="related-projects" aria-labelledby="related-heading">
+              <h2 id="related-heading">More projects</h2>
+              <ul>
+                {projects.map((project) => (
+                  <li key={project.slug}>
+                    <Link href={`/work/${project.slug}`}>{project.title} ↗</Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
       </article>
       <Contact profile={profile} />

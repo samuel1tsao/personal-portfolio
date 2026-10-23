@@ -31,6 +31,8 @@ class Role(ContentModel):
     start: date
     end: date | None = None
     summary: Text
+    accomplishments: tuple[Text, ...] = ()
+    technologies: tuple[Text, ...] = ()
 
     @model_validator(mode="after")
     def chronological_dates(self):
@@ -42,6 +44,13 @@ class Role(ContentModel):
 class Section(ContentModel):
     title: Text
     body: Text
+
+
+class Decision(ContentModel):
+    title: Text
+    choice: Text
+    rationale: Text
+    tradeoff: Text
 
 
 class Story(ContentModel):
@@ -57,8 +66,21 @@ class Story(ContentModel):
     evidence: Text
     links: tuple[Link, ...] = ()
     diagram: tuple[Text, ...] = Field(default=(), max_length=6)
+    diagram_caption: Text = "Conceptual flow"
+    diagram_description: Text = "A simplified view of the project workflow."
+    decisions: tuple[Decision, ...] = Field(default=(), max_length=8)
     published: bool
     order: int = Field(ge=0)
+
+
+class ResumeProject(ContentModel):
+    name: Text
+    story_slug: Slug | None = None
+    status: Text
+    summary: Text
+    accomplishments: tuple[Text, ...] = Field(min_length=1)
+    technologies: tuple[Text, ...] = ()
+    links: tuple[Link, ...] = ()
 
 
 class Profile(ContentModel):
@@ -72,6 +94,7 @@ class Profile(ContentModel):
     skills: tuple[Text, ...]
     links: tuple[Link, ...]
     roles: tuple[Role, ...]
+    projects: tuple[ResumeProject, ...] = ()
 
     @model_validator(mode="after")
     def safe_email(self):
@@ -92,4 +115,8 @@ class Portfolio(ContentModel):
             values = [getattr(story, key) for story in self.stories]
             if len(values) != len(set(values)):
                 raise ValueError(f"Duplicate story {key}")
+        project_slugs = {story.slug for story in self.stories if story.kind == "project"}
+        for project in self.profile.projects:
+            if project.story_slug and project.story_slug not in project_slugs:
+                raise ValueError("Resume project must reference a project story")
         return self

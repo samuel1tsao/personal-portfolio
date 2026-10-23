@@ -38,10 +38,20 @@ export function Hero({ profile }: { profile: Profile }) {
         </h1>
         <p className={styles.intro}>{profile.intro}</p>
         <div className="actions">
-          <a className="button primary" href="#work">
+          <a
+            className="button primary"
+            href="#work"
+            data-analytics-event="WorkClick"
+            data-analytics-location="hero"
+          >
             Explore my work <span aria-hidden="true">↘</span>
           </a>
-          <Link className="button" href="/resume">
+          <Link
+            className="button"
+            href="/resume"
+            data-analytics-event="ResumeClick"
+            data-analytics-location="hero"
+          >
             View resume <span aria-hidden="true">↗</span>
           </Link>
         </div>
@@ -118,6 +128,16 @@ export function Work({ stories }: { stories: Story[] }) {
           <br />A closer look at my contributions.
         </p>
       </div>
+      <p>
+        <Link
+          className="inline-link"
+          href="/projects"
+          data-analytics-event="ProjectsClick"
+          data-analytics-location="selected-work"
+        >
+          Explore all projects ↗
+        </Link>
+      </p>
       <div className={styles.stories}>
         {stories.length === 0 && (
           <p>Selected stories are being updated. Explore my experience below.</p>
@@ -138,12 +158,16 @@ export function StoryCard({ story, index }: { story: Story; index: number }) {
       </div>
       <div className={styles.storyContent}>
         <p className="eyebrow">
-          {story.kind === "project"
-            ? "Personal project · Applied ML"
-            : story.role.split(" · ").at(-1)}
+          {story.kind === "project" ? "Personal project" : story.role.split(" · ").at(-1)}
         </p>
         <h3>
-          <Link href={`/work/${story.slug}`}>{story.title}</Link>
+          <Link
+            href={`/work/${story.slug}`}
+            data-analytics-event="CaseStudyClick"
+            data-analytics-target={story.slug}
+          >
+            {story.title}
+          </Link>
         </h3>
         <p>{story.summary}</p>
         <ul className="tags" aria-label="Technologies">
@@ -156,6 +180,8 @@ export function StoryCard({ story, index }: { story: Story; index: number }) {
         href={`/work/${story.slug}`}
         className={styles.storyArrow}
         aria-label={`Read ${story.title}`}
+        data-analytics-event="CaseStudyClick"
+        data-analytics-target={story.slug}
       >
         <span aria-hidden="true">↗</span>
       </Link>
@@ -171,7 +197,12 @@ export function Experience({ profile }: { profile: Profile }) {
           <p className="eyebrow">Career / 02</p>
           <h2 id="experience-heading">Built on experience.</h2>
         </div>
-        <Link className="inline-link" href="/resume">
+        <Link
+          className="inline-link"
+          href="/resume"
+          data-analytics-event="ResumeClick"
+          data-analytics-location="experience"
+        >
           Full resume ↗
         </Link>
       </div>
@@ -240,13 +271,23 @@ export function Contact({ profile }: { profile: Profile }) {
           </p>
         </div>
         <div className={styles.contactLinks}>
-          <a className={styles.email} href={`mailto:${profile.email}`}>
+          <a
+            className={styles.email}
+            href={`mailto:${profile.email}`}
+            data-analytics-event="EmailClick"
+            data-analytics-location="contact"
+          >
             {profile.email} <span aria-hidden="true">↗</span>
           </a>
           <CopyEmail email={profile.email} />
           <div className={styles.socials}>
             {profile.links.map((link) => (
-              <a key={link.url} href={link.url}>
+              <a
+                key={link.url}
+                href={link.url}
+                data-analytics-event="ProfileLinkClick"
+                data-analytics-target={link.label.toLowerCase()}
+              >
                 {link.label} ↗
               </a>
             ))}
@@ -257,16 +298,24 @@ export function Contact({ profile }: { profile: Profile }) {
   );
 }
 
-export function Diagram({ steps }: { steps: string[] }) {
+export function Diagram({
+  steps,
+  caption = "Conceptual flow",
+  description = "A simplified view of the project workflow.",
+}: {
+  steps: string[];
+  caption?: string;
+  description?: string;
+}) {
   return (
     <figure className={styles.diagram}>
-      <figcaption>Conceptual flow · asset recommendation project</figcaption>
+      <figcaption>{caption}</figcaption>
       <ol>
         {steps.map((step) => (
           <li key={step}>{step}</li>
         ))}
       </ol>
-      <p>Historical data informs models, recommendations, and scenario evaluation.</p>
+      <p>{description}</p>
     </figure>
   );
 }

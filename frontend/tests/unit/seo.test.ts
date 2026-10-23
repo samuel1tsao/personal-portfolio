@@ -5,8 +5,7 @@ afterEach(() => {
   vi.resetModules();
 });
 
-it("never indexes Vercel previews even when indexing is enabled", async () => {
-  vi.stubEnv("SITE_INDEXABLE", "true");
+it("never indexes Vercel previews", async () => {
   vi.stubEnv("VERCEL", "1");
   vi.stubEnv("VERCEL_ENV", "preview");
   vi.stubEnv("SITE_URL", "https://portfolio.example");
@@ -15,7 +14,6 @@ it("never indexes Vercel previews even when indexing is enabled", async () => {
 });
 
 it("allows production search bots while separating training access", async () => {
-  vi.stubEnv("SITE_INDEXABLE", "true");
   vi.stubEnv("VERCEL", "1");
   vi.stubEnv("VERCEL_ENV", "production");
   vi.stubEnv("SITE_URL", "https://portfolio.example");

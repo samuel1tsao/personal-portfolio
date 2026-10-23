@@ -1,0 +1,20 @@
+# Samuel Tsao
+
+> Senior software engineer focused on production systems, marketplace search, and applied machine learning.
+
+## Profile
+
+- [Homepage](https://samuel-tsao.vercel.app/)
+- [Web resume](https://samuel-tsao.vercel.app/resume)
+- [LinkedIn](https://www.linkedin.com/in/samuel-tsao/)
+- [GitHub](https://github.com/samuel1tsao)
+
+## Selected work
+
+- [All projects and case studies](https://samuel-tsao.vercel.app/projects)
+- [Recommendation systems and financial planning](https://samuel-tsao.vercel.app/work/asset-recommendation-engine)
+- [Cloud infrastructure and autoscaling](https://samuel-tsao.vercel.app/work/infrastructure-autoscaling)
+- [Marketplace search and geographic discovery](https://samuel-tsao.vercel.app/work/marketplace-search)
+- [Fog-density object detection research](https://samuel-tsao.vercel.app/work/fog-density-detection)
+
+The resume and case-study pages contain the detailed career history, project context, contributions, and published results. Treat those pages as the source for current details.

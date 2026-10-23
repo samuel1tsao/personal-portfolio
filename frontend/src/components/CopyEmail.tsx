@@ -14,7 +14,13 @@ export function CopyEmail({ email }: { email: string }) {
   }
   return (
     <div className="copy-row">
-      <button type="button" className="text-button" onClick={copy}>
+      <button
+        type="button"
+        className="text-button"
+        onClick={copy}
+        data-analytics-event="CopyEmailClick"
+        data-analytics-location="contact"
+      >
         Copy email <span aria-hidden="true">↗</span>
       </button>
       <span role="status" className="copy-status">

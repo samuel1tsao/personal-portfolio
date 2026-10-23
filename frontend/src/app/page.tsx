@@ -2,7 +2,7 @@ import { About, Contact, Experience, Focus, Hero, Work } from "@/components/Port
 import { getPortfolio } from "@/lib/api";
 import { profileData, safeJsonLd } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
+export const instant = false;
 
 export default async function Home() {
   const { profile, stories } = await getPortfolio();
@@ -14,7 +14,7 @@ export default async function Home() {
       />
       <Hero profile={profile} />
       <Focus />
-      <Work stories={stories} />
+      <Work stories={stories.slice(0, 3)} />
       <Experience profile={profile} />
       <About profile={profile} />
       <Contact profile={profile} />

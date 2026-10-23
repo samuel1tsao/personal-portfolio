@@ -15,6 +15,18 @@ export const storySchema = z.object({
   evidence: text,
   links: z.array(link),
   diagram: z.array(text),
+  diagram_caption: text.default("Conceptual flow"),
+  diagram_description: text.default("A simplified view of the project workflow."),
+  decisions: z
+    .array(
+      z.object({
+        title: text,
+        choice: text,
+        rationale: text,
+        tradeoff: text,
+      }),
+    )
+    .default([]),
   published: z.literal(true),
   order: z.number().int().nonnegative(),
 });
@@ -39,8 +51,27 @@ export const portfolioSchema = z.object({
         start: z.iso.date(),
         end: z.iso.date().nullable(),
         summary: text,
+        accomplishments: z.array(text).default([]),
+        technologies: z.array(text).default([]),
       }),
     ),
+    projects: z
+      .array(
+        z.object({
+          name: text,
+          story_slug: z
+            .string()
+            .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+            .nullable()
+            .default(null),
+          status: text,
+          summary: text,
+          accomplishments: z.array(text).min(1),
+          technologies: z.array(text),
+          links: z.array(link),
+        }),
+      )
+      .default([]),
   }),
   stories: z.array(storySchema),
 });

@@ -7,9 +7,7 @@ export const FETCH_TIMEOUT_MS = 5000;
 export const MAX_RESPONSE_BYTES = 200_000;
 export const MAX_ATTEMPTS = 2;
 export const LOCAL_CONTENT_ORIGIN = "http://127.0.0.1:8000";
-export const isIndexable =
-  process.env.SITE_INDEXABLE === "true" &&
-  (!process.env.VERCEL || process.env.VERCEL_ENV === "production");
+export const isIndexable = process.env.VERCEL_ENV === "production";
 
 export function validOrigin(value: string, name: string): string {
   const url = new URL(value);

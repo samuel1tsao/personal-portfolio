@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { version } from "../../package.json";
 
 const NAVIGATION = [
   { label: "Work", href: "/#work" },
   { label: "Experience", href: "/#experience" },
   { label: "About", href: "/#about" },
+  { label: "Ask me", href: "/chat" },
   { label: "Resume", href: "/resume" },
 ];
 
@@ -34,7 +36,7 @@ export function Footer() {
       <p>
         Samuel Tsao <span className="muted">/ Software engineer</span>
       </p>
-      <p className="muted">Built with intention. San Jose, California.</p>
+      <p className="muted">Built with intention. San Jose, California. · v{version}</p>
       <a href="#top">Back to top ↑</a>
     </footer>
   );

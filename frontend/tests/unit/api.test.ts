@@ -32,7 +32,7 @@ describe("content contract", () => {
       .fn()
       .mockRejectedValueOnce(new Error("timeout"))
       .mockResolvedValue(success());
-    expect((await fetchPortfolio(fetcher)).stories).toHaveLength(3);
+    expect((await fetchPortfolio(fetcher)).stories).toHaveLength(content.stories.length);
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
   it.each(["revision", "schema", "partial", "oversized", "unavailable", "draft"])(

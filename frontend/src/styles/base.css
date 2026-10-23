@@ -290,6 +290,55 @@ nav a {
 .story-prose {
   max-width: 720px;
 }
+.story-contents {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 6px 22px;
+  border-block: 1px solid var(--line);
+  padding: 14px 0;
+  margin: 28px 0;
+  max-width: 850px;
+}
+.story-contents a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.decision-card {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 26px;
+  margin: 22px 0;
+  background: var(--soft);
+}
+.decision-card h3 {
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+.decision-card dl {
+  margin: 0;
+}
+.decision-card dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+.decision-card dd {
+  margin: 5px 0 0;
+}
+.project-directory {
+  margin-top: 45px;
+}
+.related-projects ul {
+  padding-left: 20px;
+}
+.related-projects a {
+  display: inline-block;
+  padding: 8px 0;
+  text-decoration: underline;
+}
 .story-prose section {
   padding-top: 26px;
 }
@@ -347,6 +396,23 @@ nav a {
 .resume-note {
   font-size: 13px;
   color: var(--muted);
+}
+.resume-accomplishments {
+  padding-left: 22px;
+  margin: 14px 0;
+}
+.resume-accomplishments li {
+  padding-left: 3px;
+  margin-bottom: 9px;
+}
+.resume-technologies {
+  font-size: 13px;
+  color: var(--muted);
+}
+.resume-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
 }
 .not-found {
   padding-top: 100px;
@@ -450,6 +516,13 @@ nav a {
   }
   .resume-page p {
     font-size: 12px;
+  }
+  .resume-accomplishments {
+    font-size: 12px;
+  }
+  .resume-page h2,
+  .resume-page h3 {
+    break-after: avoid;
   }
   .resume-page h2 {
     font-size: 22px;

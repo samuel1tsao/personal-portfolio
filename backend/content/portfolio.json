@@ -1,70 +1,1006 @@
 {
   "schema_version": "1",
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "profile": {
     "name": "Samuel Tsao",
     "headline": "Reliable systems. Thoughtful intelligence.",
-    "intro": "I'm a senior software engineer building production systems and exploring applied machine learning. My work spans financial technology, marketplaces, and cloud infrastructure.",
+    "intro": "Senior software engineer with experience across financial technology, marketplaces, cybersecurity, and healthcare. I build distributed systems, financial workflows, and search infrastructure, and apply that production engineering foundation to machine learning research and LLM evaluation.",
     "location": "San Jose, California",
     "email": "tsao1samuel@gmail.com",
     "about": "I care about the space between an idea and a system people can rely on. My experience ranges from financial workflows and marketplace search to infrastructure automation. Today, I'm deepening that foundation through graduate study in artificial intelligence and hands-on work with recommendation systems.",
-    "education": ["M.S. Artificial Intelligence · San José State University · Expected 2027", "B.S. Computer Science · University of California, San Diego · 2017"],
-    "skills": ["Python", "TypeScript", "Kotlin", "Java", "SQL", "AWS", "Docker", "Kubernetes", "Terraform", "PostgreSQL", "PyTorch", "Recommendation systems"],
+    "education": [
+      "M.S. Artificial Intelligence · San José State University · Expected 2027",
+      "B.S. Computer Science · University of California, San Diego · 2017"
+    ],
+    "skills": [
+      "Python",
+      "TypeScript",
+      "Kotlin",
+      "Java",
+      "SQL",
+      "AWS",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "PostgreSQL",
+      "PyTorch",
+      "Recommendation systems",
+      "LLM evaluation",
+      "RLHF",
+      "Coding agents",
+      "Node.js",
+      "Spring Boot",
+      "AWS ECS",
+      "S3",
+      "EventBridge",
+      "Redis",
+      "Angular",
+      "GCP",
+      "Algolia",
+      "Elasticsearch",
+      "Datadog",
+      "PagerDuty",
+      "REST APIs",
+      "Microservices",
+      "A/B testing",
+      "Cassandra",
+      "NoSQL",
+      "Perl",
+      "Puppet",
+      "Jenkins",
+      "JavaScript",
+      "HTML",
+      "IoT",
+      "API integrations",
+      "Transformers",
+      "Reinforcement learning",
+      "React",
+      "FastAPI",
+      "Jupyter",
+      "YOLO",
+      "DETR",
+      "Computer vision",
+      "Plaid",
+      "Google Apps Script",
+      "Vercel",
+      "Playwright",
+      "Scryfall API",
+      "Google Sheets",
+      "esbuild",
+      "AngularJS",
+      "Word embeddings",
+      "Neural networks",
+      "Cloudflare",
+      "Project management",
+      "UX collaboration",
+      "Next.js",
+      "Temporal",
+      "Kafka",
+      "Aurora",
+      "Distributed systems",
+      "ETL pipelines"
+    ],
     "links": [
-      {"label": "GitHub", "url": "https://github.com/samuel1tsao"},
-      {"label": "LinkedIn", "url": "https://www.linkedin.com/in/samuel-tsao/"}
+      {
+        "label": "GitHub",
+        "url": "https://github.com/samuel1tsao"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/samuel-tsao/"
+      }
     ],
     "roles": [
-      {"company": "Human Interest", "title": "Senior Software Engineer", "start": "2025-07-01", "summary": "Record keeping, financial workflows, and cloud infrastructure automation."},
-      {"company": "Nursa", "title": "Senior Software Engineer", "start": "2023-05-01", "end": "2025-03-01", "summary": "Marketplace search, geographic discovery, and recommendation infrastructure."},
-      {"company": "Affirm", "title": "Software Engineer", "start": "2021-12-01", "end": "2023-03-01", "summary": "Marketplace monetization, advertising backend infrastructure, and experimentation."},
-      {"company": "Proofpoint", "title": "Software Engineer", "start": "2019-03-01", "end": "2021-12-01", "summary": "Identity management, data migration, search, and developer tooling."},
-      {"company": "Kaiser Permanente", "title": "IT Rotational Associate", "start": "2017-07-01", "end": "2019-03-01", "summary": "Early-career foundation in enterprise technology."}
+      {
+        "company": "Frontier AI Lab (via G2i & micro1)",
+        "title": "AI Software Engineer & LLM Evaluator (Contract)",
+        "start": "2026-07-01",
+        "summary": "Evaluation of foundational language models and autonomous coding agents.",
+        "accomplishments": [
+          "Evaluate agent-generated pull request diffs for correctness, performance, regressions, and architectural quality.",
+          "Design multi-turn tasks in Python, Java, and TypeScript to test coding agents' reasoning and handling of complex software engineering problems.",
+          "Produce reinforcement learning from human feedback (RLHF) data by identifying failure modes, edge cases, and hallucinated code."
+        ],
+        "technologies": [
+          "Python",
+          "Java",
+          "TypeScript",
+          "LLM evaluation",
+          "RLHF",
+          "Coding agents"
+        ]
+      },
+      {
+        "company": "Human Interest",
+        "title": "Senior Software Engineer, Record Keeping",
+        "start": "2025-07-01",
+        "summary": "Record keeping, financial workflows, and cloud infrastructure automation.",
+        "accomplishments": [
+          "Architected enterprise-wide ECS autoscaling frameworks, achieving an initial 40% reduction in ECS operating costs.",
+          "Rearchitected dividend processing to handle bursts of up to 100,000 dividends and one million transactions, including allocation, reinvestment, and liquidation.",
+          "Built correction tools for distribution errors and reallocated millions of dollars from uncashed instruments to customer accounts.",
+          "Led a financial instrument project with two engineers; refined monitoring to reduce alert fatigue by approximately 200 alerts annually.",
+          "Contributed to ledger systems supporting multibillion-dollar 401(k) assets and AI-assisted project lifecycle initiatives."
+        ],
+        "technologies": [
+          "TypeScript",
+          "Node.js",
+          "Kotlin",
+          "Spring Boot",
+          "SQL",
+          "AWS ECS",
+          "S3",
+          "EventBridge",
+          "Redis"
+        ],
+        "end": "2026-10-01"
+      },
+      {
+        "company": "Nursa",
+        "title": "Senior Software Engineer, Marketplace",
+        "start": "2023-05-01",
+        "end": "2025-03-01",
+        "summary": "Marketplace search, geographic discovery, and recommendation infrastructure.",
+        "accomplishments": [
+          "Built recommendation backend pipelines that reduced ranking model scoring updates from 30 minutes to five minutes.",
+          "Developed geographic search and mapping features associated with an 11% conversion increase across 300,000 monthly active users.",
+          "Established core search with Algolia fuzzy matching and filtering, alongside Elasticsearch-based discovery.",
+          "Introduced Datadog and PagerDuty monitoring and alerting, achieving a 30-minute mean recovery time.",
+          "Identified and addressed a 0.5% failure rate under 1,000 concurrent requests through performance testing.",
+          "Built a shift calendar reducing scheduling interactions from 32 to 12 per shift; improved team velocity by approximately 10% through workflow and review initiatives."
+        ],
+        "technologies": [
+          "TypeScript",
+          "Node.js",
+          "Angular",
+          "SQL",
+          "AWS",
+          "GCP",
+          "Docker",
+          "Kubernetes",
+          "Algolia",
+          "Elasticsearch",
+          "Datadog",
+          "PagerDuty"
+        ]
+      },
+      {
+        "company": "Affirm",
+        "title": "Software Engineer",
+        "start": "2021-12-01",
+        "end": "2023-03-01",
+        "summary": "Marketplace monetization, advertising backend infrastructure, and experimentation.",
+        "accomplishments": [
+          "Developed the initial backend implementation of advertising infrastructure and customer-facing REST APIs.",
+          "Ran backend A/B experiments affecting five million users, coordinating with cross-functional partners on stability and rollbacks.",
+          "Mitigated failure points during user acceptance and production testing of the advertising platform.",
+          "Documented legacy functionality and improved onboarding material, reducing onboarding time by approximately one week."
+        ],
+        "technologies": [
+          "Python",
+          "Kotlin",
+          "AWS",
+          "REST APIs",
+          "Microservices",
+          "A/B testing"
+        ]
+      },
+      {
+        "company": "Proofpoint",
+        "title": "Software Engineer",
+        "start": "2019-03-01",
+        "end": "2021-12-01",
+        "summary": "Identity management, data migration, search, and developer tooling.",
+        "accomplishments": [
+          "Modernized identity services supporting millions of daily requests, spanning backend development, data architecture, infrastructure, and network operations.",
+          "Designed ETL and data transformation from multi-tenant NoSQL storage to a single-tenant SQL ingestion pipeline.",
+          "Led service and data center migrations and introduced geographic redundancy; helped recover corrupted data after a critical data center failure.",
+          "Replaced streaming jobs with paginated processing to improve queue fairness and prevent long-running jobs from blocking smaller requests.",
+          "Developed proprietary typed queries and optimized data retrieval for secure, selective field access.",
+          "Reduced CI/CD build times by 80% using continuous randomized end-to-end testing; cut test runtime from three hours to 30 minutes.",
+          "Maintained Jenkins pipelines and sales engineering scripts for demos, data cleanup, and customer onboarding."
+        ],
+        "technologies": [
+          "Java",
+          "SQL",
+          "Cassandra",
+          "NoSQL",
+          "Perl",
+          "Puppet",
+          "Jenkins",
+          "Kubernetes",
+          "Docker"
+        ]
+      },
+      {
+        "company": "Kaiser Permanente",
+        "title": "IT Rotational Associate",
+        "start": "2017-07-01",
+        "end": "2019-03-01",
+        "summary": "Early-career foundation in enterprise technology.",
+        "accomplishments": [
+          "Rotated through enterprise integration, middleware operations, and innovative technology, delivering internal tools and integration prototypes.",
+          "Designed an anonymous idea intake web service with batching, caching, rate limiting, and request aggregation to manage third-party API costs.",
+          "Built server and application health monitoring tools.",
+          "Automated IoT device connection configuration, saving approximately three hours of demo maintenance per week.",
+          "Created a Google Maps proof of concept to locate nearby hospitals and evaluated replacement technologies for outdated frameworks."
+        ],
+        "technologies": [
+          "Java",
+          "Node.js",
+          "JavaScript",
+          "HTML",
+          "IoT",
+          "API integrations"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "name": "Personalized Asset Recommendation Engine",
+        "status": "Ongoing applied ML project",
+        "summary": "Two-phase Transformer research connecting market behavior, financial goals, and risk preferences.",
+        "accomplishments": [
+          "Mined historical equity, mutual fund, and bond data from Yahoo Finance, Wikipedia, and Nasdaq.",
+          "Designed a temporal model using four-dimensional autoregression, categorical industry embeddings, feature pruning, and sine/cosine positional encodings.",
+          "Implemented a secondary Transformer and Gaussian policy-gradient recommendation policy to balance goal fulfillment, returns, volatility, and drawdown.",
+          "Developed a custom loss function to penalize portfolio fragmentation and balance diversification against management overhead.",
+          "Designed evaluation using temporal holdouts, historical stress periods, block bootstrap and Monte Carlo simulations, and S&P 500 and 60/40 baselines; comparative performance results are not published.",
+          "Collaborative graduate project; project plan identifies my lead scope as simulation, architecture, historical backtesting, and the optimization loop."
+        ],
+        "technologies": [
+          "Python",
+          "PyTorch",
+          "Transformers",
+          "Reinforcement learning",
+          "React",
+          "FastAPI"
+        ],
+        "links": [
+          {
+            "label": "Source on GitHub",
+            "url": "https://github.com/samuel1tsao/Financial_Analytics"
+          }
+        ],
+        "story_slug": "asset-recommendation-engine"
+      },
+      {
+        "name": "Fog-Density Object Detection Research",
+        "status": "Ongoing computer vision research",
+        "summary": "Investigating density-aware object detection and adaptive feature gating in fog.",
+        "accomplishments": [
+          "Built a reproducible notebook workflow comparing RGB, predicted density, and predicted density with adaptive gating for YOLO11n, YOLO11m, and DETR.",
+          "Implemented experiments that mask YOLO P3 feature inputs or filter DETR spatial tokens using a configurable density threshold.",
+          "Organized setup, subset, and full-run profiles with checkpoint handling and local/Colab execution guides; detection improvements remain under evaluation."
+        ],
+        "technologies": [
+          "Python",
+          "Jupyter",
+          "YOLO",
+          "DETR",
+          "Computer vision"
+        ],
+        "links": [],
+        "story_slug": "fog-density-detection"
+      },
+      {
+        "name": "Trajectory — Financial Planning",
+        "status": "Ongoing personal-use preview",
+        "summary": "Retirement trajectory tooling connecting spending, saving, and investing decisions with financial timelines.",
+        "accomplishments": [
+          "Built retirement and loan calculation modules, financial projections, and shareable URL-based planning profiles.",
+          "Implemented bank CSV import and Google Sheets synchronization with batched transaction updates.",
+          "Integrated Plaid balance imports with server-side encrypted sessions and separated browser, service, and calculation layers.",
+          "Added unit, architecture, production bundle, and desktop/mobile browser checks; calculation accuracy remains under validation."
+        ],
+        "technologies": [
+          "JavaScript",
+          "Node.js",
+          "Plaid",
+          "Google Apps Script",
+          "Vercel",
+          "Playwright"
+        ],
+        "links": [],
+        "story_slug": "trajectory-financial-planning"
+      },
+      {
+        "name": "MTG Vault — Collection Tracker",
+        "status": "Built application · ongoing iteration",
+        "summary": "A desktop and mobile card collection tracker designed for rapid cataloging.",
+        "accomplishments": [
+          "Built keyboard-driven card entry with set, printing, finish, condition, and language selection.",
+          "Integrated Scryfall card data and prices with a portable Google Sheets collection database.",
+          "Implemented import/export workflows, queued synchronization, collection statistics, and mobile navigation."
+        ],
+        "technologies": [
+          "JavaScript",
+          "Scryfall API",
+          "Google Sheets",
+          "Google Apps Script",
+          "esbuild"
+        ],
+        "links": [
+          {
+            "label": "Application",
+            "url": "https://mtg-tcg-collection.vercel.app"
+          }
+        ],
+        "story_slug": "mtg-vault"
+      },
+      {
+        "name": "Wordrix — Vocabulary Learning",
+        "status": "Built project",
+        "summary": "An ML-powered vocabulary game using semantic similarity to help people learn foreign words.",
+        "accomplishments": [
+          "Built a context-based word embedding model and neural similarity engine for real-time semantic hints.",
+          "Crawled approximately 10,000 Wikipedia pages and cleaned 50,000 entries, including stop-word removal and topic-focused filtering.",
+          "Compared training-data variants and similarity-score distributions to evaluate model behavior; built the frontend and backend."
+        ],
+        "technologies": [
+          "AngularJS",
+          "Java",
+          "Word embeddings",
+          "Neural networks",
+          "Cloudflare"
+        ],
+        "links": [],
+        "story_slug": "wordrix"
+      },
+      {
+        "name": "Tsao Wang Family Foundation Website",
+        "status": "Website project",
+        "summary": "A nonprofit website designed for ease of use and maintenance by nontechnical administrators.",
+        "accomplishments": [
+          "Led collaboration with a developer and UX contributor to design the nonprofit website.",
+          "Focused implementation on straightforward content presentation and maintainability."
+        ],
+        "technologies": [
+          "React",
+          "Project management",
+          "UX collaboration"
+        ],
+        "links": [
+          {
+            "label": "Website",
+            "url": "https://tsaowangfamilyfoundation.pages.dev"
+          }
+        ],
+        "story_slug": "foundation-website"
+      },
+      {
+        "name": "Personal Portfolio",
+        "status": "Built website · ongoing expansion",
+        "summary": "A server-rendered portfolio presenting engineering experience and applied ML work.",
+        "accomplishments": [
+          "Built a Next.js/React frontend with a Python/FastAPI content service and validated content contracts.",
+          "Implemented project stories, a printable resume, search metadata, and responsive layouts.",
+          "Added API, accessibility, browser, concurrency, and JavaScript transfer budget checks; deployed frontend and internal backend services on Vercel."
+        ],
+        "technologies": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Python",
+          "FastAPI",
+          "Vercel",
+          "Playwright"
+        ],
+        "links": [
+          {
+            "label": "Source on GitHub",
+            "url": "https://github.com/samuel1tsao/personal-portfolio"
+          }
+        ],
+        "story_slug": "personal-portfolio"
+      }
     ]
   },
   "stories": [
     {
-      "slug": "asset-recommendation-engine", "kind": "project", "order": 0, "published": true,
+      "slug": "asset-recommendation-engine",
+      "kind": "project",
+      "order": 0,
+      "published": true,
       "title": "Recommendations with a longer horizon",
       "summary": "Exploring how Transformer models and reinforcement learning can connect financial goals, risk, and portfolio decisions.",
-      "role": "ML engineering & application development", "period": "Applied ML project",
-      "contribution": "Architected Transformer-based models for financial data and a reinforcement-learning recommendation policy, supported by a React interface and Python API.",
-      "skills": ["Python", "PyTorch", "React", "FastAPI", "Reinforcement learning"],
-      "sections": [
-        {"title": "The problem", "body": "Asset recommendations need to account for more than similarity or historical returns. This project explores goal fulfillment, volatility, and drawdown together, across different risk profiles."},
-        {"title": "The approach", "body": "Historical market data feeds Transformer models and a Gaussian policy-gradient recommendation model. Block bootstrap and Monte Carlo simulations support evaluation under a range of market scenarios."},
-        {"title": "Evaluation and boundaries", "body": "The evaluation considers policy convergence, risk-profile behavior, and comparisons with S&P 500 and 60/40 baselines. Published comparative results are not yet available. Simulations are experimental and do not establish future investment performance."}
+      "role": "Simulation & architecture lead · collaborative graduate project",
+      "period": "Ongoing applied ML research",
+      "contribution": "Architected Transformer-based models and simulation-driven recommendation experiments within a collaborative graduate project; my assigned lead scope covers simulation, architecture, backtesting, and optimization.",
+      "skills": [
+        "Python",
+        "PyTorch",
+        "React",
+        "FastAPI",
+        "Reinforcement learning"
       ],
-      "diagram": ["Market history", "Transformer models", "Recommendation policy", "Scenario evaluation"],
-      "evidence": "Project summary based on my resume. This diagram is a conceptual overview, not a complete deployment architecture."
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "A useful allocation depends on when money is needed, what losses a person can tolerate, and whether a goal can actually be funded. Ranking assets by historical returns does not capture those constraints. This collaborative project explores personalized allocation as a goal-constrained decision problem, combining a product prototype with a separate research workflow."
+        },
+        {
+          "title": "The product experience",
+          "body": "The application prototype collects goals, risk preferences, constraints, and existing holdings through a guided questionnaire, then presents allocations and simulated growth. The repository also includes portfolio profiles and an experimental public-official holdings browser. Its original web recommendation path uses a bounded ETF universe and weighted rules; the Transformer and reinforcement learning work lives in the research pipeline. The existence of both does not establish that the web app serves the research model."
+        },
+        {
+          "title": "How the research system works",
+          "body": "Historical market series and company identity features feed a temporal Transformer that learns asset representations. A downstream Transformer combines representations with user context and generates a Gaussian allocation policy. Sampled weights run through a simulator with cash flows and goal withdrawals, and policy-gradient updates use the resulting reward. Cached representations reduce repeated upstream computation. The current RL worker uses a single Gaussian policy head; older research notes also describe dual-head variants."
+        },
+        {
+          "title": "My role and collaboration",
+          "body": "The project plan identifies my role as simulation and architecture lead, responsible for repository structure, simulation, historical backtesting, and the optimization loop. Data/ML and financial logic have other named team leads. My resume and LinkedIn describe additional work across Transformer modeling, reinforcement learning, and evaluation. The system overview describes the collaborative project rather than assigning every module to one person."
+        },
+        {
+          "title": "Evaluation and current limits",
+          "body": "The evaluation design uses historical holdouts, goal fulfillment, drawdown, volatility, and comparisons with S&P 500 and 60/40 allocations. Block-bootstrap scenarios broaden the sampled market paths, while chronological checks retain actual event ordering. The research notes have evolved alongside the code, so architecture descriptions here follow the reviewed worker implementation when the two differ. No independently verified outperformance result or production investment recommendation claim is available."
+        }
+      ],
+      "diagram": [
+        "Market history",
+        "Transformer models",
+        "Recommendation policy",
+        "Scenario evaluation"
+      ],
+      "evidence": "Based on the local Financial_Analytics README, evolving RESEARCH_PLAN, reviewed temporal/RL worker code, and resume/LinkedIn descriptions. Team responsibilities follow the project plan. Tradeoffs reflect documented design history and consequences of the reviewed implementation; benchmark claims are intentionally omitted.",
+      "decisions": [
+        {
+          "title": "Learn market behavior before allocating",
+          "choice": "Separate temporal asset representation learning from the user-conditioned allocation policy.",
+          "rationale": "The research history describes a move from snapshot autoencoders toward sequence Transformers to represent order and changing market behavior. Reusing cached embeddings avoids retraining the representation model for every allocation experiment.",
+          "tradeoff": "Training and cache management are more expensive than a simple scoring baseline. Frozen representations may omit signals the allocation objective would prefer; an adapter can reweight them but does not retrain the upstream model."
+        },
+        {
+          "title": "Optimize through the simulator",
+          "choice": "Use a stochastic Gaussian policy and REINFORCE updates around a cash-flow and withdrawal simulator.",
+          "rationale": "Discrete withdrawals and goal rules make the simulator non-differentiable. Policy gradients let sampled outcomes guide allocation without pretending that every simulator operation supports backpropagation.",
+          "tradeoff": "Reward design and exploration noise materially affect convergence. Training costs more than a deterministic optimizer, and success in the simulator can reflect its assumptions rather than generalize to future markets."
+        },
+        {
+          "title": "Restrict historical features",
+          "choice": "Classify features by temporal safety and exclude current market snapshots from historical embedding inputs.",
+          "rationale": "Using today's valuation ratios when evaluating earlier years can introduce future information. The project instead emphasizes time-aligned derived signals and comparatively stable identity features.",
+          "tradeoff": "Potentially useful fundamentals are excluded unless point-in-time history exists. Company classifications are not perfectly immutable either, so the feature registry reduces a leakage risk without proving every historical record is unbiased."
+        },
+        {
+          "title": "Resample market blocks",
+          "choice": "Combine block-bootstrap simulations with chronological evaluation.",
+          "rationale": "Resampling blocks diversifies the paths seen by the policy and reduces dependence on one exact sequence of crises and recoveries.",
+          "tradeoff": "Block boundaries can break longer market cycles. Resampled scenarios complement held-out historical tests; they do not replace them or establish a forecast."
+        }
+      ],
+      "diagram_caption": "Conceptual flow · asset recommendation research",
+      "diagram_description": "The application prototype and research pipeline are distinct; this flow summarizes the research loop.",
+      "links": [
+        {
+          "label": "Source on GitHub",
+          "url": "https://github.com/samuel1tsao/Financial_Analytics"
+        }
+      ]
     },
     {
-      "slug": "infrastructure-autoscaling", "kind": "experience", "order": 1, "published": true,
+      "slug": "infrastructure-autoscaling",
+      "kind": "experience",
+      "order": 1,
+      "published": true,
       "title": "Infrastructure that adapts to demand",
       "summary": "Cloud automation and financial workflows at Human Interest, with reliability and operational efficiency in view.",
-      "role": "Senior Software Engineer · Human Interest", "period": "July 2025–present",
+      "role": "Senior Software Engineer · Human Interest",
+      "period": "July 2025–October 2026",
       "contribution": "Worked on enterprise ECS autoscaling frameworks and automation for dividend allocation, reinvestment, and liquidation workflows.",
-      "skills": ["AWS", "ECS", "Backend systems", "Financial workflows"],
+      "skills": [
+        "AWS",
+        "ECS",
+        "Backend systems",
+        "Financial workflows"
+      ],
       "sections": [
-        {"title": "The engineering context", "body": "Financial record keeping combines operational scale with workflows that need careful, predictable behavior. Infrastructure efficiency and dependable execution both matter."},
-        {"title": "My contribution", "body": "My work includes ECS autoscaling frameworks and automated dividend allocation workflows. This overview describes the scope of my work without exposing internal implementation details."},
-        {"title": "What I can share", "body": "Specific internal designs and detailed measurements are omitted here. I'm happy to discuss the engineering principles and my role at an appropriate level of detail."}
+        {
+          "title": "The engineering context",
+          "body": "Financial record keeping combines operational scale with workflows that need careful, predictable behavior. Infrastructure efficiency and dependable execution both matter."
+        },
+        {
+          "title": "My contribution",
+          "body": "My work includes ECS autoscaling frameworks and automated dividend allocation workflows. This overview describes the scope of my work without exposing internal implementation details."
+        },
+        {
+          "title": "What I can share",
+          "body": "Specific internal designs and detailed measurements are omitted here. I'm happy to discuss the engineering principles and my role at an appropriate level of detail."
+        }
       ],
       "evidence": "Experience summary based on my resume; employer code and architecture are private."
     },
     {
-      "slug": "marketplace-search", "kind": "experience", "order": 2, "published": true,
+      "slug": "marketplace-search",
+      "kind": "experience",
+      "order": 2,
+      "published": true,
       "title": "Helping people find the right opportunity",
       "summary": "Search, geographic discovery, and recommendation systems for Nursa's marketplace.",
-      "role": "Senior Software Engineer · Nursa", "period": "May 2023–March 2025",
+      "role": "Senior Software Engineer · Nursa",
+      "period": "May 2023–March 2025",
       "contribution": "Developed backend recommendation infrastructure, maps and geographic search, and core search with Algolia fuzzy matching and filtering.",
-      "skills": ["Search", "Recommendations", "Algolia", "Backend systems"],
+      "skills": [
+        "Search",
+        "Recommendations",
+        "Algolia",
+        "Backend systems"
+      ],
       "sections": [
-        {"title": "The problem", "body": "Marketplace discovery depends on making relevant opportunities easy to find. Search quality, geographic context, and the freshness of ranking updates each shape that experience."},
-        {"title": "My contribution", "body": "I worked on recommendation backend performance, geographic search capabilities, and Algolia-based search with fuzzy matching and filtering."},
-        {"title": "Product and engineering", "body": "This work connected backend performance with user-facing discovery. Detailed employer measurements and internal designs are omitted; the emphasis here is the problem space and my contribution."}
+        {
+          "title": "The problem",
+          "body": "Marketplace discovery depends on making relevant opportunities easy to find. Search quality, geographic context, and the freshness of ranking updates each shape that experience."
+        },
+        {
+          "title": "My contribution",
+          "body": "I worked on recommendation backend performance, geographic search capabilities, and Algolia-based search with fuzzy matching and filtering."
+        },
+        {
+          "title": "Product and engineering",
+          "body": "This work connected backend performance with user-facing discovery. Detailed employer measurements and internal designs are omitted; the emphasis here is the problem space and my contribution."
+        }
       ],
       "evidence": "Experience summary based on my resume; public repository and demo links are not available."
+    },
+    {
+      "slug": "fog-density-detection",
+      "kind": "project",
+      "order": 3,
+      "published": true,
+      "title": "Fog-Density Object Detection Research",
+      "summary": "Investigating density-aware object detection and adaptive feature gating in fog.",
+      "role": "Computer vision experimentation & research tooling",
+      "period": "Ongoing computer vision research",
+      "contribution": "Built a reproducible notebook workflow comparing RGB, predicted density, and predicted density with adaptive gating for YOLO11n, YOLO11m, and DETR.",
+      "skills": [
+        "Python",
+        "Jupyter",
+        "YOLO",
+        "DETR",
+        "Computer vision"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "Camera-based object detection becomes less dependable when fog obscures visual detail. This study asks whether estimating fog density and conditioning the detector on that estimate can improve detection. It also tests whether suppressing selected fine spatial features helps. The current product is a reproducible research workflow for comparing hypotheses, rather than a driver-facing assistance application."
+        },
+        {
+          "title": "The experimenter's workflow",
+          "body": "A researcher selects a setup, subset, or full profile; checks dataset coverage; trains or resumes a run; and exports comparisons without retraining. The project preserves the original density-feature notebook alongside the newer squint experiment namespace. This makes it possible to compare work over time without silently overwriting older outputs."
+        },
+        {
+          "title": "How the study works",
+          "body": "A frozen fog-density estimator supplies a beta estimate to a shared adapter. YOLO11n, YOLO11m, and DETR are compared across RGB, predicted-density, and predicted-density-plus-squint arms. The squint intervention masks YOLO's P3 detector input or filters DETR spatial tokens while keeping positional information aligned. The research plan requires matched initialization, scene splits, seeds, and budgets so the comparison focuses on the intervention."
+        },
+        {
+          "title": "Data and recovery",
+          "body": "The plan splits whole scenes to reduce train/test leakage and distinguishes Foggy Cityscapes beta labels from native nuScenes visibility. Projected nuScenes boxes are treated as a 2D evaluation proxy. Run identity includes configuration and input fingerprints; checkpoint handling is designed to preserve optimizer and RNG state and reject incompatible resumes. These controls make interrupted experiments more inspectable, although they are not evidence of detection quality."
+        },
+        {
+          "title": "Evaluation and current limits",
+          "body": "The planned report includes mAP, AP50, recall, per-class and small-object performance, density estimation error, seed spread, and end-to-end mean/p95 latency. The estimator and gate overhead belong in timing. Positive, null, and negative outcomes are all meaningful. No completed matched-run evidence has been reviewed here that establishes accuracy gains, compute savings, or readiness for use in a vehicle."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Three matched comparison arms",
+          "choice": "Keep RGB and predicted-density controls alongside an independently trained squint arm.",
+          "rationale": "A density adapter and a gate change different things. Keeping both controls helps determine whether any measured difference comes from adding density information or from feature suppression.",
+          "tradeoff": "The experiment matrix is larger and consumes more training time. Using only one baseline would be cheaper but would leave the source of an improvement ambiguous."
+        },
+        {
+          "title": "Adapt the gate to each architecture",
+          "choice": "Mask YOLO P3 features and filter DETR spatial tokens instead of forcing identical mechanics onto both models.",
+          "rationale": "The reviewed plan recognizes that the YOLO detection pyramid and the configured DETR spatial representation have different contracts.",
+          "tradeoff": "The interventions are not identical, so cross-model results need careful interpretation. Zeroing YOLO features does not skip their computation, and DETR filtering can damage small-object recall or positional alignment."
+        },
+        {
+          "title": "Predict density at evaluation time",
+          "choice": "Use a frozen density estimator and report its errors and overhead.",
+          "rationale": "A practical experiment should not rely on perfect fog labels that would be unavailable for a new image. Freezing the predictor also helps isolate detector changes.",
+          "tradeoff": "The detector inherits prediction error, and the estimator adds latency. Oracle-density results, when possible, answer a different question and need separate labeling."
+        },
+        {
+          "title": "Favor reproducible recovery",
+          "choice": "Version outputs and identify checkpoints by configuration, data, and arm.",
+          "rationale": "Long experiments can be interrupted. Explicit identities reduce the chance that a resume silently combines incompatible runs.",
+          "tradeoff": "More metadata, validation, and storage are required. Faster ad hoc iteration is sacrificed for comparisons that can be traced and repeated."
+        }
+      ],
+      "diagram": [
+        "Labeled scenes",
+        "Frozen density estimate",
+        "Adapter & architecture gate",
+        "Matched detector evaluation"
+      ],
+      "diagram_caption": "Conceptual flow · Fog-Density Object Detection Research",
+      "diagram_description": "A simplified workflow of the reviewed project, with research and implementation boundaries described below.",
+      "evidence": "Based on the local fog research README, research plan, squint implementation plan, and notebook guide. Some controls are specified acceptance requirements; they are not presented as a fresh audit of every run. Results and vehicle-safety claims are not asserted.",
+      "links": []
+    },
+    {
+      "slug": "trajectory-financial-planning",
+      "kind": "project",
+      "order": 4,
+      "published": true,
+      "title": "Trajectory — Financial Planning",
+      "summary": "Retirement trajectory tooling connecting spending, saving, and investing decisions with financial timelines.",
+      "role": "Product development & financial application architecture",
+      "period": "Ongoing personal-use preview",
+      "contribution": "Built retirement and loan calculation modules, financial projections, and shareable URL-based planning profiles.",
+      "skills": [
+        "JavaScript",
+        "Node.js",
+        "Plaid",
+        "Google Apps Script",
+        "Vercel",
+        "Playwright"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "Budgets usually explain where money went. Trajectory explores a different question: how today's spending, contributions, and goals change the time needed to reach financial independence. The product connects immediate cash-flow decisions with a longer retirement trajectory, while making room for manual inputs and optional connected account data."
+        },
+        {
+          "title": "The product experience",
+          "body": "Users configure a financial profile, inspect projections, and adjust income, expenses, contributions, property assumptions, and goals. A CSV import path and optional Plaid account connections reduce repeated data entry. Shareable profiles and backup/import workflows support portability. More recent development focuses on retaining edits, focused editors, reserve goals, and making uncertain connected data visible before it replaces manual values."
+        },
+        {
+          "title": "How the application works",
+          "body": "The reviewed codebase separates pure calculation engines, application services, browser controllers, and thin Plaid HTTP handlers. The profile codec versions a compact representation for URL transport. Current work also adds local persistence and recovery controls. An architecture document proposes a broader canonical plan model and repository boundary; that target design is not described here as a completed migration."
+        },
+        {
+          "title": "Reliability as product behavior",
+          "body": "Losing a plan or silently substituting a bad balance would undermine the product more than a missing chart. Development notes record fixes for startup hydration overwriting restored values, storage failures, cross-tab conflicts, incomplete provider pagination, and negative or unknown balances. The revised flows retain manual values when connected data needs review, preserve prior records during writes, and expose backup and recovery options."
+        },
+        {
+          "title": "Validation and current limits",
+          "body": "The October 18 source notes report a 98-case desktop/mobile browser pass alongside unit and synthetic local-production checks. A subsequent hands-on review still identified UX gaps, including inline scrolling, long editors, and a reserve-source mismatch. Those results are historical evidence from the project, not tests rerun for this portfolio. The personal release remains a preview; financial accuracy, provider reconciliation, performance gates, and release rehearsal are not established as complete."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Translate finances into time",
+          "choice": "Center the experience on retirement trajectory and the effects of changing assumptions.",
+          "rationale": "This connects individual spending and saving decisions with a goal users can understand, rather than making transaction categories the only product output.",
+          "tradeoff": "A clear timeline can look more certain than its inputs warrant. Assumptions and data confidence need to remain visible, and a compelling chart is not proof of calculation accuracy."
+        },
+        {
+          "title": "Keep calculations separate from screens",
+          "choice": "Use pure calculation modules and service boundaries, with architecture checks on dependencies.",
+          "rationale": "Financial behavior is easier to test when it can run without a browser or provider. A shared calculation path also reduces differences between onboarding and dashboard views.",
+          "tradeoff": "The current mutable profile and controller refresh flow still create coupling. The documented canonical-plan architecture requires further migration rather than being solved by folder names alone."
+        },
+        {
+          "title": "Offer portable plans",
+          "choice": "Support versioned profile URLs, local persistence, and explicit backups.",
+          "rationale": "These paths let users revisit and move a plan without requiring a hosted account system for every experiment.",
+          "tradeoff": "Encoded URLs are not encryption and may expose included plan data when shared. Local storage and backups also require versioning, validation, and clear handling when writes fail."
+        },
+        {
+          "title": "Bound connected-data work",
+          "choice": "Use limited provider concurrency and pagination, preserve manual values on questionable balances, and separate bank access from profile links.",
+          "rationale": "This reduces the chance that partial or malformed account data is treated as a complete financial picture.",
+          "tradeoff": "A failed or bounded refresh can leave information incomplete. The UI must distinguish stale, missing, and reviewed data, and historical test passes do not prove every live account is reconciled."
+        }
+      ],
+      "diagram": [
+        "Plan inputs & accounts",
+        "Validated application state",
+        "Cash-flow & projection engines",
+        "Trajectory & editable assumptions"
+      ],
+      "diagram_caption": "Conceptual flow · Trajectory — Financial Planning",
+      "diagram_description": "A simplified workflow of the reviewed project, with research and implementation boundaries described below.",
+      "evidence": "Based on local README, profile codec, architecture proposal, progress notes through October 18, and daily-use UX review. Distinguishes the current application from proposed architecture and pinned release. No personal account values or credentials are included.",
+      "links": []
+    },
+    {
+      "slug": "mtg-vault",
+      "kind": "project",
+      "order": 5,
+      "published": true,
+      "title": "MTG Vault — Collection Tracker",
+      "summary": "A desktop and mobile card collection tracker designed for rapid cataloging.",
+      "role": "Full-stack product development",
+      "period": "Built application · ongoing iteration",
+      "contribution": "Built keyboard-driven card entry with set, printing, finish, condition, and language selection.",
+      "skills": [
+        "JavaScript",
+        "Scryfall API",
+        "Google Sheets",
+        "Google Apps Script",
+        "esbuild"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "Cataloging a physical card collection is repetitive work. A collector needs to distinguish sets, printings, finishes, condition, and language, often for thousands of cards. A complete database form is not necessarily a fast capture experience. MTG Vault starts with the entry loop, then adds browsing, valuation estimates, and portability around it."
+        },
+        {
+          "title": "The collector's workflow",
+          "body": "A collector types a card name, chooses a set and printing with the keyboard, selects finish and condition, and presses Enter. They can immediately begin the next card. Existing matching variants increase in quantity rather than becoming duplicate rows. Browsing adds search, sorting, details, and collection statistics, while mobile uses a dedicated navigation and selection layout."
+        },
+        {
+          "title": "How the system works",
+          "body": "Scryfall supplies card identity, images, printing metadata, and reference prices. A variant identity combines the card, set, style, finish, condition, and language. Storage interfaces support Google Sheets through CSV reads and Apps Script writes, plus a local CSV representation in browser storage. A sync queue merges matching operations and sends batches rather than a separate request for each keystroke."
+        },
+        {
+          "title": "Portability and recovery",
+          "body": "CSV import detects common collection formats, normalizes aliases, resolves printings, and previews results with found, unfound, and error counts. Export targets include collector and marketplace workflows. For remote write failures, the documented recovery paths include an unsynced CSV backup and switching to local storage. Shared collection mode is read-only; it is a separate experience from editing an owned collection."
+        },
+        {
+          "title": "Validation and current limits",
+          "body": "The repository includes tests for card identity, CSV parsing, import behavior, collection actions, sync queues, and Moxfield handling. The product document distinguishes intended behavior from remaining implementation gaps. Price fields are market references, not realizable sale prices, and remote storage depends on the user's sheet and Apps Script setup. No measured entry-speed advantage, large-scale multi-user guarantee, or commerce capability is claimed."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Optimize for repeated capture",
+          "choice": "Use a keyboard-first sequence of small choices, with a separate mobile layout.",
+          "rationale": "The product document identifies repetitive physical-card logging as the primary job. Keeping the collector in one selection loop avoids repeated mouse-driven forms.",
+          "tradeoff": "Keyboard controls need discoverability and focus discipline. Mobile cannot simply inherit the desktop layout, so it adds interaction and accessibility work."
+        },
+        {
+          "title": "Preserve variant identity",
+          "choice": "Match on printing attributes, finish, condition, and language instead of card name alone.",
+          "rationale": "Two copies with the same name can be materially different collection records. A composite identity lets true duplicates aggregate while distinct variants remain separate.",
+          "tradeoff": "Imports and edits become more complex because external tools name styles and finishes differently. Incorrect normalization can still split or merge records."
+        },
+        {
+          "title": "Use portable storage adapters",
+          "choice": "Support Sheets/Apps Script and a local CSV storage implementation.",
+          "rationale": "This fits a collector-owned dataset that remains inspectable and exportable without a dedicated hosted account backend.",
+          "tradeoff": "Sheets setup and service limits become product constraints. Local storage depends on the browser, and this approach does not establish the transaction or collaboration guarantees of a purpose-built database."
+        },
+        {
+          "title": "Batch rapid changes",
+          "choice": "Merge matching queued operations and send debounced batches.",
+          "rationale": "Fast entry creates bursts of small changes. Combining them reduces request overhead and keeps the interaction from waiting on every remote write.",
+          "tradeoff": "The visible collection and remote sheet can temporarily differ. Failure recovery and unsynced backups matter, and batching alone does not prove conflict-safe concurrent editing."
+        }
+      ],
+      "diagram": [
+        "Resolve card with Scryfall",
+        "Select exact variant",
+        "Update collection & sync queue",
+        "Sheets or local CSV"
+      ],
+      "diagram_caption": "Conceptual flow · MTG Vault — Collection Tracker",
+      "diagram_description": "A simplified view of the product workflow, rather than a complete deployment diagram.",
+      "evidence": "Based on MTG Vault PRODUCT.md, README, reviewed sync queue and identity code, and the repository's test inventory. Product goals and architectural consequences are explained without inventing user research, performance results, or SaaS-scale guarantees.",
+      "links": [
+        {
+          "label": "Application",
+          "url": "https://mtg-tcg-collection.vercel.app"
+        }
+      ]
+    },
+    {
+      "slug": "wordrix",
+      "kind": "project",
+      "order": 6,
+      "published": true,
+      "title": "Wordrix — Vocabulary Learning",
+      "summary": "An ML-powered vocabulary game using semantic similarity to help people learn foreign words.",
+      "role": "Vocabulary product & ML application development",
+      "period": "Built project",
+      "contribution": "Built a context-based word embedding model and neural similarity engine for real-time semantic hints.",
+      "skills": [
+        "AngularJS",
+        "Java",
+        "Word embeddings",
+        "Neural networks",
+        "Cloudflare"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "Vocabulary practice can become a memorization exercise disconnected from how words relate. Wordrix explores an interactive alternative: use semantic similarity as a hint so a learner can reason about neighboring concepts while learning foreign words. The product joins a small language-modeling experiment with a web game."
+        },
+        {
+          "title": "The learning experience",
+          "body": "A learner receives semantic feedback rather than only a correct/incorrect signal. The model represents words in a reduced-dimensional context space and uses a neural similarity calculation to produce hints. The historical project summary describes an interactive game connecting foreign and English vocabulary; detailed current screen behavior and language coverage have not been verified."
+        },
+        {
+          "title": "The data and model workflow",
+          "body": "The resume describes crawling roughly 10,000 Wikipedia pages and cleaning about 50,000 entries. Preparation included stop-word removal, minimum context filtering, and topic-focused sentences, including animals and fruits. Training-data variants and within-group similarity-score distributions were compared to inspect model behavior. The application work spans an AngularJS interface and Java backend."
+        },
+        {
+          "title": "What the project demonstrates",
+          "body": "The interesting engineering work is the connection between data preparation, representation quality, and feedback a learner can interpret. A mathematically valid similarity score may still be a poor game hint if too many unrelated words score closely or a topic is underrepresented. That makes examining the score distribution part of the product design, not just an offline model task."
+        },
+        {
+          "title": "Evidence and current limits",
+          "body": "Available evidence is the historical resume material, not a newly reviewed local repository or a live service audit. It supports the pipeline, implementation scope, and evaluation approach but does not establish learning outcomes, current uptime, multilingual accuracy, or comparison with modern language models. The original demo address is omitted because availability has not been verified."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Use context-based word representations",
+          "choice": "Represent words with embeddings and calculate similarity for game feedback.",
+          "rationale": "Context-based representations provide a way to rank related concepts rather than treating every vocabulary guess as an exact string match. This is an engineering interpretation of the described implementation; the original decision log is unavailable.",
+          "tradeoff": "Similarity reflects the training corpus and is not the same as translation correctness. Sparse words and differences between languages can produce misleading hints."
+        },
+        {
+          "title": "Filter training contexts",
+          "choice": "Clean crawled text and focus parts of the dataset on identifiable topics.",
+          "rationale": "The source describes stop-word removal and meaningful-context filtering. These steps aim to make the learned relationships more useful for the intended vocabulary groups.",
+          "tradeoff": "Filtering removes noise but also reduces coverage and can amplify topic bias. A clean animal vocabulary subset does not imply equal quality for other subjects."
+        },
+        {
+          "title": "Inspect score behavior before game claims",
+          "choice": "Compare training variants and the spread of similarity scores within word groups.",
+          "rationale": "A usable hint system needs distinctions a learner can act on. The resume records this distribution-based inspection rather than an unsupported claim of user learning gains.",
+          "tradeoff": "Offline scores do not measure retention, fairness across languages, or whether users understand the hint. A learner study would be needed to establish those outcomes."
+        }
+      ],
+      "diagram": [
+        "Wikipedia text",
+        "Cleaned topic contexts",
+        "Word representations",
+        "Similarity-based game hints"
+      ],
+      "diagram_caption": "Conceptual flow · Wordrix — Vocabulary Learning",
+      "diagram_description": "A simplified view of the product workflow, rather than a complete deployment diagram.",
+      "evidence": "Based on the historical backend and general resumes reviewed for the resume expansion. Rationale is explicitly identified as implementation analysis where no original decision record exists; code, live uptime, and learner outcomes are unverified.",
+      "links": []
+    },
+    {
+      "slug": "foundation-website",
+      "kind": "project",
+      "order": 7,
+      "published": true,
+      "title": "Tsao Wang Family Foundation Website",
+      "summary": "A nonprofit website designed for ease of use and maintenance by nontechnical administrators.",
+      "role": "Project leadership · developer & UX collaboration",
+      "period": "Website project",
+      "contribution": "Led collaboration with a developer and UX contributor to design the nonprofit website.",
+      "skills": [
+        "React",
+        "Project management",
+        "UX collaboration"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "A nonprofit needs to keep resources and messages current without making every edit a developer task. The foundation website prioritizes a content workflow that nontechnical administrators can operate, along with clear resource navigation for English and Traditional Chinese readers."
+        },
+        {
+          "title": "The editor and visitor experience",
+          "body": "An administrator edits text, image links, and resource records in a Google Spreadsheet. The website reads the published sheet data when visitors load the page and maps it into reusable sections. Visitors browse foundation information and resource categories with language-specific content. This puts routine publishing into a familiar editing tool while keeping the public interface separate."
+        },
+        {
+          "title": "How the website works",
+          "body": "The reviewed project uses React and Vite, reusable page and section components, a custom CSS-variable design system, and PapaParse for published CSV data. Fetch functions load resources and messages, parse column headers, and convert rows into page content. Language-specific sheet data supplies translated content rather than automatically translating a single source."
+        },
+        {
+          "title": "My contribution and delivery",
+          "body": "LinkedIn describes leading collaboration with a developer and a UX contributor. The local code and README support the component-based site and spreadsheet content architecture, while the changelog records work on responsive navigation, consistent page layout, branding, metadata, and dropdown behavior. These describe the team's implementation; they do not attribute every code change to me personally."
+        },
+        {
+          "title": "Maintenance and current limits",
+          "body": "The README documents a static-hosted deployment and a nontechnical content guide. The older resume and local README reference different hosting addresses; the portfolio keeps the previously supplied site link without asserting a newly verified migration. The reviewed fetch functions log failures, so a rich editor preview or robust public fallback should not be assumed. Language parity, accessibility conformance, and availability are not independently certified here."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Use Sheets as the content source",
+          "choice": "Read published CSV content from a spreadsheet rather than requiring an administrative CMS application.",
+          "rationale": "The project explicitly aims for maintenance without technical expertise. Editors can update familiar rows while the React site owns presentation.",
+          "tradeoff": "Spreadsheet columns become an implicit content contract. Renamed headers, malformed links, or a publishing change can affect the site, and a published sheet is appropriate for public content only."
+        },
+        {
+          "title": "Keep a custom visual system",
+          "choice": "Use CSS variables and reusable React sections instead of a large styling framework.",
+          "rationale": "The README documents a lightweight, consistent design system and shared layout components. Repeated resource pages can share spacing and presentation rules.",
+          "tradeoff": "Custom navigation, responsive behavior, and accessibility need to be maintained directly. A small dependency footprint does not by itself prove a faster or more accessible site."
+        },
+        {
+          "title": "Maintain explicit translated content",
+          "choice": "Use English and Traditional Chinese content sheets.",
+          "rationale": "Separate translations let editors control the wording and context readers see, rather than depending on an automatic translation step.",
+          "tradeoff": "Two versions can drift and need editorial coordination. This architecture provides language support without guaranteeing translation completeness or parity."
+        }
+      ],
+      "diagram": [
+        "Editor updates public sheet",
+        "Fetch & parse CSV",
+        "Reusable React sections",
+        "Language-specific resource pages"
+      ],
+      "diagram_caption": "Conceptual flow · Tsao Wang Family Foundation Website",
+      "diagram_description": "A simplified view of the product workflow, rather than a complete deployment diagram.",
+      "evidence": "Based on the local foundation README, changelog, fetch/CSV code, and LinkedIn collaboration description. Hosting references differ across sources; no new uptime or accessibility audit is claimed.",
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://tsaowangfamilyfoundation.pages.dev"
+        }
+      ]
+    },
+    {
+      "slug": "personal-portfolio",
+      "kind": "project",
+      "order": 8,
+      "published": true,
+      "title": "Personal Portfolio",
+      "summary": "A server-rendered portfolio presenting engineering experience and applied ML work.",
+      "role": "Product design, content architecture & full-stack engineering",
+      "period": "Built website · ongoing expansion",
+      "contribution": "Built a recruiter-oriented portfolio with server-rendered pages, a validated content service, and a path from concise accomplishments to detailed project case studies.",
+      "skills": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Python",
+        "FastAPI",
+        "Vercel",
+        "Playwright"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "A resume can list experience but has limited room to explain judgment. This portfolio gives recruiters a quick way to assess technical fit, then lets engineers and collaborators inspect the product problem, implementation, evidence, and tradeoffs behind each project. The challenge is making the deeper material easy to reach without turning the homepage into a long technical report."
+        },
+        {
+          "title": "The visitor's path",
+          "body": "The homepage presents positioning, selected work, career history, and contact. The expanded resume supplies accomplishments and project summaries. Each project links to a dedicated case study, and a project directory offers a complete browsing path. Case studies include the user problem, workflow, system overview, contribution, current limits, and structured design choices."
+        },
+        {
+          "title": "How content reaches the page",
+          "body": "A Python/FastAPI service loads a JSON content file, validates it with Pydantic, filters unpublished stories, and calculates a content revision. Next.js fetches that content on the server and validates the response with Zod before rendering. Pages, metadata, and the sitemap derive from the same published story collection. Production uses Vercel's internal service binding; the backend has no public API ingress."
+        },
+        {
+          "title": "Designing for assessment",
+          "body": "The visual system uses restrained typography, readable prose, semantic headings, and clear links. A simplified flow diagram supports the explanation when useful. The homepage stays curated while the project directory grows. Tradeoff cards separate the actual choice, the reason it fits, and the cost or limitation, so a technical reader can inspect judgment without decoding a wall of stack names."
+        },
+        {
+          "title": "Verification and current limits",
+          "body": "Existing checks cover API contracts, invalid content, draft exclusion, recovery, concurrent reads, accessibility, narrow screens, navigation without JavaScript, and a JavaScript transfer budget. The resume adds print-specific behavior. These automated and local checks support the reviewed release paths; they do not establish recruiter conversion, field performance, or search ranking. The new project pages are local changes until deployed."
+        }
+      ],
+      "decisions": [
+        {
+          "title": "Keep the homepage curated",
+          "choice": "Use a few selected stories on the homepage and a dedicated directory for all personal projects.",
+          "rationale": "The visitor can get an initial view quickly, then deliberately choose a deeper project or the full resume.",
+          "tradeoff": "Some projects require another click to discover. Explicit directory and resume links are needed so curation does not make the rest of the work invisible."
+        },
+        {
+          "title": "Validate one content source twice",
+          "choice": "Use JSON/Pydantic at the content boundary and Zod at the server-rendering boundary.",
+          "rationale": "Content needs stable shapes across Python and TypeScript. Validation catches malformed data before pages silently display partial or invented information.",
+          "tradeoff": "Two contract definitions must remain aligned, and schema extensions need compatibility checks. A simpler repository could import static content directly and avoid this service boundary."
+        },
+        {
+          "title": "Render with an internal content service",
+          "choice": "Fetch content on the server through a deployment service binding and render HTML for visitors.",
+          "rationale": "This fits the Python/React stack and keeps the content API internal while allowing ordinary links and meaningful HTML without client-side data fetching.",
+          "tradeoff": "A backend outage can affect page rendering. Compared with a wholly static export, this adds runtime availability, service configuration, and operational checks."
+        },
+        {
+          "title": "Use conceptual diagrams and scoped evidence",
+          "choice": "Show a simplified workflow and pair it with implementation status, source scope, and limits.",
+          "rationale": "A diagram helps explain the system while source notes distinguish reviewed code, historical descriptions, and proposed work.",
+          "tradeoff": "A simplified view omits operational detail, and some older projects have thinner evidence. The page needs enough prose to avoid presenting a conceptual flow as a complete deployment architecture."
+        }
+      ],
+      "diagram": [
+        "Validated content source",
+        "Internal FastAPI service",
+        "Server-rendered Next.js pages",
+        "Resume & project case studies"
+      ],
+      "diagram_caption": "Conceptual flow · portfolio content",
+      "diagram_description": "The public frontend renders validated content; production visitors do not call the internal API directly.",
+      "evidence": "Based on this repository's content service, schemas, page components, and deployment guide. Current case-study changes are local.",
+      "links": [
+        {
+          "label": "Source on GitHub",
+          "url": "https://github.com/samuel1tsao/personal-portfolio"
+        }
+      ]
     }
   ]
 }

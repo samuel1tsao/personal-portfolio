@@ -34,9 +34,11 @@ For the mobile Lighthouse audit, keep `pnpm start` running and run `pnpm audit:p
 
 Edit `backend/content/portfolio.json`. Pydantic forbids extra/private fields and malformed links; `published: false` excludes a story from API responses, runtime pages, and sitemap. Keep unpublished notes outside this public data file. Duplicate slugs/orders fail validation. `updated` is the actual editorial update date. API content revisions are SHA-256 hashes of normalized public content. Runtime responses are schema-validated; service bindings target the backend from the same deployment, without a manually pinned revision. Content failures stop rendering rather than inventing missing information.
 
-Current content omits unreviewed employer metrics, client identity, repository/demo links and the original PDF. `/resume` is an HTML resume with a print layout. Before launch, review the public email and facts. Add a PDF only after reviewing its contact information; do not create a broken PDF link. The experience stories intentionally avoid reconstructed proprietary diagrams.
+The `/resume` page includes employer accomplishments, technologies, and published personal projects. Client identity and the original PDF remain omitted. The HTML resume has a print layout; add a PDF only after reviewing its contact information. The experience stories intentionally avoid reconstructed proprietary diagrams.
 
 ## One Vercel project with services
+
+Personal projects link from `/resume` to `/work/<slug>`; `/projects` lists all published personal project stories. The homepage selects the first three stories by editorial order. Structured decisions and diagram captions are optional story fields. Each resume `story_slug` must refer to an existing project story, and links to draft stories are suppressed.
 
 The root `vercel.json` replaces the earlier two-project proposal. Set the Vercel project's Root Directory to the repository root, not `frontend/` or `backend/`. Do not add top-level build/runtime overrides; the frontend build command belongs to its service. The user confirmed the service names and requested an internal-only backend on 2026-10-20.
 
@@ -51,12 +53,13 @@ Only the frontend receives public traffic. The backend has no public rewrite and
 
 The frontend declares one binding: `{ "type": "service", "service": "backend", "format": "url", "env": "CONTENT_SERVICE_URL" }`. Vercel injects that variable; **do not set it yourself**. Server functions read it when handling requests. They preserve any path prefix in the generated base URL and do not send public Deployment Protection bypass credentials. A binding grants reachability, not application-level authorization.
 
-The homepage, resume, stories, and sitemap now render at runtime. Builds never contact the backend or enumerate story slugs. Core content is still returned as server-rendered HTML, including metadata and structured data. Schema validation, bounded GET retry and timeout remain. The old `CONTENT_REVISION` pin and `CONTENT_API_BYPASS_SECRET` are removed; a shared deployment and deployment-aware binding replace manual project pairing. `CONTENT_API_URL` is only a fallback for separate local Next.js/uvicorn development, not a hosted service-discovery setting.
+The homepage, resume, stories, and sitemap render at runtime. Builds never contact the backend or enumerate story slugs. Core content is returned as server-rendered HTML, including metadata and structured data. Shared portfolio data uses Next.js Cache Components with an hourly cache lifetime. Schema validation, bounded GET retry and timeout remain. The old `CONTENT_REVISION` pin and `CONTENT_API_BYPASS_SECRET` are removed; a shared deployment and deployment-aware binding replace manual project pairing. `CONTENT_API_URL` is only a fallback for separate local Next.js/uvicorn development, not a hosted service-discovery setting.
 
 Project environment settings:
 
 - Set `SITE_URL` to the intended canonical HTTPS production origin. This is required for metadata during build; use the assigned production Vercel hostname until a custom domain is connected.
-- Set `SITE_INDEXABLE=true` only for the reviewed public production site; Vercel preview builds stay noindex. Keep it false during setup.
+- Production deployments are indexable automatically; previews and local runs remain noindex. This is based on Vercel's `VERCEL_ENV=production` value, so no `SITE_INDEXABLE` variable is needed.
+- Enable Web Analytics in the Vercel project to collect page views. Portfolio action clicks and browser error counts use custom events, which Vercel currently lists as available on Pro and Enterprise plans; use Vercel Observability and Runtime Logs for server-side request errors.
 - Remove any manually configured `CONTENT_SERVICE_URL`, `CONTENT_API_URL`, `CONTENT_REVISION`, and `CONTENT_API_BYPASS_SECRET` from Vercel project settings. The binding supplies the service URL automatically.
 - Gateway experiments remain owner-only CLI operations; no Gateway key is needed to deploy or browse the portfolio. Shared project environment variables are not service-specific secrets, so do not add unrelated private credentials.
 
@@ -64,7 +67,6 @@ To test the actual multi-service routing locally from the repository root (Power
 
 ```powershell
 $env:SITE_URL = 'http://127.0.0.1:3010'
-$env:SITE_INDEXABLE = 'false'
 npm exec --yes --package=vercel@64.7.0 -- vercel dev -L --listen 127.0.0.1:3010
 ```
 
@@ -90,3 +92,7 @@ The prompt is read interactively. Only public test inputs should be submitted. A
 Check balance and current model eligibility before each session. Vercel currently documents $5/month for eligible models on the Gateway free tier; purchasing credits ends that monthly free allocation. Keep auto top-up disabled and stop on quota errors. Hosting/function limits remain separate. No automatic cost estimate or hard account budget is implied by the CLI. Enable appropriate dashboard budgets if available. Sources: [pricing](https://vercel.com/docs/ai-gateway/pricing), [Chat Completions](https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions), [FastAPI hosting](https://vercel.com/docs/frameworks/backend/fastapi).
 
 A hosted public experiment requires a separate design for authentication, atomic shared quotas, abuse handling, and billing limits. Process-local counters would not enforce a deployment-wide limit.
+
+## Portfolio chat agent
+
+The `/chat` page answers from validated published portfolio content through the frontend's same-origin `/api/chat` route. It uses Vercel AI SDK's Gateway provider on the server and its UI message stream in the browser; the Gateway key and model are server-only. Set `AI_GATEWAY_API_KEY`, `AI_MODEL_FAST`, and `CHAT_AGENT_ENABLED=true` in the frontend runtime environment only after configuring a Vercel Firewall rate limit for `/api/chat` and reviewing Gateway spending controls. The feature flag defaults to off; missing configuration or upstream failure leaves direct email and profile links available. Never set `NEXT_PUBLIC_` variants of Gateway secrets. Requests accept only bounded text-only message parts, responses cap output tokens, and the app does not persist or log conversation text; these application limits do not provide a deployment-wide quota. Do not enable public chat until the platform protections are configured.

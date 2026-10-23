@@ -111,3 +111,19 @@ def test_response_and_source_are_independent(source):
     original = read_portfolio()
     assert original["stories"] == sorted(original["stories"], key=lambda item: item["order"])
     assert original == read_portfolio()
+
+
+@pytest.mark.parametrize("slug", ["missing-project", "marketplace-search", "../unsafe"])
+def test_resume_project_references_must_target_project_stories(source, slug):
+    source["profile"]["projects"][0]["story_slug"] = slug
+    with pytest.raises(ValueError):
+        Portfolio.model_validate(source)
+
+
+def test_legacy_stories_keep_compatible_defaults(source):
+    for story in source["stories"]:
+        for field in ("decisions", "diagram_caption", "diagram_description"):
+            story.pop(field, None)
+    portfolio = Portfolio.model_validate(source)
+    assert portfolio.stories[0].decisions == ()
+    assert portfolio.stories[0].diagram_caption == "Conceptual flow"

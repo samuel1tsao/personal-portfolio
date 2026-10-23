@@ -2,15 +2,15 @@ import Link from "next/link";
 import { getPortfolio } from "@/lib/api";
 import { pageMetadata, rolePeriod } from "@/lib/seo";
 
+export const instant = false;
+
 export const metadata = pageMetadata(
   "Resume | Samuel Tsao",
-  "Samuel Tsao's software engineering experience, skills, and education.",
+  "Samuel Tsao's engineering accomplishments, applied ML research, personal projects, skills, and education.",
   "/resume",
 );
-export const dynamic = "force-dynamic";
-
 export default async function Resume() {
-  const { profile } = await getPortfolio();
+  const { profile, stories } = await getPortfolio();
   return (
     <main id="main" className="resume-page wrap">
       <p className="eyebrow">Experience & education</p>
@@ -20,6 +20,13 @@ export default async function Resume() {
         {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </p>
       <p className="resume-note">Web resume · Use your browser’s Print / Save as PDF for a copy.</p>
+      <p className="resume-links">
+        {profile.links.map((link) => (
+          <a key={link.url} href={link.url}>
+            {link.label} ↗
+          </a>
+        ))}
+      </p>
       <section>
         <h2>Profile</h2>
         <p>{profile.intro}</p>
@@ -33,9 +40,55 @@ export default async function Resume() {
             </h3>
             <p className="muted">{rolePeriod(role.start, role.end)}</p>
             <p>{role.summary}</p>
+            <ul className="resume-accomplishments">
+              {role.accomplishments.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            {role.technologies.length > 0 && (
+              <p className="resume-technologies">
+                <strong>Technologies:</strong> {role.technologies.join(" · ")}
+              </p>
+            )}
           </article>
         ))}
       </section>
+      {profile.projects.length > 0 && (
+        <section>
+          <h2>Projects & applied research</h2>
+          {profile.projects.map((project) => (
+            <article key={project.name}>
+              <h3>
+                {stories.some((story) => story.slug === project.story_slug) ? (
+                  <Link href={`/work/${project.story_slug}`}>{project.name} ↗</Link>
+                ) : (
+                  project.name
+                )}
+              </h3>
+              <p className="muted">{project.status}</p>
+              <p>{project.summary}</p>
+              <ul className="resume-accomplishments">
+                {project.accomplishments.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="resume-technologies">
+                <strong>Technologies:</strong> {project.technologies.join(" · ")}
+              </p>
+              <p className="resume-links">
+                {stories.some((story) => story.slug === project.story_slug) && (
+                  <Link href={`/work/${project.story_slug}`}>Product details & tradeoffs ↗</Link>
+                )}
+                {project.links.map((link) => (
+                  <a key={link.url} href={link.url}>
+                    {link.label} ↗
+                  </a>
+                ))}
+              </p>
+            </article>
+          ))}
+        </section>
+      )}
       <section>
         <h2>Education</h2>
         {profile.education.map((item) => (
