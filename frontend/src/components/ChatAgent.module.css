@@ -192,6 +192,7 @@
   display: flex;
   width: 100%;
   min-width: 0;
+  min-height: 0;
   flex-direction: column;
   border: 0;
   border-radius: 0;
@@ -199,7 +200,11 @@
 .compactMessages {
   min-height: 0;
   max-height: none;
-  flex: 1;
+  flex: 1 1 0;
+}
+.compactChat .chatHeader,
+.compactChat .form {
+  flex-shrink: 0;
 }
 @media (max-width: 760px) {
   .layout {
