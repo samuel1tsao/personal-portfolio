@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "updated": "2026-10-21",
+  "updated": "2026-10-27",
   "profile": {
     "name": "Samuel Tsao",
     "headline": "Reliable systems. Thoughtful intelligence.",
@@ -239,14 +239,14 @@
       {
         "name": "Personalized Asset Recommendation Engine",
         "status": "Ongoing applied ML project",
-        "summary": "Two-phase Transformer research connecting market behavior, financial goals, and risk preferences.",
+        "summary": "Collaborative Transformer and reinforcement-learning research for multi-goal portfolio allocation; the linked repository is a separate finance application and does not verify this model implementation.",
         "accomplishments": [
           "Mined historical equity, mutual fund, and bond data from Yahoo Finance, Wikipedia, and Nasdaq.",
           "Designed a temporal model using four-dimensional autoregression, categorical industry embeddings, feature pruning, and sine/cosine positional encodings.",
           "Implemented a secondary Transformer and Gaussian policy-gradient recommendation policy to balance goal fulfillment, returns, volatility, and drawdown.",
           "Developed a custom loss function to penalize portfolio fragmentation and balance diversification against management overhead.",
           "Designed evaluation using temporal holdouts, historical stress periods, block bootstrap and Monte Carlo simulations, and S&P 500 and 60/40 baselines; comparative performance results are not published.",
-          "Collaborative graduate project; project plan identifies my lead scope as simulation, architecture, historical backtesting, and the optimization loop."
+          "The public Financial_Analytics repository contains a separate full-stack recommendation and planning application; its README does not establish that the deployed app uses this Transformer/RL research model."
         ],
         "technologies": [
           "Python",
@@ -393,6 +393,126 @@
           }
         ],
         "story_slug": "personal-portfolio"
+      },
+      {
+        "name": "2D Object Detector Benchmark",
+        "story_slug": "2d-detector-benchmark",
+        "status": "Completed pretrained-model evaluation",
+        "summary": "Compared YOLO11 and RT-DETR on a 5,000-image COCO validation sample and KITTI labeled training images using a two-class vehicle/person mapping.",
+        "accomplishments": [
+          "Reported COCO/KITTI mAP of 0.471/0.303 for YOLO11n, 0.581/0.349 for YOLO11m, and 0.578/0.366 for RT-DETR ResNet-50.",
+          "Documented that models were pretrained and not fine-tuned, KITTI evaluation used its labeled training split rather than the official test split, and GPU memory was not measured."
+        ],
+        "technologies": [
+          "Python",
+          "Jupyter",
+          "YOLO11",
+          "RT-DETR",
+          "COCO",
+          "KITTI"
+        ],
+        "links": [
+          {
+            "label": "Benchmark repository",
+            "url": "https://github.com/samuel1tsao/2d-detection-model-analysis"
+          }
+        ]
+      },
+      {
+        "name": "RAG Fact-Checking & Claim Validation",
+        "story_slug": "rag-fact-checking",
+        "status": "Collaborative graduate project · forked class repository",
+        "summary": "A team-built evidence retrieval and claim assessment pipeline; my documented contribution was the fact-validation module.",
+        "accomplishments": [
+          "Contributed a validation module that combines entailment, contradiction, relevance, recency, and domain signals in a Random Forest classifier.",
+          "The module classifies claims as Supported, Refuted, Contested, or Not enough evidence and derives a confidence score from class probabilities.",
+          "The repository README describes the broader team pipeline, including Qdrant with E5 embeddings, NLI, GPT or local Ollama reasoning, and a React interface served through Flask; those components are not attributed solely to me."
+        ],
+        "technologies": [
+          "Python",
+          "scikit-learn",
+          "Qdrant",
+          "E5 embeddings",
+          "NLI",
+          "React",
+          "Flask"
+        ],
+        "links": [
+          {
+            "label": "Project repository",
+            "url": "https://github.com/samuel1tsao/CMPE297-project"
+          },
+          {
+            "label": "Fact Validator source",
+            "url": "https://github.com/samuel1tsao/CMPE297-project/blob/main/src/modules/claim_extraction/Fact_Validator.py"
+          }
+        ]
+      },
+      {
+        "name": "Automatic Speech Recognition Bias Research",
+        "status": "Academic research · source link not yet listed",
+        "summary": "Research on reducing accent representation bias in speech recognition through on-device personalization, accent normalization, and teacher-student distillation.",
+        "accomplishments": [
+          "Explored approaches to improve the representation of accents in automatic speech recognition.",
+          "The research notes identify a July 2026 paper; no public paper or code link is currently available in the portfolio."
+        ],
+        "technologies": [
+          "Automatic speech recognition",
+          "Knowledge distillation",
+          "On-device personalization"
+        ]
+      },
+      {
+        "name": "License Plate Super-Resolution",
+        "status": "Graduate research project · source link not yet listed",
+        "summary": "A 4× license-plate image super-resolution project combining U-Net and EDSR components.",
+        "accomplishments": [
+          "The described approach combines channel attention with an edge-aware Sobel loss.",
+          "No matching public repository or paper link is currently available; this work is separate from the linked 2D object-detection benchmark."
+        ],
+        "technologies": [
+          "Python",
+          "U-Net",
+          "EDSR",
+          "Image super-resolution"
+        ]
+      },
+      {
+        "name": "Lucra Tournament API Exercise",
+        "status": "Backend exercise · forked repository",
+        "summary": "A TypeScript and PostgreSQL tournament directory with paginated participant leaderboards.",
+        "accomplishments": [
+          "Implements cursor pagination, highest-score selection, and standard competition ranking for ties.",
+          "Includes a React/Vite client; standings are fresh reads and are not guaranteed to remain a consistent snapshot between visits."
+        ],
+        "technologies": [
+          "TypeScript",
+          "Express",
+          "PostgreSQL",
+          "React",
+          "Vite"
+        ],
+        "links": [
+          {
+            "label": "Exercise repository",
+            "url": "https://github.com/samuel1tsao/lucra-backend-exercise"
+          }
+        ]
+      },
+      {
+        "name": "StarResonanceDps Localization & Fixes",
+        "status": "Community contribution · fork",
+        "summary": "A contribution fork where the README credits Samuel with translation work and bug fixes; the upstream project and code are credited to their original authors.",
+        "accomplishments": [
+          "Translated the tool and contributed bug fixes, as described in the repository README."
+        ],
+        "technologies": [],
+        "links": [
+          {
+            "label": "Contribution fork",
+            "url": "https://github.com/samuel1tsao/StarResonanceDps"
+          }
+        ]
       }
     ]
   },
@@ -616,7 +736,12 @@
       "diagram_caption": "Conceptual flow · Fog-Density Object Detection Research",
       "diagram_description": "A simplified workflow of the reviewed project, with research and implementation boundaries described below.",
       "evidence": "Based on the local fog research README, research plan, squint implementation plan, and notebook guide. Some controls are specified acceptance requirements; they are not presented as a fresh audit of every run. Results and vehicle-safety claims are not asserted.",
-      "links": []
+      "links": [
+        {
+          "label": "Research repository",
+          "url": "https://github.com/samuel1tsao/ai-driving-assistance"
+        }
+      ]
     },
     {
       "slug": "trajectory-financial-planning",
@@ -1001,6 +1126,92 @@
           "url": "https://github.com/samuel1tsao/personal-portfolio"
         }
       ]
+    },
+    {
+      "slug": "2d-detector-benchmark",
+      "kind": "project",
+      "title": "Benchmarking Pretrained 2D Detectors",
+      "summary": "A reproducible comparison of pretrained YOLO11 and RT-DETR models across two image datasets, with explicit evaluation caveats.",
+      "role": "Independent computer vision evaluation",
+      "period": "Completed benchmark",
+      "contribution": "Evaluated pretrained detectors on selected COCO and KITTI data and documented the class mapping, metrics, and limits of comparison.",
+      "skills": [
+        "Python",
+        "Jupyter",
+        "YOLO11",
+        "RT-DETR",
+        "Computer vision"
+      ],
+      "sections": [
+        {
+          "title": "The question",
+          "body": "How do selected pretrained detectors compare on common object-detection data when evaluated under a consistent two-class mapping? This benchmark reports model and dataset details so readers can interpret the numbers in context."
+        },
+        {
+          "title": "Evaluation and results",
+          "body": "The repository reports evaluation on 5,000 COCO validation images and 7,481 images from KITTI’s labeled training split, mapped to vehicle and person classes. COCO/KITTI mAP was 0.471/0.303 for YOLO11n, 0.581/0.349 for YOLO11m, and 0.578/0.366 for RT-DETR ResNet-50."
+        },
+        {
+          "title": "Interpretation and limits",
+          "body": "These are pretrained, non-fine-tuned model results under a two-class mapping. They are not standard 80-class COCO scores or results on KITTI’s official test split. The repository notes that fine-tuning and GPU memory measurement were not performed, so the results should not be read as a complete accuracy/cost comparison."
+        }
+      ],
+      "evidence": "Metrics and caveats are transcribed from the public 2d-detection-model-analysis README. No independent rerun is claimed.",
+      "links": [
+        {
+          "label": "Benchmark repository",
+          "url": "https://github.com/samuel1tsao/2d-detection-model-analysis"
+        }
+      ],
+      "published": true,
+      "order": 9
+    },
+    {
+      "slug": "rag-fact-checking",
+      "kind": "project",
+      "title": "RAG Fact-Checking & Claim Validation",
+      "summary": "A collaborative retrieval and claim-validation system, with my documented contribution focused on the fact-validator module.",
+      "role": "Fact-validation module contributor",
+      "period": "Collaborative graduate project",
+      "contribution": "Implemented a feature-based claim classifier that uses evidence signals to distinguish supported, refuted, contested, and insufficient-evidence cases.",
+      "skills": [
+        "Python",
+        "scikit-learn",
+        "NLI",
+        "Qdrant",
+        "Information retrieval"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "A claim-checking workflow needs to connect a statement to retrieved evidence and distinguish strong support from contradiction or insufficient evidence. The class project combines retrieval and language-model components while retaining an explicit validation stage."
+        },
+        {
+          "title": "My contribution",
+          "body": "The public Fact_Validator module builds features from entailment, contradiction, relevance, recency, domain agreement, and related signals. It uses a Random Forest classifier to predict Supported, Refuted, Contested, or Not enough evidence and derives a 0–100 confidence score from class probabilities."
+        },
+        {
+          "title": "Collaborative system",
+          "body": "The project README describes a team-built pipeline using Qdrant semantic search with intfloat/e5-small-v2 embeddings, NLI validation, GPT or local Ollama reasoning, and a React interface served through Flask. The README attributes the Fact Validator to Sam and credits teammates for other modules; the overall system is presented as collaborative work."
+        },
+        {
+          "title": "Evidence and limits",
+          "body": "This is a forked class-project repository. The reviewed README and module support the implementation described here; they do not substantiate Elasticsearch, roberta-large-mnli, Logistic Regression, or a fixed 0.65 verdict threshold. No production deployment or measured fact-checking accuracy is claimed."
+        }
+      ],
+      "evidence": "Based on the public CMPE297-project README and Fact_Validator.py source. Overall pipeline components are attributed to the team; the fact-validator contribution is attributed to Sam in the README.",
+      "links": [
+        {
+          "label": "Project repository",
+          "url": "https://github.com/samuel1tsao/CMPE297-project"
+        },
+        {
+          "label": "Fact Validator source",
+          "url": "https://github.com/samuel1tsao/CMPE297-project/blob/main/src/modules/claim_extraction/Fact_Validator.py"
+        }
+      ],
+      "published": true,
+      "order": 10
     }
   ]
 }
