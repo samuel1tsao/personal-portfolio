@@ -41,6 +41,7 @@ export const portfolioSchema = z.object({
     location: text,
     email: z.email(),
     about: text,
+    assistant_context: text,
     education: z.array(text),
     skills: z.array(text),
     links: z.array(link),

@@ -27,6 +27,7 @@ export function streamPortfolioChat({
     system,
     messages,
     reasoning: "minimal",
+    providerOptions: { gateway: { caching: "auto" } },
     maxOutputTokens: CHAT_OUTPUT_TOKENS,
     maxRetries: 0,
     timeout: CHAT_TIMEOUT_MS,
