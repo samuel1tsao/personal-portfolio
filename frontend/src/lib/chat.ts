@@ -63,7 +63,6 @@ export function portfolioContext(portfolio: Portfolio): string {
     `Contact email: ${profile.email}`,
     `Profiles: ${profile.links.map((link) => `${link.label}: ${link.url}`).join("; ")}`,
     `About: ${profile.about}`,
-    `Professional statement: ${profile.assistant_context}`,
     `Education: ${profile.education.join("; ")}`,
     `Skills: ${profile.skills.join(", ")}`,
     `Professional experience from the published resume:\n${roles.join("\n\n")}`,

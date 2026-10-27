@@ -90,7 +90,6 @@ class Profile(ContentModel):
     location: Text
     email: Text
     about: Text
-    assistant_context: Text
     education: tuple[Text, ...]
     skills: tuple[Text, ...]
     links: tuple[Link, ...]

@@ -9,7 +9,7 @@ A personal portfolio for software engineering and applied ML work. The site brin
 - **Home:** A short introduction, areas of focus, selected work, experience, background, and contact links.
 - **Projects and case studies:** Browse published projects at `/projects` or read a project story at `/work/<slug>`.
 - **Web resume:** Experience, accomplishments, skills, education, and projects at `/resume`; use the browser’s Print / Save as PDF option for a copy.
-- **Portfolio chat:** Ask about Samuel’s experience, projects, or how to connect at `/chat`. A pinned button also opens chat while browsing. Responses use published portfolio content and should acknowledge when it does not support an answer; email and profile links are available directly. See the [chat prompt and context plan](docs/features/chat-context-retrieval.md).
+- **Portfolio chat:** Ask about Samuel’s experience, projects, or how to connect at `/chat`. A pinned button also opens chat while browsing. Responses use published portfolio content; email and profile links are available directly.
 - **Accessible and discoverable pages:** Responsive layouts, keyboard navigation, page metadata, structured profile data, sitemap, and production-only indexing.
 
 ## How it works
