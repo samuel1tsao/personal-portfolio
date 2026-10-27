@@ -12,8 +12,8 @@ export const metadata = pageMetadata(
 );
 
 export default async function Projects() {
-  const { stories } = await getPortfolio();
-  const projects = stories.filter((story) => story.kind === "project");
+  const { entries } = await getPortfolio();
+  const projects = entries.filter((entry) => entry.kind === "project");
   return (
     <main id="main" className="story-page wrap">
       <Link className="back-link" href="/#work">
@@ -28,8 +28,8 @@ export default async function Projects() {
         </p>
       </header>
       <div className="project-directory">
-        {projects.map((story, index) => (
-          <StoryCard key={story.slug} story={story} index={index} />
+        {projects.map((project, index) => (
+          <StoryCard key={project.slug} entry={project} index={index} />
         ))}
       </div>
     </main>

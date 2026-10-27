@@ -1,7 +1,7 @@
 from pathlib import Path
 
 CONTENT_PATH = Path(__file__).parent / "content" / "portfolio.json"
-SCHEMA_VERSION = "1"
+SCHEMA_VERSION = "2"
 API_PREFIX = "/api/v1"
 MAX_CONTENT_BYTES = 200_000
 MAX_TEXT = 8_000

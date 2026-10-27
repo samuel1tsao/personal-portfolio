@@ -25,22 +25,6 @@ class Link(ContentModel):
         return self
 
 
-class Role(ContentModel):
-    company: Text
-    title: Text
-    start: date
-    end: date | None = None
-    summary: Text
-    accomplishments: tuple[Text, ...] = ()
-    technologies: tuple[Text, ...] = ()
-
-    @model_validator(mode="after")
-    def chronological_dates(self):
-        if self.end and self.end < self.start:
-            raise ValueError("Role ends before it starts")
-        return self
-
-
 class Section(ContentModel):
     title: Text
     body: Text
@@ -53,14 +37,21 @@ class Decision(ContentModel):
     tradeoff: Text
 
 
-class Story(ContentModel):
+class PortfolioEntry(ContentModel):
     slug: Slug
     kind: Literal["project", "experience"]
     title: Text
+    organization: Text | None = None
+    position: Text | None = None
+    start: date | None = None
+    end: date | None = None
     summary: Text
     role: Text
     period: Text
     contribution: Text
+    status: Text | None = None
+    accomplishments: tuple[Text, ...] = ()
+    technologies: tuple[Text, ...] = ()
     skills: tuple[Text, ...] = Field(min_length=1, max_length=12)
     sections: tuple[Section, ...] = Field(min_length=1, max_length=12)
     evidence: Text
@@ -72,15 +63,15 @@ class Story(ContentModel):
     published: bool
     order: int = Field(ge=0)
 
-
-class ResumeProject(ContentModel):
-    name: Text
-    story_slug: Slug | None = None
-    status: Text
-    summary: Text
-    accomplishments: tuple[Text, ...] = Field(min_length=1)
-    technologies: tuple[Text, ...] = ()
-    links: tuple[Link, ...] = ()
+    @model_validator(mode="after")
+    def valid_entry_identity(self):
+        if self.kind == "experience" and (
+            not self.organization or not self.position or not self.start
+        ):
+            raise ValueError("Experience entries require organization, position, and start date")
+        if self.end and self.start and self.end < self.start:
+            raise ValueError("Entry ends before it starts")
+        return self
 
 
 class Profile(ContentModel):
@@ -93,8 +84,7 @@ class Profile(ContentModel):
     education: tuple[Text, ...]
     skills: tuple[Text, ...]
     links: tuple[Link, ...]
-    roles: tuple[Role, ...]
-    projects: tuple[ResumeProject, ...] = ()
+    interests: tuple[Text, ...] = ()
 
     @model_validator(mode="after")
     def safe_email(self):
@@ -107,16 +97,12 @@ class Portfolio(ContentModel):
     schema_version: Literal[SCHEMA_VERSION]
     updated: date
     profile: Profile
-    stories: tuple[Story, ...] = Field(min_length=1, max_length=30)
+    entries: tuple[PortfolioEntry, ...] = Field(min_length=1, max_length=40)
 
     @model_validator(mode="after")
-    def unique_stories(self):
+    def unique_entries(self):
         for key in ("slug", "order"):
-            values = [getattr(story, key) for story in self.stories]
+            values = [getattr(entry, key) for entry in self.entries]
             if len(values) != len(set(values)):
-                raise ValueError(f"Duplicate story {key}")
-        project_slugs = {story.slug for story in self.stories if story.kind == "project"}
-        for project in self.profile.projects:
-            if project.story_slug and project.story_slug not in project_slugs:
-                raise ValueError("Resume project must reference a project story")
+                raise ValueError(f"Duplicate portfolio entry {key}")
         return self

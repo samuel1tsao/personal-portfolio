@@ -11,11 +11,6 @@ const fixture = JSON.parse(
 const content = {
   ...fixture,
   content_revision: createHash("sha256").update("fixture").digest("hex"),
-  profile: {
-    ...fixture.profile,
-    roles: fixture.profile.roles.map((role: object) => ({ end: null, ...role })),
-  },
-  stories: fixture.stories.map((story: object) => ({ diagram: [], links: [], ...story })),
 };
 const success = () => new Response(JSON.stringify(content));
 afterEach(() => vi.unstubAllEnvs());
@@ -32,7 +27,7 @@ describe("content contract", () => {
       .fn()
       .mockRejectedValueOnce(new Error("timeout"))
       .mockResolvedValue(success());
-    expect((await fetchPortfolio(fetcher)).stories).toHaveLength(content.stories.length);
+    expect((await fetchPortfolio(fetcher)).entries).toHaveLength(content.entries.length);
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
   it.each(["revision", "schema", "partial", "oversized", "unavailable", "draft"])(
@@ -40,9 +35,9 @@ describe("content contract", () => {
     async (caseName) => {
       const body = structuredClone(content);
       if (caseName === "revision") body.content_revision = "incorrect";
-      if (caseName === "schema") body.schema_version = "2";
+      if (caseName === "schema") body.schema_version = "3";
       if (caseName === "partial") body.profile = {};
-      if (caseName === "draft") body.stories[0].published = false;
+      if (caseName === "draft") body.entries[0].published = false;
       const raw = caseName === "oversized" ? "x".repeat(200001) : JSON.stringify(body);
       const fetcher = vi
         .fn()

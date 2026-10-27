@@ -19,17 +19,17 @@ def source():
     return json.loads(CONTENT_PATH.read_text(encoding="utf-8"))
 
 
-def test_public_content_and_story():
+def test_public_content_and_entry():
     response = client.get("/api/v1/portfolio")
     assert response.status_code == 200
     content = response.json()
     assert len(content["content_revision"]) == 64
-    assert content["schema_version"] == "1"
-    slug = content["stories"][0]["slug"]
-    assert client.get(f"/api/v1/stories/{slug}").json() == content["stories"][0]
+    assert content["schema_version"] == "2"
+    slug = content["entries"][0]["slug"]
+    assert client.get(f"/api/v1/entries/{slug}").json() == content["entries"][0]
 
 
-@pytest.mark.parametrize("path", ["/api/v1/stories/missing", "/api/v2/portfolio", "/docs"])
+@pytest.mark.parametrize("path", ["/api/v1/entries/missing", "/api/v2/portfolio", "/docs"])
 def test_missing_paths(path):
     response = client.get(path)
     assert response.status_code == 404
@@ -40,15 +40,16 @@ def test_missing_paths(path):
 @pytest.mark.parametrize("case", ["empty", "duplicate", "slug", "url", "date", "extra", "long"])
 def test_invalid_content(source, case):
     if case == "empty":
-        source["stories"] = []
+        source["entries"] = []
     elif case == "duplicate":
-        source["stories"].append(copy.deepcopy(source["stories"][0]))
+        source["entries"].append(copy.deepcopy(source["entries"][0]))
     elif case == "slug":
-        source["stories"][0]["slug"] = "../private"
+        source["entries"][0]["slug"] = "../private"
     elif case == "url":
         source["profile"]["links"][0]["url"] = "javascript:alert(1)"
     elif case == "date":
-        source["profile"]["roles"][1]["end"] = "2000-01-01"
+        experience = next(entry for entry in source["entries"] if entry["kind"] == "experience")
+        experience["end"] = "2000-01-01"
     elif case == "extra":
         source["profile"]["private_notes"] = "secret"
     else:
@@ -59,11 +60,11 @@ def test_invalid_content(source, case):
 
 def test_drafts_removed_and_revision_changes(source, tmp_path):
     before = read_portfolio()
-    source["stories"][0]["published"] = False
+    source["entries"][0]["published"] = False
     path = tmp_path / "portfolio.json"
     path.write_text(json.dumps(source))
     after = read_portfolio(path)
-    assert len(after["stories"]) == len(before["stories"]) - 1
+    assert len(after["entries"]) == len(before["entries"]) - 1
     assert after["content_revision"] != before["content_revision"]
 
 
@@ -94,12 +95,12 @@ def test_twenty_concurrent_reads_are_isolated():
     assert read_portfolio()["profile"]["name"] == "Samuel Tsao"
 
 
-def test_draft_story_is_not_accessible(source, tmp_path, monkeypatch):
-    source["stories"][0]["published"] = False
+def test_draft_entry_is_not_accessible(source, tmp_path, monkeypatch):
+    source["entries"][0]["published"] = False
     path = tmp_path / "draft.json"
     path.write_text(json.dumps(source))
     monkeypatch.setattr(api, "read_portfolio", lambda: read_portfolio(path))
-    assert client.get("/api/v1/stories/asset-recommendation-engine").status_code == 404
+    assert client.get("/api/v1/entries/asset-recommendation-engine").status_code == 404
 
 
 def test_no_public_inference_or_writes():
@@ -109,21 +110,14 @@ def test_no_public_inference_or_writes():
 
 def test_response_and_source_are_independent(source):
     original = read_portfolio()
-    assert original["stories"] == sorted(original["stories"], key=lambda item: item["order"])
+    assert original["entries"] == sorted(original["entries"], key=lambda item: item["order"])
     assert original == read_portfolio()
 
 
-@pytest.mark.parametrize("slug", ["missing-project", "marketplace-search", "../unsafe"])
-def test_resume_project_references_must_target_project_stories(source, slug):
-    source["profile"]["projects"][0]["story_slug"] = slug
-    with pytest.raises(ValueError):
-        Portfolio.model_validate(source)
-
-
-def test_legacy_stories_keep_compatible_defaults(source):
-    for story in source["stories"]:
+def test_entries_keep_compatible_defaults(source):
+    for entry in source["entries"]:
         for field in ("decisions", "diagram_caption", "diagram_description"):
-            story.pop(field, None)
+            entry.pop(field, None)
     portfolio = Portfolio.model_validate(source)
-    assert portfolio.stories[0].decisions == ()
-    assert portfolio.stories[0].diagram_caption == "Conceptual flow"
+    assert portfolio.entries[0].decisions == ()
+    assert portfolio.entries[0].diagram_caption == "Conceptual flow"

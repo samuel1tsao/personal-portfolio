@@ -5,7 +5,7 @@ import { profileData, safeJsonLd } from "@/lib/seo";
 export const instant = false;
 
 export default async function Home() {
-  const { profile, stories } = await getPortfolio();
+  const { profile, entries } = await getPortfolio();
   return (
     <main id="main">
       <script
@@ -14,8 +14,8 @@ export default async function Home() {
       />
       <Hero profile={profile} />
       <Focus />
-      <Work stories={stories.slice(0, 3)} />
-      <Experience profile={profile} />
+      <Work entries={entries.filter((entry) => entry.kind === "project").slice(0, 3)} />
+      <Experience entries={entries} />
       <About profile={profile} />
       <Contact profile={profile} />
     </main>

@@ -91,7 +91,7 @@ test("recruiter paths, private backend, metadata and recovery", async ({ page, r
   await page.getByRole("link", { name: "Resume", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Samuel Tsao", exact: true })).toBeVisible();
   expect((await request.get("/api/v1/portfolio")).status()).toBe(404);
-  expect((await request.get("/api/v1/stories/asset-recommendation-engine")).status()).toBe(404);
+  expect((await request.get("/api/v1/entries/asset-recommendation-engine")).status()).toBe(404);
   expect((await request.get("/backend/api/v1/portfolio")).status()).toBe(404);
   const missing = await page.goto("/work/missing-story");
   expect(missing?.status()).toBe(200);

@@ -10,12 +10,14 @@ export const metadata = pageMetadata(
   "/resume",
 );
 export default async function Resume() {
-  const { profile, stories } = await getPortfolio();
+  const { profile, entries } = await getPortfolio();
+  const roles = entries.filter((entry) => entry.kind === "experience");
+  const projects = entries.filter((entry) => entry.kind === "project");
   return (
     <main id="main" className="resume-page wrap">
       <p className="eyebrow">Experience & education</p>
       <h1>{profile.name}</h1>
-      <p className="story-lede">Senior Software Engineer · Systems & Applied ML</p>
+      <p className="story-lede">{profile.headline}</p>
       <p>
         {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </p>
@@ -30,40 +32,42 @@ export default async function Resume() {
       <section>
         <h2>Profile</h2>
         <p>{profile.intro}</p>
+        <p>{profile.about}</p>
+        {profile.interests.length > 0 && (
+          <p>
+            <strong>Interests:</strong> {profile.interests.join(" · ")}
+          </p>
+        )}
       </section>
       <section>
         <h2>Experience</h2>
-        {profile.roles.map((role) => (
-          <article key={role.company}>
+        {roles.map((role) => (
+          <article key={role.slug}>
             <h3>
-              {role.company} · {role.title}
+              <Link href={`/experience/${role.slug}`}>
+                {role.organization} · {role.position} ↗
+              </Link>
             </h3>
-            <p className="muted">{rolePeriod(role.start, role.end)}</p>
+            <p className="muted">{role.start ? rolePeriod(role.start, role.end) : role.period}</p>
             <p>{role.summary}</p>
             <ul className="resume-accomplishments">
               {role.accomplishments.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            {role.technologies.length > 0 && (
-              <p className="resume-technologies">
-                <strong>Technologies:</strong> {role.technologies.join(" · ")}
-              </p>
-            )}
+            <p className="resume-links">
+              <Link href={`/experience/${role.slug}`}>Full role details ↗</Link>
+            </p>
           </article>
         ))}
       </section>
-      {profile.projects.length > 0 && (
+      {projects.length > 0 && (
         <section>
           <h2>Projects & applied research</h2>
-          {profile.projects.map((project) => (
-            <article key={project.name}>
+          {projects.map((project) => (
+            <article key={project.slug}>
               <h3>
-                {stories.some((story) => story.slug === project.story_slug) ? (
-                  <Link href={`/work/${project.story_slug}`}>{project.name} ↗</Link>
-                ) : (
-                  project.name
-                )}
+                <Link href={`/work/${project.slug}`}>{project.title} ↗</Link>
               </h3>
               <p className="muted">{project.status}</p>
               <p>{project.summary}</p>
@@ -73,12 +77,11 @@ export default async function Resume() {
                 ))}
               </ul>
               <p className="resume-technologies">
-                <strong>Technologies:</strong> {project.technologies.join(" · ")}
+                <strong>Technologies:</strong>{" "}
+                {[...new Set([...project.skills, ...project.technologies])].join(" · ")}
               </p>
               <p className="resume-links">
-                {stories.some((story) => story.slug === project.story_slug) && (
-                  <Link href={`/work/${project.story_slug}`}>Product details & tradeoffs ↗</Link>
-                )}
+                <Link href={`/work/${project.slug}`}>Full project details & tradeoffs ↗</Link>
                 {project.links.map((link) => (
                   <a key={link.url} href={link.url}>
                     {link.label} ↗

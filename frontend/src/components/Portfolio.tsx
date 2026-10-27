@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Profile, Story } from "@/lib/schema";
+import type { PortfolioEntry, Profile } from "@/lib/schema";
 import { rolePeriod } from "@/lib/seo";
 import { CopyEmail } from "./CopyEmail";
 import styles from "./Portfolio.module.css";
@@ -115,7 +115,8 @@ export function Focus() {
   );
 }
 
-export function Work({ stories }: { stories: Story[] }) {
+export function Work({ entries }: { entries: PortfolioEntry[] }) {
+  const projects = entries.filter((entry) => entry.kind === "project");
   return (
     <section className="section wrap" id="work" aria-labelledby="work-heading">
       <div className="section-heading">
@@ -139,49 +140,52 @@ export function Work({ stories }: { stories: Story[] }) {
         </Link>
       </p>
       <div className={styles.stories}>
-        {stories.length === 0 && (
-          <p>Selected stories are being updated. Explore my experience below.</p>
+        {projects.length === 0 && (
+          <p>Selected work is being updated. Explore my experience below.</p>
         )}
-        {stories.map((story, index) => (
-          <StoryCard key={story.slug} story={story} index={index} />
+        {projects.map((project, index) => (
+          <StoryCard key={project.slug} entry={project} index={index} />
         ))}
       </div>
     </section>
   );
 }
 
-export function StoryCard({ story, index }: { story: Story; index: number }) {
+export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: number }) {
   return (
     <article className={styles.storyCard}>
       <div className={styles.storyNumber} aria-hidden="true">
-        0{index + 1}
+        {String(index + 1).padStart(2, "0")}
       </div>
       <div className={styles.storyContent}>
         <p className="eyebrow">
-          {story.kind === "project" ? "Personal project" : story.role.split(" · ").at(-1)}
+          {entry.kind === "project"
+            ? (entry.status ?? "Project")
+            : `${entry.organization} · ${entry.period}`}
         </p>
         <h3>
           <Link
-            href={`/work/${story.slug}`}
+            href={entry.kind === "project" ? `/work/${entry.slug}` : `/experience/${entry.slug}`}
             data-analytics-event="CaseStudyClick"
-            data-analytics-target={story.slug}
+            data-analytics-target={entry.slug}
           >
-            {story.title}
+            {entry.title}
           </Link>
         </h3>
-        <p>{story.summary}</p>
+        {entry.position && <p className={styles.roleTitle}>{entry.position}</p>}
+        <p>{entry.summary}</p>
         <ul className="tags" aria-label="Technologies">
-          {story.skills.slice(0, 4).map((skill) => (
+          {entry.skills.slice(0, 4).map((skill) => (
             <li key={skill}>{skill}</li>
           ))}
         </ul>
       </div>
       <Link
-        href={`/work/${story.slug}`}
+        href={entry.kind === "project" ? `/work/${entry.slug}` : `/experience/${entry.slug}`}
         className={styles.storyArrow}
-        aria-label={`Read ${story.title}`}
+        aria-label={`Read ${entry.title}`}
         data-analytics-event="CaseStudyClick"
-        data-analytics-target={story.slug}
+        data-analytics-target={entry.slug}
       >
         <span aria-hidden="true">↗</span>
       </Link>
@@ -189,7 +193,8 @@ export function StoryCard({ story, index }: { story: Story; index: number }) {
   );
 }
 
-export function Experience({ profile }: { profile: Profile }) {
+export function Experience({ entries }: { entries: PortfolioEntry[] }) {
+  const roles = entries.filter((entry) => entry.kind === "experience");
   return (
     <section className="section wrap" id="experience" aria-labelledby="experience-heading">
       <div className="section-heading">
@@ -199,26 +204,26 @@ export function Experience({ profile }: { profile: Profile }) {
         </div>
         <Link
           className="inline-link"
-          href="/resume"
+          href="/experience"
           data-analytics-event="ResumeClick"
           data-analytics-location="experience"
         >
-          Full resume ↗
+          All roles ↗
         </Link>
       </div>
       <div className={styles.timeline}>
-        {profile.roles.map((role) => (
-          <article key={role.company} className={styles.role}>
-            <p className={styles.roleDate}>{rolePeriod(role.start, role.end)}</p>
+        {roles.map((role) => (
+          <Link key={role.slug} href={`/experience/${role.slug}`} className={styles.role}>
+            <p className={styles.roleDate}>{rolePeriod(role.start!, role.end)}</p>
             <div>
-              <h3>{role.company}</h3>
-              <p className={styles.roleTitle}>{role.title}</p>
+              <h3>{role.organization}</h3>
+              <p className={styles.roleTitle}>{role.position}</p>
               <p>{role.summary}</p>
             </div>
             <span className={styles.roleMark} aria-hidden="true">
               ↗
             </span>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
@@ -248,6 +253,10 @@ export function About({ profile }: { profile: Profile }) {
             <li key={skill}>{skill}</li>
           ))}
         </ul>
+        <h3>Outside work</h3>
+        {profile.interests.map((interest) => (
+          <p key={interest}>{interest}</p>
+        ))}
       </div>
     </section>
   );

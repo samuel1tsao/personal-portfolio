@@ -1,13 +1,13 @@
 {
-  "schema_version": "1",
+  "schema_version": "2",
   "updated": "2026-10-27",
   "profile": {
     "name": "Samuel Tsao",
     "headline": "Reliable systems. Thoughtful intelligence.",
-    "intro": "Senior software engineer with experience across financial technology, marketplaces, cybersecurity, and healthcare. I build distributed systems, financial workflows, and search infrastructure, and apply that production engineering foundation to machine learning research and LLM evaluation.",
+    "intro": "Senior software engineer with experience across financial technology, marketplaces, cybersecurity, and healthcare. I build distributed systems, financial workflows, and search infrastructure, and bring that production engineering foundation to machine learning research, agent evaluation, and useful AI products.",
     "location": "San Jose, California",
     "email": "tsao1samuel@gmail.com",
-    "about": "I care about the space between an idea and a system people can rely on. My experience ranges from financial workflows and marketplace search to infrastructure automation. Today, I'm deepening that foundation through graduate study in artificial intelligence and hands-on work with recommendation systems.",
+    "about": "I want to leave products and teams better than I found them. I look for the simplest approach that solves the real problem, and expect each added system or abstraction to earn its maintenance cost. My work spans dependable financial workflows, marketplace discovery, cloud infrastructure, and applied AI. I care about clear communication, collaboration, and turning fast-moving ML capabilities into practical tools people can use. My current focus is moving further into AI and ML engineering at the intersection of inference and applied software, including accessible products built with agent workflows and computer vision.",
     "education": [
       "M.S. Artificial Intelligence · San José State University · Expected 2027",
       "B.S. Computer Science · University of California, San Diego · 2017"
@@ -90,433 +90,13 @@
         "url": "https://www.linkedin.com/in/samuel-tsao/"
       }
     ],
-    "roles": [
-      {
-        "company": "Frontier AI Lab (via G2i & micro1)",
-        "title": "AI Software Engineer & LLM Evaluator (Contract)",
-        "start": "2026-07-01",
-        "summary": "Evaluation of foundational language models and autonomous coding agents.",
-        "accomplishments": [
-          "Evaluate agent-generated pull request diffs for correctness, performance, regressions, and architectural quality.",
-          "Design multi-turn tasks in Python, Java, and TypeScript to test coding agents' reasoning and handling of complex software engineering problems.",
-          "Produce reinforcement learning from human feedback (RLHF) data by identifying failure modes, edge cases, and hallucinated code."
-        ],
-        "technologies": [
-          "Python",
-          "Java",
-          "TypeScript",
-          "LLM evaluation",
-          "RLHF",
-          "Coding agents"
-        ]
-      },
-      {
-        "company": "Human Interest",
-        "title": "Senior Software Engineer, Record Keeping",
-        "start": "2025-07-01",
-        "summary": "Record keeping, financial workflows, and cloud infrastructure automation.",
-        "accomplishments": [
-          "Architected enterprise-wide ECS autoscaling frameworks, achieving an initial 40% reduction in ECS operating costs.",
-          "Rearchitected dividend processing to handle bursts of up to 100,000 dividends and one million transactions, including allocation, reinvestment, and liquidation.",
-          "Built correction tools for distribution errors and reallocated millions of dollars from uncashed instruments to customer accounts.",
-          "Led a financial instrument project with two engineers; refined monitoring to reduce alert fatigue by approximately 200 alerts annually.",
-          "Contributed to ledger systems supporting multibillion-dollar 401(k) assets and AI-assisted project lifecycle initiatives."
-        ],
-        "technologies": [
-          "TypeScript",
-          "Node.js",
-          "Kotlin",
-          "Spring Boot",
-          "SQL",
-          "AWS ECS",
-          "S3",
-          "EventBridge",
-          "Redis"
-        ],
-        "end": "2026-10-01"
-      },
-      {
-        "company": "Nursa",
-        "title": "Senior Software Engineer, Marketplace",
-        "start": "2023-05-01",
-        "end": "2025-03-01",
-        "summary": "Marketplace search, geographic discovery, and recommendation infrastructure.",
-        "accomplishments": [
-          "Built recommendation backend pipelines that reduced ranking model scoring updates from 30 minutes to five minutes.",
-          "Developed geographic search and mapping features associated with an 11% conversion increase across 300,000 monthly active users.",
-          "Established core search with Algolia fuzzy matching and filtering, alongside Elasticsearch-based discovery.",
-          "Introduced Datadog and PagerDuty monitoring and alerting, achieving a 30-minute mean recovery time.",
-          "Identified and addressed a 0.5% failure rate under 1,000 concurrent requests through performance testing.",
-          "Built a shift calendar reducing scheduling interactions from 32 to 12 per shift; improved team velocity by approximately 10% through workflow and review initiatives."
-        ],
-        "technologies": [
-          "TypeScript",
-          "Node.js",
-          "Angular",
-          "SQL",
-          "AWS",
-          "GCP",
-          "Docker",
-          "Kubernetes",
-          "Algolia",
-          "Elasticsearch",
-          "Datadog",
-          "PagerDuty"
-        ]
-      },
-      {
-        "company": "Affirm",
-        "title": "Software Engineer",
-        "start": "2021-12-01",
-        "end": "2023-03-01",
-        "summary": "Marketplace monetization, advertising backend infrastructure, and experimentation.",
-        "accomplishments": [
-          "Developed the initial backend implementation of advertising infrastructure and customer-facing REST APIs.",
-          "Ran backend A/B experiments affecting five million users, coordinating with cross-functional partners on stability and rollbacks.",
-          "Mitigated failure points during user acceptance and production testing of the advertising platform.",
-          "Documented legacy functionality and improved onboarding material, reducing onboarding time by approximately one week."
-        ],
-        "technologies": [
-          "Python",
-          "Kotlin",
-          "AWS",
-          "REST APIs",
-          "Microservices",
-          "A/B testing"
-        ]
-      },
-      {
-        "company": "Proofpoint",
-        "title": "Software Engineer",
-        "start": "2019-03-01",
-        "end": "2021-12-01",
-        "summary": "Identity management, data migration, search, and developer tooling.",
-        "accomplishments": [
-          "Modernized identity services supporting millions of daily requests, spanning backend development, data architecture, infrastructure, and network operations.",
-          "Designed ETL and data transformation from multi-tenant NoSQL storage to a single-tenant SQL ingestion pipeline.",
-          "Led service and data center migrations and introduced geographic redundancy; helped recover corrupted data after a critical data center failure.",
-          "Replaced streaming jobs with paginated processing to improve queue fairness and prevent long-running jobs from blocking smaller requests.",
-          "Developed proprietary typed queries and optimized data retrieval for secure, selective field access.",
-          "Reduced CI/CD build times by 80% using continuous randomized end-to-end testing; cut test runtime from three hours to 30 minutes.",
-          "Maintained Jenkins pipelines and sales engineering scripts for demos, data cleanup, and customer onboarding."
-        ],
-        "technologies": [
-          "Java",
-          "SQL",
-          "Cassandra",
-          "NoSQL",
-          "Perl",
-          "Puppet",
-          "Jenkins",
-          "Kubernetes",
-          "Docker"
-        ]
-      },
-      {
-        "company": "Kaiser Permanente",
-        "title": "IT Rotational Associate",
-        "start": "2017-07-01",
-        "end": "2019-03-01",
-        "summary": "Early-career foundation in enterprise technology.",
-        "accomplishments": [
-          "Rotated through enterprise integration, middleware operations, and innovative technology, delivering internal tools and integration prototypes.",
-          "Designed an anonymous idea intake web service with batching, caching, rate limiting, and request aggregation to manage third-party API costs.",
-          "Built server and application health monitoring tools.",
-          "Automated IoT device connection configuration, saving approximately three hours of demo maintenance per week.",
-          "Created a Google Maps proof of concept to locate nearby hospitals and evaluated replacement technologies for outdated frameworks."
-        ],
-        "technologies": [
-          "Java",
-          "Node.js",
-          "JavaScript",
-          "HTML",
-          "IoT",
-          "API integrations"
-        ]
-      }
-    ],
-    "projects": [
-      {
-        "name": "Personalized Asset Recommendation Engine",
-        "status": "Ongoing applied ML project",
-        "summary": "Collaborative Transformer and reinforcement-learning research for multi-goal portfolio allocation; the linked repository is a separate finance application and does not verify this model implementation.",
-        "accomplishments": [
-          "Mined historical equity, mutual fund, and bond data from Yahoo Finance, Wikipedia, and Nasdaq.",
-          "Designed a temporal model using four-dimensional autoregression, categorical industry embeddings, feature pruning, and sine/cosine positional encodings.",
-          "Implemented a secondary Transformer and Gaussian policy-gradient recommendation policy to balance goal fulfillment, returns, volatility, and drawdown.",
-          "Developed a custom loss function to penalize portfolio fragmentation and balance diversification against management overhead.",
-          "Designed evaluation using temporal holdouts, historical stress periods, block bootstrap and Monte Carlo simulations, and S&P 500 and 60/40 baselines; comparative performance results are not published.",
-          "The public Financial_Analytics repository contains a separate full-stack recommendation and planning application; its README does not establish that the deployed app uses this Transformer/RL research model."
-        ],
-        "technologies": [
-          "Python",
-          "PyTorch",
-          "Transformers",
-          "Reinforcement learning",
-          "React",
-          "FastAPI"
-        ],
-        "links": [
-          {
-            "label": "Source on GitHub",
-            "url": "https://github.com/samuel1tsao/Financial_Analytics"
-          }
-        ],
-        "story_slug": "asset-recommendation-engine"
-      },
-      {
-        "name": "Fog-Density Object Detection Research",
-        "status": "Ongoing computer vision research",
-        "summary": "Investigating density-aware object detection and adaptive feature gating in fog.",
-        "accomplishments": [
-          "Built a reproducible notebook workflow comparing RGB, predicted density, and predicted density with adaptive gating for YOLO11n, YOLO11m, and DETR.",
-          "Implemented experiments that mask YOLO P3 feature inputs or filter DETR spatial tokens using a configurable density threshold.",
-          "Organized setup, subset, and full-run profiles with checkpoint handling and local/Colab execution guides; detection improvements remain under evaluation."
-        ],
-        "technologies": [
-          "Python",
-          "Jupyter",
-          "YOLO",
-          "DETR",
-          "Computer vision"
-        ],
-        "links": [],
-        "story_slug": "fog-density-detection"
-      },
-      {
-        "name": "Trajectory — Financial Planning",
-        "status": "Ongoing personal-use preview",
-        "summary": "Retirement trajectory tooling connecting spending, saving, and investing decisions with financial timelines.",
-        "accomplishments": [
-          "Built retirement and loan calculation modules, financial projections, and shareable URL-based planning profiles.",
-          "Implemented bank CSV import and Google Sheets synchronization with batched transaction updates.",
-          "Integrated Plaid balance imports with server-side encrypted sessions and separated browser, service, and calculation layers.",
-          "Added unit, architecture, production bundle, and desktop/mobile browser checks; calculation accuracy remains under validation."
-        ],
-        "technologies": [
-          "JavaScript",
-          "Node.js",
-          "Plaid",
-          "Google Apps Script",
-          "Vercel",
-          "Playwright"
-        ],
-        "links": [],
-        "story_slug": "trajectory-financial-planning"
-      },
-      {
-        "name": "MTG Vault — Collection Tracker",
-        "status": "Built application · ongoing iteration",
-        "summary": "A desktop and mobile card collection tracker designed for rapid cataloging.",
-        "accomplishments": [
-          "Built keyboard-driven card entry with set, printing, finish, condition, and language selection.",
-          "Integrated Scryfall card data and prices with a portable Google Sheets collection database.",
-          "Implemented import/export workflows, queued synchronization, collection statistics, and mobile navigation."
-        ],
-        "technologies": [
-          "JavaScript",
-          "Scryfall API",
-          "Google Sheets",
-          "Google Apps Script",
-          "esbuild"
-        ],
-        "links": [
-          {
-            "label": "Application",
-            "url": "https://mtg-tcg-collection.vercel.app"
-          }
-        ],
-        "story_slug": "mtg-vault"
-      },
-      {
-        "name": "Wordrix — Vocabulary Learning",
-        "status": "Built project",
-        "summary": "An ML-powered vocabulary game using semantic similarity to help people learn foreign words.",
-        "accomplishments": [
-          "Built a context-based word embedding model and neural similarity engine for real-time semantic hints.",
-          "Crawled approximately 10,000 Wikipedia pages and cleaned 50,000 entries, including stop-word removal and topic-focused filtering.",
-          "Compared training-data variants and similarity-score distributions to evaluate model behavior; built the frontend and backend."
-        ],
-        "technologies": [
-          "AngularJS",
-          "Java",
-          "Word embeddings",
-          "Neural networks",
-          "Cloudflare"
-        ],
-        "links": [],
-        "story_slug": "wordrix"
-      },
-      {
-        "name": "Tsao Wang Family Foundation Website",
-        "status": "Website project",
-        "summary": "A nonprofit website designed for ease of use and maintenance by nontechnical administrators.",
-        "accomplishments": [
-          "Led collaboration with a developer and UX contributor to design the nonprofit website.",
-          "Focused implementation on straightforward content presentation and maintainability."
-        ],
-        "technologies": [
-          "React",
-          "Project management",
-          "UX collaboration"
-        ],
-        "links": [
-          {
-            "label": "Website",
-            "url": "https://tsaowangfamilyfoundation.pages.dev"
-          }
-        ],
-        "story_slug": "foundation-website"
-      },
-      {
-        "name": "Personal Portfolio",
-        "status": "Built website · ongoing expansion",
-        "summary": "A server-rendered portfolio presenting engineering experience and applied ML work.",
-        "accomplishments": [
-          "Built a Next.js/React frontend with a Python/FastAPI content service and validated content contracts.",
-          "Implemented project stories, a printable resume, search metadata, and responsive layouts.",
-          "Added API, accessibility, browser, concurrency, and JavaScript transfer budget checks; deployed frontend and internal backend services on Vercel."
-        ],
-        "technologies": [
-          "TypeScript",
-          "React",
-          "Next.js",
-          "Python",
-          "FastAPI",
-          "Vercel",
-          "Playwright"
-        ],
-        "links": [
-          {
-            "label": "Source on GitHub",
-            "url": "https://github.com/samuel1tsao/personal-portfolio"
-          }
-        ],
-        "story_slug": "personal-portfolio"
-      },
-      {
-        "name": "2D Object Detector Benchmark",
-        "story_slug": "2d-detector-benchmark",
-        "status": "Completed pretrained-model evaluation",
-        "summary": "Compared YOLO11 and RT-DETR on a 5,000-image COCO validation sample and KITTI labeled training images using a two-class vehicle/person mapping.",
-        "accomplishments": [
-          "Reported COCO/KITTI mAP of 0.471/0.303 for YOLO11n, 0.581/0.349 for YOLO11m, and 0.578/0.366 for RT-DETR ResNet-50.",
-          "Documented that models were pretrained and not fine-tuned, KITTI evaluation used its labeled training split rather than the official test split, and GPU memory was not measured."
-        ],
-        "technologies": [
-          "Python",
-          "Jupyter",
-          "YOLO11",
-          "RT-DETR",
-          "COCO",
-          "KITTI"
-        ],
-        "links": [
-          {
-            "label": "Benchmark repository",
-            "url": "https://github.com/samuel1tsao/2d-detection-model-analysis"
-          }
-        ]
-      },
-      {
-        "name": "RAG Fact-Checking & Claim Validation",
-        "story_slug": "rag-fact-checking",
-        "status": "Collaborative graduate project · forked class repository",
-        "summary": "A team-built evidence retrieval and claim assessment pipeline; my documented contribution was the fact-validation module.",
-        "accomplishments": [
-          "Contributed a validation module that combines entailment, contradiction, relevance, recency, and domain signals in a Random Forest classifier.",
-          "The module classifies claims as Supported, Refuted, Contested, or Not enough evidence and derives a confidence score from class probabilities.",
-          "The repository README describes the broader team pipeline, including Qdrant with E5 embeddings, NLI, GPT or local Ollama reasoning, and a React interface served through Flask; those components are not attributed solely to me."
-        ],
-        "technologies": [
-          "Python",
-          "scikit-learn",
-          "Qdrant",
-          "E5 embeddings",
-          "NLI",
-          "React",
-          "Flask"
-        ],
-        "links": [
-          {
-            "label": "Project repository",
-            "url": "https://github.com/samuel1tsao/CMPE297-project"
-          },
-          {
-            "label": "Fact Validator source",
-            "url": "https://github.com/samuel1tsao/CMPE297-project/blob/main/src/modules/claim_extraction/Fact_Validator.py"
-          }
-        ]
-      },
-      {
-        "name": "Automatic Speech Recognition Bias Research",
-        "status": "Academic research · source link not yet listed",
-        "summary": "Research on reducing accent representation bias in speech recognition through on-device personalization, accent normalization, and teacher-student distillation.",
-        "accomplishments": [
-          "Explored approaches to improve the representation of accents in automatic speech recognition.",
-          "The research notes identify a July 2026 paper; no public paper or code link is currently available in the portfolio."
-        ],
-        "technologies": [
-          "Automatic speech recognition",
-          "Knowledge distillation",
-          "On-device personalization"
-        ]
-      },
-      {
-        "name": "License Plate Super-Resolution",
-        "status": "Graduate research project · source link not yet listed",
-        "summary": "A 4× license-plate image super-resolution project combining U-Net and EDSR components.",
-        "accomplishments": [
-          "The described approach combines channel attention with an edge-aware Sobel loss.",
-          "No matching public repository or paper link is currently available; this work is separate from the linked 2D object-detection benchmark."
-        ],
-        "technologies": [
-          "Python",
-          "U-Net",
-          "EDSR",
-          "Image super-resolution"
-        ]
-      },
-      {
-        "name": "Lucra Tournament API Exercise",
-        "status": "Backend exercise · forked repository",
-        "summary": "A TypeScript and PostgreSQL tournament directory with paginated participant leaderboards.",
-        "accomplishments": [
-          "Implements cursor pagination, highest-score selection, and standard competition ranking for ties.",
-          "Includes a React/Vite client; standings are fresh reads and are not guaranteed to remain a consistent snapshot between visits."
-        ],
-        "technologies": [
-          "TypeScript",
-          "Express",
-          "PostgreSQL",
-          "React",
-          "Vite"
-        ],
-        "links": [
-          {
-            "label": "Exercise repository",
-            "url": "https://github.com/samuel1tsao/lucra-backend-exercise"
-          }
-        ]
-      },
-      {
-        "name": "StarResonanceDps Localization & Fixes",
-        "status": "Community contribution · fork",
-        "summary": "A contribution fork where the README credits Samuel with translation work and bug fixes; the upstream project and code are credited to their original authors.",
-        "accomplishments": [
-          "Translated the tool and contributed bug fixes, as described in the repository README."
-        ],
-        "technologies": [],
-        "links": [
-          {
-            "label": "Contribution fork",
-            "url": "https://github.com/samuel1tsao/StarResonanceDps"
-          }
-        ]
-      }
+    "interests": [
+      "Local generative image workflows with ComfyUI, FLUX.1, and SUPIR upscaling.",
+      "Marvel Rivals strategy; reached Celestial 3 as a White Fox main and write about team compositions and win conditions.",
+      "Magic: The Gathering Commander deck building, including Mardu Kaalia and five-color Child of Alara, plus collection tools."
     ]
   },
-  "stories": [
+  "entries": [
     {
       "slug": "asset-recommendation-engine",
       "kind": "project",
@@ -532,7 +112,8 @@
         "PyTorch",
         "React",
         "FastAPI",
-        "Reinforcement learning"
+        "Reinforcement learning",
+        "Transformers"
       ],
       "sections": [
         {
@@ -596,71 +177,28 @@
           "label": "Source on GitHub",
           "url": "https://github.com/samuel1tsao/Financial_Analytics"
         }
-      ]
-    },
-    {
-      "slug": "infrastructure-autoscaling",
-      "kind": "experience",
-      "order": 1,
-      "published": true,
-      "title": "Infrastructure that adapts to demand",
-      "summary": "Cloud automation and financial workflows at Human Interest, with reliability and operational efficiency in view.",
-      "role": "Senior Software Engineer · Human Interest",
-      "period": "July 2025–October 2026",
-      "contribution": "Worked on enterprise ECS autoscaling frameworks and automation for dividend allocation, reinvestment, and liquidation workflows.",
-      "skills": [
-        "AWS",
-        "ECS",
-        "Backend systems",
-        "Financial workflows"
       ],
-      "sections": [
-        {
-          "title": "The engineering context",
-          "body": "Financial record keeping combines operational scale with workflows that need careful, predictable behavior. Infrastructure efficiency and dependable execution both matter."
-        },
-        {
-          "title": "My contribution",
-          "body": "My work includes ECS autoscaling frameworks and automated dividend allocation workflows. This overview describes the scope of my work without exposing internal implementation details."
-        },
-        {
-          "title": "What I can share",
-          "body": "Specific internal designs and detailed measurements are omitted here. I'm happy to discuss the engineering principles and my role at an appropriate level of detail."
-        }
+      "status": "Ongoing applied ML project",
+      "accomplishments": [
+        "Mined historical equity, mutual fund, and bond data from Yahoo Finance, Wikipedia, and Nasdaq.",
+        "Designed a temporal model using four-dimensional autoregression, categorical industry embeddings, feature pruning, and sine/cosine positional encodings.",
+        "Implemented a secondary Transformer and Gaussian policy-gradient recommendation policy to balance goal fulfillment, returns, volatility, and drawdown.",
+        "Developed a custom loss function to penalize portfolio fragmentation and balance diversification against management overhead.",
+        "Designed evaluation using temporal holdouts, historical stress periods, block bootstrap and Monte Carlo simulations, and S&P 500 and 60/40 baselines; comparative performance results are not published.",
+        "The public Financial_Analytics repository contains a separate full-stack recommendation and planning application; its README does not establish that the deployed app uses this Transformer/RL research model."
       ],
-      "evidence": "Experience summary based on my resume; employer code and architecture are private."
-    },
-    {
-      "slug": "marketplace-search",
-      "kind": "experience",
-      "order": 2,
-      "published": true,
-      "title": "Helping people find the right opportunity",
-      "summary": "Search, geographic discovery, and recommendation systems for Nursa's marketplace.",
-      "role": "Senior Software Engineer · Nursa",
-      "period": "May 2023–March 2025",
-      "contribution": "Developed backend recommendation infrastructure, maps and geographic search, and core search with Algolia fuzzy matching and filtering.",
-      "skills": [
-        "Search",
-        "Recommendations",
-        "Algolia",
-        "Backend systems"
+      "technologies": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "Reinforcement learning",
+        "React",
+        "FastAPI"
       ],
-      "sections": [
-        {
-          "title": "The problem",
-          "body": "Marketplace discovery depends on making relevant opportunities easy to find. Search quality, geographic context, and the freshness of ranking updates each shape that experience."
-        },
-        {
-          "title": "My contribution",
-          "body": "I worked on recommendation backend performance, geographic search capabilities, and Algolia-based search with fuzzy matching and filtering."
-        },
-        {
-          "title": "Product and engineering",
-          "body": "This work connected backend performance with user-facing discovery. Detailed employer measurements and internal designs are omitted; the emphasis here is the problem space and my contribution."
-        }
-      ],
-      "evidence": "Experience summary based on my resume; public repository and demo links are not available."
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "fog-density-detection",
@@ -699,6 +237,10 @@
         {
           "title": "Evaluation and current limits",
           "body": "The planned report includes mAP, AP50, recall, per-class and small-object performance, density estimation error, seed spread, and end-to-end mean/p95 latency. The estimator and gate overhead belong in timing. Positive, null, and negative outcomes are all meaningful. No completed matched-run evidence has been reviewed here that establishes accuracy gains, compute savings, or readiness for use in a vehicle."
+        },
+        {
+          "title": "Related research directions",
+          "body": "Separate research notes also cover physics-based augmentation, domain adaptation, reviews of 3D LiDAR architectures such as TransFusion-L, CenterFormer, DSVT, and ScatterFormer, self-supervised vision models, and cross-dataset analysis. These topics are distinct from the experiments documented in the linked repository; no results or implementation claims are made for them here."
         }
       ],
       "decisions": [
@@ -741,7 +283,24 @@
           "label": "Research repository",
           "url": "https://github.com/samuel1tsao/ai-driving-assistance"
         }
-      ]
+      ],
+      "status": "Ongoing computer vision research",
+      "accomplishments": [
+        "Built a reproducible notebook workflow comparing RGB, predicted density, and predicted density with adaptive gating for YOLO11n, YOLO11m, and DETR.",
+        "Implemented experiments that mask YOLO P3 feature inputs or filter DETR spatial tokens using a configurable density threshold.",
+        "Organized setup, subset, and full-run profiles with checkpoint handling and local/Colab execution guides; detection improvements remain under evaluation."
+      ],
+      "technologies": [
+        "Python",
+        "Jupyter",
+        "YOLO",
+        "DETR",
+        "Computer vision"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "trajectory-financial-planning",
@@ -818,7 +377,26 @@
       "diagram_caption": "Conceptual flow · Trajectory — Financial Planning",
       "diagram_description": "A simplified workflow of the reviewed project, with research and implementation boundaries described below.",
       "evidence": "Based on local README, profile codec, architecture proposal, progress notes through October 18, and daily-use UX review. Distinguishes the current application from proposed architecture and pinned release. No personal account values or credentials are included.",
-      "links": []
+      "links": [],
+      "status": "Ongoing personal-use preview",
+      "accomplishments": [
+        "Built retirement and loan calculation modules, financial projections, and shareable URL-based planning profiles.",
+        "Implemented bank CSV import and Google Sheets synchronization with batched transaction updates.",
+        "Integrated Plaid balance imports with server-side encrypted sessions and separated browser, service, and calculation layers.",
+        "Added unit, architecture, production bundle, and desktop/mobile browser checks; calculation accuracy remains under validation."
+      ],
+      "technologies": [
+        "JavaScript",
+        "Node.js",
+        "Plaid",
+        "Google Apps Script",
+        "Vercel",
+        "Playwright"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "mtg-vault",
@@ -899,7 +477,24 @@
           "label": "Application",
           "url": "https://mtg-tcg-collection.vercel.app"
         }
-      ]
+      ],
+      "status": "Built application · ongoing iteration",
+      "accomplishments": [
+        "Built keyboard-driven card entry with set, printing, finish, condition, and language selection.",
+        "Integrated Scryfall card data and prices with a portable Google Sheets collection database.",
+        "Implemented import/export workflows, queued synchronization, collection statistics, and mobile navigation."
+      ],
+      "technologies": [
+        "JavaScript",
+        "Scryfall API",
+        "Google Sheets",
+        "Google Apps Script",
+        "esbuild"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "wordrix",
@@ -969,7 +564,24 @@
       "diagram_caption": "Conceptual flow · Wordrix — Vocabulary Learning",
       "diagram_description": "A simplified view of the product workflow, rather than a complete deployment diagram.",
       "evidence": "Based on the historical backend and general resumes reviewed for the resume expansion. Rationale is explicitly identified as implementation analysis where no original decision record exists; code, live uptime, and learner outcomes are unverified.",
-      "links": []
+      "links": [],
+      "status": "Built project",
+      "accomplishments": [
+        "Built a context-based word embedding model and neural similarity engine for real-time semantic hints.",
+        "Crawled approximately 10,000 Wikipedia pages and cleaned 50,000 entries, including stop-word removal and topic-focused filtering.",
+        "Compared training-data variants and similarity-score distributions to evaluate model behavior; built the frontend and backend."
+      ],
+      "technologies": [
+        "AngularJS",
+        "Java",
+        "Word embeddings",
+        "Neural networks",
+        "Cloudflare"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "foundation-website",
@@ -1042,7 +654,21 @@
           "label": "Website",
           "url": "https://tsaowangfamilyfoundation.pages.dev"
         }
-      ]
+      ],
+      "status": "Website project",
+      "accomplishments": [
+        "Led collaboration with a developer and UX contributor to design the nonprofit website.",
+        "Focused implementation on straightforward content presentation and maintainability."
+      ],
+      "technologies": [
+        "React",
+        "Project management",
+        "UX collaboration"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "personal-portfolio",
@@ -1070,27 +696,31 @@
         },
         {
           "title": "The visitor's path",
-          "body": "The homepage presents positioning, selected work, career history, and contact. The expanded resume supplies accomplishments and project summaries. Each project links to a dedicated case study, and a project directory offers a complete browsing path. Case studies include the user problem, workflow, system overview, contribution, current limits, and structured design choices."
+          "body": "The homepage presents positioning, selected work, career history, and contact. Each role and project has one complete content entry that supplies the resume summary and the dedicated detail page, so accomplishments do not live in a separate resume-only copy. Project and career directories provide a complete browsing path. Detail pages include the problem, workflow, contribution, evidence, and relevant tradeoffs."
         },
         {
           "title": "How content reaches the page",
-          "body": "A Python/FastAPI service loads a JSON content file, validates it with Pydantic, filters unpublished stories, and calculates a content revision. Next.js fetches that content on the server and validates the response with Zod before rendering. Pages, metadata, and the sitemap derive from the same published story collection. Production uses Vercel's internal service binding; the backend has no public API ingress."
+          "body": "A Python/FastAPI service loads one JSON content file, validates it with Pydantic, filters unpublished entries, and calculates a content revision. Next.js fetches that content on the server and validates the response with Zod before rendering. The resume, career and project directories, detail routes, chat context, metadata, and sitemap derive from the same published entry collection. Production uses Vercel's internal service binding; the backend has no public API ingress."
         },
         {
           "title": "Designing for assessment",
-          "body": "The visual system uses restrained typography, readable prose, semantic headings, and clear links. A simplified flow diagram supports the explanation when useful. The homepage stays curated while the project directory grows. Tradeoff cards separate the actual choice, the reason it fits, and the cost or limitation, so a technical reader can inspect judgment without decoding a wall of stack names."
+          "body": "The visual system uses restrained typography, readable prose, semantic headings, and clear links. A simplified flow diagram supports the explanation when useful. The homepage stays curated while project and career directories expose every published entry. Tradeoff cards separate the choice, rationale, and cost or limitation, so a technical reader can inspect judgment without decoding a wall of stack names."
         },
         {
           "title": "Verification and current limits",
-          "body": "Existing checks cover API contracts, invalid content, draft exclusion, recovery, concurrent reads, accessibility, narrow screens, navigation without JavaScript, and a JavaScript transfer budget. The resume adds print-specific behavior. These automated and local checks support the reviewed release paths; they do not establish recruiter conversion, field performance, or search ranking. The new project pages are local changes until deployed."
+          "body": "Existing checks cover API contracts, invalid content, draft exclusion, recovery, concurrent reads, accessibility, narrow screens, navigation without JavaScript, and a JavaScript transfer budget. The unified entries also supply the printable resume and job-by-job and project-by-project pages. These checks do not establish recruiter conversion, field performance, or search ranking."
+        },
+        {
+          "title": "Portfolio chat and shared context",
+          "body": "The recruiter-facing chat is part of this portfolio. The server loads the same published profile and project entries used to render the site, then sends that context with the conversation to the model. The browser sends conversation messages rather than a second copy of the portfolio. Chat history is not persisted; answers are grounded in published content and should say when the profile does not contain enough detail."
         }
       ],
       "decisions": [
         {
           "title": "Keep the homepage curated",
-          "choice": "Use a few selected stories on the homepage and a dedicated directory for all personal projects.",
-          "rationale": "The visitor can get an initial view quickly, then deliberately choose a deeper project or the full resume.",
-          "tradeoff": "Some projects require another click to discover. Explicit directory and resume links are needed so curation does not make the rest of the work invisible."
+          "choice": "Use a curated selection on the homepage and dedicated directories for every project and role.",
+          "rationale": "Visitors can get an initial view quickly, then choose a detailed project or role page or open the full resume. Each view reads the same canonical content entry.",
+          "tradeoff": "Some entries require another click to discover. Explicit project and career directories, plus links from the resume, make the full set easy to find."
         },
         {
           "title": "Validate one content source twice",
@@ -1125,7 +755,27 @@
           "label": "Source on GitHub",
           "url": "https://github.com/samuel1tsao/personal-portfolio"
         }
-      ]
+      ],
+      "status": "Built website · ongoing expansion",
+      "accomplishments": [
+        "Built a Next.js/React frontend with a Python/FastAPI content service and validated content contracts.",
+        "Implemented project-by-project and job-by-job detail pages, a printable resume, search metadata, and responsive layouts from one published entry collection.",
+        "Added API, accessibility, browser, concurrency, and JavaScript transfer budget checks; deployed frontend and internal backend services on Vercel.",
+        "Built a portfolio chat that uses the same backend-published content as the website, keeping the profile as the source of truth for pages and answers."
+      ],
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Python",
+        "FastAPI",
+        "Vercel",
+        "Playwright"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "2d-detector-benchmark",
@@ -1140,7 +790,9 @@
         "Jupyter",
         "YOLO11",
         "RT-DETR",
-        "Computer vision"
+        "Computer vision",
+        "COCO",
+        "KITTI"
       ],
       "sections": [
         {
@@ -1164,7 +816,24 @@
         }
       ],
       "published": true,
-      "order": 9
+      "order": 9,
+      "status": "Completed pretrained-model evaluation",
+      "accomplishments": [
+        "Reported COCO/KITTI mAP of 0.471/0.303 for YOLO11n, 0.581/0.349 for YOLO11m, and 0.578/0.366 for RT-DETR ResNet-50.",
+        "Documented that models were pretrained and not fine-tuned, KITTI evaluation used its labeled training split rather than the official test split, and GPU memory was not measured."
+      ],
+      "technologies": [
+        "Python",
+        "Jupyter",
+        "YOLO11",
+        "RT-DETR",
+        "COCO",
+        "KITTI"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
     },
     {
       "slug": "rag-fact-checking",
@@ -1179,7 +848,10 @@
         "scikit-learn",
         "NLI",
         "Qdrant",
-        "Information retrieval"
+        "Information retrieval",
+        "E5 embeddings",
+        "React",
+        "Flask"
       ],
       "sections": [
         {
@@ -1211,7 +883,754 @@
         }
       ],
       "published": true,
-      "order": 10
+      "order": 10,
+      "status": "Collaborative graduate project · forked class repository",
+      "accomplishments": [
+        "Contributed a validation module that combines entailment, contradiction, relevance, recency, and domain signals in a Random Forest classifier.",
+        "The module classifies claims as Supported, Refuted, Contested, or Not enough evidence and derives a confidence score from class probabilities.",
+        "The repository README describes the broader team pipeline, including Qdrant with E5 embeddings, NLI, GPT or local Ollama reasoning, and a React interface served through Flask; those components are not attributed solely to me."
+      ],
+      "technologies": [
+        "Python",
+        "scikit-learn",
+        "Qdrant",
+        "E5 embeddings",
+        "NLI",
+        "React",
+        "Flask"
+      ],
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null
+    },
+    {
+      "slug": "asr-bias-research",
+      "kind": "project",
+      "title": "Automatic Speech Recognition Bias Research",
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null,
+      "summary": "Academic research on reducing accent representation bias in automatic speech recognition through personalization and model adaptation.",
+      "role": "Graduate research",
+      "period": "July 2026 · paper",
+      "contribution": "Explored on-device personalization, accent normalization layers, and teacher-student knowledge distillation as approaches to improve accent equity.",
+      "status": "Academic research · public paper link not listed",
+      "accomplishments": [
+        "Authored a paper on on-device personalization, accent normalization, and teacher-student knowledge distillation for ASR equity."
+      ],
+      "technologies": [
+        "Automatic speech recognition",
+        "Knowledge distillation",
+        "On-device personalization"
+      ],
+      "skills": [
+        "Automatic speech recognition",
+        "Knowledge distillation",
+        "On-device personalization"
+      ],
+      "sections": [
+        {
+          "title": "Research objective",
+          "body": "Speech recognition can represent accents unevenly. This research considered ways to adapt recognition to speakers while preserving useful generalization."
+        },
+        {
+          "title": "Approaches explored",
+          "body": "The paper explored on-device personalization, accent normalization layers, and teacher-student knowledge distillation. No measured fairness or accuracy improvement is claimed here."
+        },
+        {
+          "title": "Publication and availability",
+          "body": "The profile notes identify a paper authored in July 2026. A public paper or code link has not been provided."
+        }
+      ],
+      "evidence": "Based on the owner-provided research notes. No public paper or code was available to link.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Conceptual flow",
+      "diagram_description": "A simplified view of the project.",
+      "decisions": [],
+      "published": true,
+      "order": 11
+    },
+    {
+      "slug": "license-plate-super-resolution",
+      "kind": "project",
+      "title": "License Plate Super-Resolution",
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null,
+      "summary": "A graduate computer vision project exploring four-times upscaling of degraded license-plate images.",
+      "role": "Computer vision research and model implementation",
+      "period": "Graduate research · CMPE 258",
+      "contribution": "Implemented a hybrid U-Net and EDSR approach with channel attention and a Sobel edge-aware loss.",
+      "status": "Graduate research · public source link not listed",
+      "accomplishments": [
+        "Combined U-Net and EDSR components for 4× image super-resolution.",
+        "Applied channel attention and an edge-aware Sobel loss to retain plate structure during reconstruction.",
+        "This work is separate from the linked 2D detector benchmark; no matching public repository or paper link is available."
+      ],
+      "technologies": [
+        "Python",
+        "U-Net",
+        "EDSR",
+        "Channel attention",
+        "Image super-resolution"
+      ],
+      "skills": [
+        "Python",
+        "U-Net",
+        "EDSR",
+        "Channel attention",
+        "Image super-resolution"
+      ],
+      "sections": [
+        {
+          "title": "The problem",
+          "body": "Small, degraded plate images can lose edges and character details needed for visual interpretation. This project explored a learned reconstruction approach for four-times upscaling."
+        },
+        {
+          "title": "Model approach",
+          "body": "The implementation combined U-Net and EDSR components, channel attention, and a Sobel edge-aware loss. Reviewed benchmark results and a public code link are not available."
+        },
+        {
+          "title": "Evidence and limits",
+          "body": "This work was part of CMPE 258 and is separate from the YOLO/RT-DETR detector benchmark. No claim about recognition accuracy or deployment is made."
+        }
+      ],
+      "evidence": "Based on owner-provided notes. A matching public repository and evaluation report were not identified.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Conceptual flow",
+      "diagram_description": "A simplified view of the project.",
+      "decisions": [],
+      "published": true,
+      "order": 12
+    },
+    {
+      "slug": "lucra-tournament-api",
+      "kind": "project",
+      "title": "Lucra Tournament API Exercise",
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null,
+      "summary": "A TypeScript and PostgreSQL tournament directory with paginated participant leaderboards.",
+      "role": "Backend take-home exercise",
+      "period": "Backend exercise",
+      "contribution": "Implemented a cursor-paginated API that selects each participant’s highest score and applies standard competition ranking for ties.",
+      "status": "Backend exercise · forked repository",
+      "accomplishments": [
+        "Built a tournament and participant leaderboard API with cursor pagination.",
+        "Applied highest-score selection and standard competition ranking to tied scores.",
+        "Added a React/Vite client; standings are fresh reads and do not promise a stable snapshot across visits."
+      ],
+      "technologies": [
+        "TypeScript",
+        "Express",
+        "PostgreSQL",
+        "React",
+        "Vite"
+      ],
+      "skills": [
+        "TypeScript",
+        "Express",
+        "PostgreSQL",
+        "React",
+        "Vite"
+      ],
+      "sections": [
+        {
+          "title": "The workflow",
+          "body": "The exercise exposes tournaments and participant standings through an API and browser client. Cursor pagination lets the client browse longer result sets."
+        },
+        {
+          "title": "Ranking behavior",
+          "body": "The leaderboard chooses a participant’s highest score and uses standard competition ranking, so tied positions share a rank."
+        },
+        {
+          "title": "Consistency boundary",
+          "body": "Each page is a fresh read. Results can shift between visits as source data changes; snapshot consistency is outside the exercise scope."
+        }
+      ],
+      "evidence": "Based on the public forked Lucra exercise README. Labeled as an exercise, not a production service.",
+      "links": [
+        {
+          "label": "Exercise repository",
+          "url": "https://github.com/samuel1tsao/lucra-backend-exercise"
+        }
+      ],
+      "diagram": [],
+      "diagram_caption": "Conceptual flow",
+      "diagram_description": "A simplified view of the project.",
+      "decisions": [],
+      "published": true,
+      "order": 13
+    },
+    {
+      "slug": "starresonance-dps-contribution",
+      "kind": "project",
+      "title": "StarResonanceDps Localization & Fixes",
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null,
+      "summary": "A contribution fork with translation work and bug fixes credited in the repository README.",
+      "role": "Community contributor",
+      "period": "Open-source contribution",
+      "contribution": "Translated the tool and fixed bugs; the README credits the original upstream authors for the project and code.",
+      "status": "Community contribution · fork",
+      "accomplishments": [
+        "Translated the tool and contributed bug fixes, as described in the repository README."
+      ],
+      "technologies": [
+        "Open-source contribution",
+        "Localization"
+      ],
+      "skills": [
+        "Open-source contribution",
+        "Localization"
+      ],
+      "sections": [
+        {
+          "title": "Contribution scope",
+          "body": "The public fork README describes translation and bug-fix contributions. The project remains a fork, with the project and code credited to upstream authors."
+        },
+        {
+          "title": "Attribution",
+          "body": "This page describes only the contribution credited in the README; it does not claim ownership of the upstream application."
+        }
+      ],
+      "evidence": "Based on the public StarResonanceDps fork README.",
+      "links": [
+        {
+          "label": "Contribution fork",
+          "url": "https://github.com/samuel1tsao/StarResonanceDps"
+        }
+      ],
+      "diagram": [],
+      "diagram_caption": "Conceptual flow",
+      "diagram_description": "A simplified view of the project.",
+      "decisions": [],
+      "published": true,
+      "order": 14
+    },
+    {
+      "slug": "financial-analytics-app",
+      "kind": "project",
+      "title": "Financial Analytics & Portfolio Planning App",
+      "organization": null,
+      "position": null,
+      "start": null,
+      "end": null,
+      "summary": "A full-stack finance application for goal and risk assessment, ETF allocation, long-horizon simulation, and public portfolio exploration.",
+      "role": "Product design and application development",
+      "period": "Built application",
+      "contribution": "Built a guided finance app that connects user goals and risk preferences to a constrained ETF portfolio and long-term projection.",
+      "status": "Built application · separate from Transformer/RL research",
+      "accomplishments": [
+        "Created a five-step goals and risk questionnaire.",
+        "Implemented constrained recommendations over a 12-asset ETF universe with a FOMO-adjusted tilt.",
+        "Added a 30-year growth simulator and a browser for public-official portfolios.",
+        "The repository README also describes separate research notebooks for market correlations, technical indicators, and options Greeks; it does not establish that the deployed app uses the Transformer/RL engine described in the separate research project."
+      ],
+      "technologies": [],
+      "skills": [
+        "Portfolio planning",
+        "Financial analytics",
+        "Portfolio simulation"
+      ],
+      "sections": [
+        {
+          "title": "The planning workflow",
+          "body": "The application guides a visitor through a five-step goals and risk questionnaire, then uses those answers to generate an allocation across a constrained universe of twelve ETFs."
+        },
+        {
+          "title": "Recommendation and simulation",
+          "body": "The recommendation flow includes a FOMO-adjusted tilt, and the application offers a thirty-year growth simulator to explore how a suggested allocation may behave over time. This is a planning aid; projected growth is not a promise of investment performance."
+        },
+        {
+          "title": "Public portfolio browser",
+          "body": "A separate feature lets visitors explore public-official portfolios. The repository README also describes notebooks for market correlations, technical indicators, and options Greeks."
+        },
+        {
+          "title": "Separate research track",
+          "body": "The same GitHub repository contains finance application material and research notebooks, but its public README does not verify that the deployed recommender runs the Transformer and Gaussian policy-gradient research model described in the Personalized Asset Recommendation Engine entry. The app and model research are documented separately to preserve that distinction."
+        }
+      ],
+      "evidence": "Based on the public Financial_Analytics README and repository notes. No investment performance or model deployment claim is made beyond what those materials establish.",
+      "links": [
+        {
+          "label": "Financial Analytics repository",
+          "url": "https://github.com/samuel1tsao/Financial_Analytics"
+        }
+      ],
+      "diagram": [],
+      "diagram_caption": "Conceptual flow",
+      "diagram_description": "A simplified view of the finance application.",
+      "decisions": [],
+      "published": true,
+      "order": 15
+    },
+    {
+      "slug": "frontier-ai-evaluation",
+      "kind": "experience",
+      "title": "Frontier AI Lab (via G2i & micro1)",
+      "organization": "Frontier AI Lab (via G2i & micro1)",
+      "position": "AI Software Engineer & LLM Evaluator (Contract)",
+      "start": "2026-08-01",
+      "end": "2026-10-01",
+      "summary": "Evaluation of foundational language models and autonomous coding agents.",
+      "role": "AI Software Engineer & LLM Evaluator (Contract)",
+      "period": "August 2026–October 2026",
+      "contribution": "Evaluation of foundational language models and autonomous coding agents.",
+      "status": null,
+      "accomplishments": [
+        "Evaluate agent-generated pull request diffs for correctness, performance, regressions, and architectural quality.",
+        "Design multi-turn tasks in Python, Java, and TypeScript to test coding agents' reasoning and handling of complex software engineering problems.",
+        "Produce reinforcement learning from human feedback (RLHF) data by identifying failure modes, edge cases, and hallucinated code."
+      ],
+      "technologies": [
+        "Python",
+        "Java",
+        "TypeScript",
+        "LLM evaluation",
+        "RLHF",
+        "Coding agents"
+      ],
+      "skills": [
+        "Python",
+        "Java",
+        "TypeScript",
+        "LLM evaluation",
+        "RLHF",
+        "Coding agents"
+      ],
+      "sections": [
+        {
+          "title": "Evaluation work",
+          "body": "Evaluate agent-generated pull request diffs for correctness, performance, regressions, and architectural quality. Design multi-turn Python, Java, and TypeScript tasks that exercise reasoning across realistic engineering problems."
+        },
+        {
+          "title": "Feedback for model improvement",
+          "body": "Identify failure modes, edge cases, and unsupported code claims to produce human feedback data for model training. The work evaluates reasoning and implementation quality, not only whether generated code compiles."
+        }
+      ],
+      "evidence": "Based on the owner-provided professional profile and resume notes. Employer-specific source repositories are not linked; project details are presented as the owner’s experience description.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Career contribution overview",
+      "diagram_description": "A high-level summary of the role and selected work.",
+      "decisions": [],
+      "published": true,
+      "order": 16
+    },
+    {
+      "slug": "human-interest",
+      "kind": "experience",
+      "title": "Human Interest",
+      "organization": "Human Interest",
+      "position": "Senior Software Engineer, Record Keeping",
+      "start": "2025-07-01",
+      "end": "2026-10-01",
+      "summary": "Record keeping, financial workflows, and cloud infrastructure automation.",
+      "role": "Senior Software Engineer, Record Keeping",
+      "period": "July 2025–October 2026",
+      "contribution": "Record keeping, financial workflows, and cloud infrastructure automation.",
+      "status": null,
+      "accomplishments": [
+        "Architected enterprise-wide ECS autoscaling frameworks, achieving an initial 40% reduction in ECS operating costs.",
+        "Rearchitected dividend processing to handle bursts of up to 100,000 dividends and one million transactions, including allocation, reinvestment, and liquidation.",
+        "Built correction tools for distribution errors and reallocated millions of dollars from uncashed instruments to customer accounts.",
+        "Led a financial instrument project with two engineers; refined monitoring to reduce alert fatigue by approximately 200 alerts annually.",
+        "Contributed to ledger systems supporting multibillion-dollar 401(k) assets and AI-assisted project lifecycle initiatives."
+      ],
+      "technologies": [
+        "TypeScript",
+        "Node.js",
+        "Kotlin",
+        "Spring Boot",
+        "SQL",
+        "AWS ECS",
+        "S3",
+        "EventBridge",
+        "Redis",
+        "Go",
+        "Temporal",
+        "Terraform",
+        "GitHub Actions",
+        "Datadog",
+        "BullJS",
+        "Docker",
+        "Kubernetes"
+      ],
+      "skills": [
+        "TypeScript",
+        "Node.js",
+        "Kotlin",
+        "Spring Boot",
+        "SQL",
+        "AWS ECS",
+        "S3",
+        "EventBridge",
+        "Redis",
+        "Go",
+        "Temporal",
+        "Terraform"
+      ],
+      "sections": [
+        {
+          "title": "Financial systems and operating context",
+          "body": "Worked on record-keeping and ledger systems supporting retirement plans. The engineering focus included money movement, operational corrections, dividend processing, and infrastructure that could scale during concentrated custodian-file bursts."
+        },
+        {
+          "title": "Burst-aware infrastructure",
+          "body": "Updated a shared infrastructure library with scheduling and autoscaling so compute could scale with asynchronous processing bursts and reduce capacity during idle periods. Owner-provided notes report up to $1,000 per month in savings on one service; the resume separately records an initial 40% ECS cost reduction."
+        },
+        {
+          "title": "Distribution corrections",
+          "body": "Built a multi-step Temporal workflow for corrections that could route funding through company funds, ACH customer debits, or collections. It included advisor confirmation before execution, then returned funds to participants or plans and reinvested them according to elected portfolios."
+        },
+        {
+          "title": "Dividend processing and service decomposition",
+          "body": "Moved critical daily accrual and dividend flows from a legacy Node.js monolith toward replayable Temporal workflows and Go microservices. Notes describe bursts of up to 100,000 dividends per day and millions of participant transactions, designed not to block unrelated processing."
+        },
+        {
+          "title": "Reusable foundations",
+          "body": "Established cross-service Temporal workflow and activity patterns reused by later business flows. Also contributed to sandbox improvements and early organization-wide real-scale testing initiatives."
+        },
+        {
+          "title": "The engineering context",
+          "body": "Financial record keeping combines operational scale with workflows that need careful, predictable behavior. Infrastructure efficiency and dependable execution both matter."
+        },
+        {
+          "title": "My contribution",
+          "body": "My work includes ECS autoscaling frameworks and automated dividend allocation workflows. This overview describes the scope of my work without exposing internal implementation details."
+        },
+        {
+          "title": "What I can share",
+          "body": "Specific internal designs and detailed measurements are omitted here. I'm happy to discuss the engineering principles and my role at an appropriate level of detail."
+        },
+        {
+          "title": "Career direction",
+          "body": "After stabilizing important financial workflows and scaling infrastructure, I chose to focus more directly on machine learning and AI. The move builds on my backend and infrastructure experience while shifting toward applied systems at the edge of rapid ML progress."
+        }
+      ],
+      "evidence": "Based on the owner-provided professional profile and resume notes. Employer-specific source repositories are not linked; project details are presented as the owner’s experience description.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Career contribution overview",
+      "diagram_description": "A high-level summary of the role and selected work.",
+      "decisions": [],
+      "published": true,
+      "order": 17
+    },
+    {
+      "slug": "nursa",
+      "kind": "experience",
+      "title": "Nursa",
+      "organization": "Nursa",
+      "position": "Senior Software Engineer, Marketplace",
+      "start": "2023-05-01",
+      "end": "2025-03-01",
+      "summary": "Marketplace search, geographic discovery, and recommendation infrastructure.",
+      "role": "Senior Software Engineer, Marketplace",
+      "period": "May 2023–March 2025",
+      "contribution": "Marketplace search, geographic discovery, and recommendation infrastructure.",
+      "status": null,
+      "accomplishments": [
+        "Built recommendation backend pipelines that reduced ranking model scoring updates from 30 minutes to five minutes.",
+        "Developed geographic search and mapping features associated with an 11% conversion increase across 300,000 monthly active users.",
+        "Established core search with Algolia fuzzy matching and filtering, alongside Elasticsearch-based discovery.",
+        "Introduced Datadog and PagerDuty monitoring and alerting, achieving a 30-minute mean recovery time.",
+        "Identified and addressed a 0.5% failure rate under 1,000 concurrent requests through performance testing.",
+        "Built a shift calendar reducing scheduling interactions from 32 to 12 per shift; improved team velocity by approximately 10% through workflow and review initiatives."
+      ],
+      "technologies": [
+        "TypeScript",
+        "Node.js",
+        "Angular",
+        "SQL",
+        "AWS",
+        "GCP",
+        "Docker",
+        "Kubernetes",
+        "Algolia",
+        "Elasticsearch",
+        "Datadog",
+        "PagerDuty"
+      ],
+      "skills": [
+        "TypeScript",
+        "Node.js",
+        "Angular",
+        "SQL",
+        "AWS",
+        "GCP",
+        "Docker",
+        "Kubernetes",
+        "Algolia",
+        "Elasticsearch",
+        "Datadog",
+        "PagerDuty"
+      ],
+      "sections": [
+        {
+          "title": "Marketplace and reliability context",
+          "body": "Worked on a healthcare staffing marketplace where search and scheduling help nurses find shifts and facilities staff patient care. The role combined backend services, marketplace discovery, recommendation infrastructure, and operational reliability."
+        },
+        {
+          "title": "Search and geographic discovery",
+          "body": "Built fuzzy text search and geographic mapping to help nurses find relevant local shifts. The portfolio records an 11% conversion increase across roughly 300,000 monthly users."
+        },
+        {
+          "title": "Recommendation throughput and fallback",
+          "body": "Improved recommendation ranking updates from 30 minutes to five minutes and added graceful degradation that could serve default stale data when the model was unavailable, keeping upstream ML failures from blocking the user interface."
+        },
+        {
+          "title": "Observability and load behavior",
+          "body": "Established Datadog telemetry, alerts, and monitoring associated with a 30-minute mean time to recovery. High-concurrency testing exposed a 0.5% request failure rate around 1,000 concurrent users, giving the team a concrete limit to address."
+        },
+        {
+          "title": "The problem",
+          "body": "Marketplace discovery depends on making relevant opportunities easy to find. Search quality, geographic context, and the freshness of ranking updates each shape that experience."
+        },
+        {
+          "title": "My contribution",
+          "body": "I worked on recommendation backend performance, geographic search capabilities, and Algolia-based search with fuzzy matching and filtering."
+        },
+        {
+          "title": "Product and engineering",
+          "body": "This work connected backend performance with user-facing discovery. Detailed employer measurements and internal designs are omitted; the emphasis here is the problem space and my contribution."
+        },
+        {
+          "title": "Career direction",
+          "body": "After building marketplace search, recommendation, and reliability foundations, I wanted to carry that systems experience into new technical domains and continue taking on unfamiliar product problems."
+        }
+      ],
+      "evidence": "Based on the owner-provided professional profile and resume notes. Employer-specific source repositories are not linked; project details are presented as the owner’s experience description.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Career contribution overview",
+      "diagram_description": "A high-level summary of the role and selected work.",
+      "decisions": [],
+      "published": true,
+      "order": 18
+    },
+    {
+      "slug": "affirm",
+      "kind": "experience",
+      "title": "Affirm",
+      "organization": "Affirm",
+      "position": "Software Engineer",
+      "start": "2021-12-01",
+      "end": "2023-03-01",
+      "summary": "Marketplace monetization, advertising backend infrastructure, and experimentation.",
+      "role": "Software Engineer",
+      "period": "December 2021–March 2023",
+      "contribution": "Marketplace monetization, advertising backend infrastructure, and experimentation.",
+      "status": null,
+      "accomplishments": [
+        "Developed the initial backend implementation of advertising infrastructure and customer-facing REST APIs.",
+        "Ran backend A/B experiments affecting five million users, coordinating with cross-functional partners on stability and rollbacks.",
+        "Mitigated failure points during user acceptance and production testing of the advertising platform.",
+        "Documented legacy functionality and improved onboarding material, reducing onboarding time by approximately one week."
+      ],
+      "technologies": [
+        "Python",
+        "Kotlin",
+        "AWS",
+        "REST APIs",
+        "Microservices",
+        "A/B testing",
+        "PostgreSQL",
+        "AWS ECS",
+        "Advertising infrastructure",
+        "Distributed systems"
+      ],
+      "skills": [
+        "Python",
+        "Kotlin",
+        "AWS",
+        "REST APIs",
+        "Microservices",
+        "A/B testing",
+        "PostgreSQL",
+        "AWS ECS",
+        "Advertising infrastructure",
+        "Distributed systems"
+      ],
+      "sections": [
+        {
+          "title": "Advertising platform",
+          "body": "Helped create a marketplace advertising revenue stream by building the backend for Affirm’s inaugural ads platform. The implementation reused existing recommendation panels and marketplace carousels to serve targeted ad content, allowing the channel to launch without building a separate user-interface pattern."
+        },
+        {
+          "title": "Experimentation and delivery",
+          "body": "Executed and managed backend A/B experiments to assess product changes for more than five million daily active users. Maintained backend stability during tests and supported user acceptance and production readiness, including failure mitigation and rollback coordination. Improved legacy documentation and onboarding material, reducing onboarding time by about one week."
+        },
+        {
+          "title": "Career direction",
+          "body": "I used the next stage of my career to broaden my product and architecture experience beyond established fintech, seeking new domains and teams that needed foundational systems work."
+        }
+      ],
+      "evidence": "Based on the owner-provided professional profile and resume notes. Employer-specific source repositories are not linked; project details are presented as the owner’s experience description.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Career contribution overview",
+      "diagram_description": "A high-level summary of the role and selected work.",
+      "decisions": [],
+      "published": true,
+      "order": 19
+    },
+    {
+      "slug": "proofpoint",
+      "kind": "experience",
+      "title": "Proofpoint",
+      "organization": "Proofpoint",
+      "position": "Software Engineer",
+      "start": "2019-03-01",
+      "end": "2021-12-01",
+      "summary": "Identity management, data migration, search, and developer tooling.",
+      "role": "Software Engineer",
+      "period": "March 2019–December 2021",
+      "contribution": "Identity management, data migration, search, and developer tooling.",
+      "status": null,
+      "accomplishments": [
+        "Modernized identity services supporting millions of daily requests, spanning backend development, data architecture, infrastructure, and network operations.",
+        "Designed ETL and data transformation from multi-tenant NoSQL storage to a single-tenant SQL ingestion pipeline.",
+        "Led service and data center migrations and introduced geographic redundancy; helped recover corrupted data after a critical data center failure.",
+        "Replaced streaming jobs with paginated processing to improve queue fairness and prevent long-running jobs from blocking smaller requests.",
+        "Developed proprietary typed queries and optimized data retrieval for secure, selective field access.",
+        "Reduced CI/CD build times by 80% using continuous randomized end-to-end testing; cut test runtime from three hours to 30 minutes.",
+        "Maintained Jenkins pipelines and sales engineering scripts for demos, data cleanup, and customer onboarding.",
+        "Migrated 500 GB of enterprise data during a zero-downtime infrastructure move, as documented in the owner-provided project notes."
+      ],
+      "technologies": [
+        "Java",
+        "SQL",
+        "Cassandra",
+        "NoSQL",
+        "Perl",
+        "Puppet",
+        "Jenkins",
+        "Kubernetes",
+        "Docker",
+        "AWS Lambda",
+        "SQS",
+        "Kinesis Firehose",
+        "MySQL Aurora",
+        "GraphQL",
+        "Terraform"
+      ],
+      "skills": [
+        "Java",
+        "SQL",
+        "Cassandra",
+        "NoSQL",
+        "Perl",
+        "Puppet",
+        "Jenkins",
+        "Kubernetes",
+        "Docker",
+        "AWS Lambda",
+        "SQS",
+        "Kinesis Firehose"
+      ],
+      "sections": [
+        {
+          "title": "Identity and data architecture",
+          "body": "Modernized identity services supporting millions of daily requests, spanning backend services, data architecture, infrastructure, and network operations. Helped move from multi-tenant Cassandra to single-tenant MySQL Aurora, building ETL and data-forking logic with AWS Lambda, SQS dead-letter queues, and Kinesis Firehose."
+        },
+        {
+          "title": "Fair processing and secure search",
+          "body": "Designed a pagination structure that separated hot and cold data, including product metadata, and restored queue fairness. Performance tests showed the new structure could serve data for five million users in half the time of the legacy streaming setup. Built proprietary search with security and authorization controls and selective field retrieval."
+        },
+        {
+          "title": "Testing and infrastructure migration",
+          "body": "Introduced continuous randomized tests across environments to expose search edge cases and improve CI/CD throughput; the notes report build time reduced from two hours to 30 minutes. Configured the Jenkins pipeline for the search service. Led service and data-center migrations, geographic redundancy work, and recovery after data corruption; owner-provided notes also describe a zero-downtime move of 500 GB of enterprise data."
+        },
+        {
+          "title": "Career direction",
+          "body": "After the data migration and service modernization work, I wanted new technical challenges and a faster-moving product environment. That led me toward consumer fintech and marketplace engineering."
+        }
+      ],
+      "evidence": "Based on the owner-provided professional profile and resume notes. Employer-specific source repositories are not linked; project details are presented as the owner’s experience description.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Career contribution overview",
+      "diagram_description": "A high-level summary of the role and selected work.",
+      "decisions": [],
+      "published": true,
+      "order": 20
+    },
+    {
+      "slug": "kaiser-permanente",
+      "kind": "experience",
+      "title": "Kaiser Permanente",
+      "organization": "Kaiser Permanente",
+      "position": "IT Rotational Associate",
+      "start": "2017-07-01",
+      "end": "2019-03-01",
+      "summary": "Early-career foundation in enterprise technology.",
+      "role": "IT Rotational Associate",
+      "period": "July 2017–March 2019",
+      "contribution": "Early-career foundation in enterprise technology.",
+      "status": null,
+      "accomplishments": [
+        "Rotated through enterprise integration, middleware operations, and innovative technology, delivering internal tools and integration prototypes.",
+        "Designed an anonymous idea intake web service with batching, caching, rate limiting, and request aggregation to manage third-party API costs.",
+        "Built server and application health monitoring tools.",
+        "Automated IoT device connection configuration, saving approximately three hours of demo maintenance per week.",
+        "Created a Google Maps proof of concept to locate nearby hospitals and evaluated replacement technologies for outdated frameworks."
+      ],
+      "technologies": [
+        "Java",
+        "Node.js",
+        "JavaScript",
+        "HTML",
+        "IoT",
+        "API integrations",
+        "AWS",
+        "Relational databases",
+        "Security protocols",
+        "Geospatial APIs"
+      ],
+      "skills": [
+        "Java",
+        "Node.js",
+        "JavaScript",
+        "HTML",
+        "IoT",
+        "API integrations",
+        "AWS",
+        "Relational databases",
+        "Security protocols",
+        "Geospatial APIs"
+      ],
+      "sections": [
+        {
+          "title": "Rotational engineering foundation",
+          "body": "Rotated through enterprise integration, middleware operations, innovative technology, and security, delivering internal tools and prototypes across teams."
+        },
+        {
+          "title": "Integration cost control",
+          "body": "Built an intake and process-management application with request batching, caching, and a rate-limiting queue for a third-party API capped at two requests per second. The design increased useful throughput while staying within the free service tier."
+        },
+        {
+          "title": "Monitoring, IoT, and prototypes",
+          "body": "Aggregated application health from six servers, automated IoT setup to save about three hours of weekly demo maintenance, and built a hospital-locator prototype. Notes also describe research across more than ten technologies and five production-ready proofs of concept."
+        }
+      ],
+      "evidence": "Based on the owner-provided professional profile and resume notes. Employer-specific source repositories are not linked; project details are presented as the owner’s experience description.",
+      "links": [],
+      "diagram": [],
+      "diagram_caption": "Career contribution overview",
+      "diagram_description": "A high-level summary of the role and selected work.",
+      "decisions": [],
+      "published": true,
+      "order": 21
     }
   ]
 }

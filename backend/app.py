@@ -50,11 +50,12 @@ def get_portfolio():
 
 
 @app.get(f"{API_PREFIX}/stories/{{slug}}")
-def get_story(slug: str):
-    stories = read_portfolio()["stories"]
-    story = next((item for item in stories if item["slug"] == slug), None)
+@app.get(f"{API_PREFIX}/entries/{{slug}}")
+def get_entry(slug: str):
+    entries = read_portfolio()["entries"]
+    entry = next((item for item in entries if item["slug"] == slug), None)
     return (
-        JSONResponse(story, headers=JSON_HEADERS)
-        if story
-        else error_response(HTTPStatus.NOT_FOUND, "story_not_found", "This story is unavailable.")
+        JSONResponse(entry, headers=JSON_HEADERS)
+        if entry
+        else error_response(HTTPStatus.NOT_FOUND, "entry_not_found", "This entry is unavailable.")
     )
