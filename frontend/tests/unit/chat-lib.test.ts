@@ -33,7 +33,7 @@ describe("chat gateway configuration", () => {
       { role: "user", content: "Hello" },
       { role: "assistant", content: "Hi" },
     ]);
-    expect(CHAT_OUTPUT_TOKENS).toBe(256);
+    expect(CHAT_OUTPUT_TOKENS).toBe(512);
     expect(CHAT_TIMEOUT_MS).toBe(20_000);
   });
 });
@@ -46,7 +46,7 @@ describe("chat instructions", () => {
     );
     const prompt = systemPrompt(fixture);
     expect(prompt).toContain(`Contact email: ${fixture.profile.email}`);
-    expect(prompt).toContain("Use only the portfolio facts below.");
+    expect(prompt).toContain("Use only the portfolio facts above.");
     expect(prompt).toContain("Do not invent outcomes");
   });
 });

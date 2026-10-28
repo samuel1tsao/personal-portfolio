@@ -18,9 +18,9 @@ export function isChatEnabled(): boolean {
 export function portfolioContext(portfolio: Portfolio): string {
   const { profile, entries } = portfolio;
   const details = entries.map((entry) => {
-    const sections = entry.sections.map(({ title, body }) => `${title}: ${body}`);
-    const accomplishments = entry.accomplishments.join("; ");
-    const decisions = entry.decisions.map(
+    const sections = (entry.sections ?? []).map(({ title, body }) => `${title}: ${body}`);
+    const accomplishments = (entry.accomplishments ?? []).join("; ");
+    const decisions = (entry.decisions ?? []).map(
       ({ title, choice, rationale, tradeoff }) =>
         `${title}: Choice: ${choice} Rationale: ${rationale} Tradeoff: ${tradeoff}`,
     );
@@ -31,12 +31,12 @@ export function portfolioContext(portfolio: Portfolio): string {
       `Summary: ${entry.summary}`,
       `Contribution: ${entry.contribution}`,
       `Accomplishments: ${accomplishments || "none listed"}`,
-      `Skills and technologies: ${[...new Set([...entry.skills, ...entry.technologies])].join(", ")}`,
+      `Skills and technologies: ${[...new Set([...(entry.skills ?? []), ...(entry.technologies ?? [])])].join(", ")}`,
       `Sections:\n${sections.join("\n")}`,
       `Decisions:\n${decisions.join("\n") || "No documented decisions."}`,
-      `Diagram: ${entry.diagram.join(" → ")} (${entry.diagram_caption}) ${entry.diagram_description}`,
+      `Diagram: ${(entry.diagram ?? []).join(" → ")} (${entry.diagram_caption ?? "Conceptual flow"}) ${entry.diagram_description ?? ""}`,
       `Evidence and limits: ${entry.evidence}`,
-      `Links: ${entry.links.map((link) => `${link.label}: ${link.url}`).join("; ") || "none"}`,
+      `Links: ${(entry.links ?? []).map((link) => `${link.label}: ${link.url}`).join("; ") || "none"}`,
     ].join("\n");
   });
   const context = [

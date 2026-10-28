@@ -21,7 +21,7 @@ export const portfolioEntrySchema = z.object({
   sections: z.array(z.object({ title: text, body: text })),
   evidence: text,
   links: z.array(link),
-  diagram: z.array(text),
+  diagram: z.array(text).default([]),
   diagram_caption: text.default("Conceptual flow"),
   diagram_description: text.default("A simplified view of the project workflow."),
   decisions: z
