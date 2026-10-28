@@ -48,7 +48,10 @@ test("project directory contains all personal projects", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 });
   await page.goto("/projects");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("From problem to product.");
-  await expect(page.locator(".project-directory article")).toHaveCount(7);
+  await expect(page.locator(".project-directory article")).toHaveCount(12);
+  await expect(
+    page.getByText(/Lucra Tournament API Exercise|StarResonanceDps Localization & Fixes/),
+  ).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(
     (await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations,
