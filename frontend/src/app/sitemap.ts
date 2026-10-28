@@ -11,7 +11,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/",
     "/resume",
     "/projects",
+    "/experience",
     "/chat",
-    ...data.stories.map((story) => `/work/${story.slug}`),
+    ...data.entries.map(
+      (entry) => `${entry.kind === "project" ? "/work" : "/experience"}/${entry.slug}`,
+    ),
   ].map((path) => ({ url: `${siteOrigin()}${path}`, lastModified: data.updated }));
 }
