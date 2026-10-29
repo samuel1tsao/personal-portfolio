@@ -88,6 +88,7 @@ test("overview lists every role and project without full case studies", async ({
   }
   await expect(page.locator(".project-case-study")).toHaveCount(0);
   await expect(page.locator("details")).toHaveCount(0);
+  await page.screenshot({ path: "artifacts/resume-overview.png", fullPage: true });
   await page.emulateMedia({ media: "print" });
   await expect(page.locator(".overview-nav")).toBeHidden();
 });
@@ -335,3 +336,13 @@ for (const width of [320, 1440]) {
     await expect(page.getByRole("heading", { name: "Resume & Work" })).toBeVisible();
   });
 }
+
+test("deferred chat opens and survives repeated close and reopen", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open chat", exact: true }).click();
+  await expect(page.getByText("Chat is currently unavailable")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Open chat", exact: true })).toBeFocused();
+  await page.getByRole("button", { name: "Open chat", exact: true }).click();
+  await expect(page.getByText("Chat is currently unavailable")).toBeVisible();
+});

@@ -7,13 +7,17 @@ const DETAIL_LINKS = 'a[href^="/work/"], a[href^="/experience/"]';
 
 function rememberLink(event: MouseEvent) {
   const link = (event.target as Element).closest<HTMLAnchorElement>(DETAIL_LINKS);
-  try { if (link) sessionStorage.setItem(RETURN_LINK_KEY, link.getAttribute("href")!); } catch {}
+  try {
+    if (link) sessionStorage.setItem(RETURN_LINK_KEY, link.getAttribute("href")!);
+  } catch {}
 }
 
 function focusReturnLink() {
   try {
     const href = sessionStorage.getItem(RETURN_LINK_KEY);
-    const link = Array.from(document.querySelectorAll<HTMLAnchorElement>(DETAIL_LINKS)).find((item) => item.getAttribute("href") === href);
+    const link = Array.from(document.querySelectorAll<HTMLAnchorElement>(DETAIL_LINKS)).find(
+      (item) => item.getAttribute("href") === href,
+    );
     link?.focus({ preventScroll: true });
   } catch {}
 }
