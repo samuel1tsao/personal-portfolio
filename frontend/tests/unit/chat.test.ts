@@ -156,6 +156,7 @@ describe("portfolio chat route", () => {
     expect((await POST(chatRequest({ messages: [message("user", "Hello")] }))).status).toBe(503);
     expect(log).toHaveBeenCalledWith("error", "portfolio_chat_failed", {
       reason: "upstream_error",
+      kind: "unknown",
     });
     expect(JSON.stringify(log.mock.calls)).not.toContain("visitor prompt");
   });
@@ -168,6 +169,7 @@ describe("portfolio chat route", () => {
     options.onFailed();
     expect(log).toHaveBeenCalledWith("error", "portfolio_chat_failed", {
       reason: "upstream_error",
+      kind: "unknown",
     });
     expect(JSON.stringify(log.mock.calls)).not.toContain("visitor prompt");
   });

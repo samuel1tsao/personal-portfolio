@@ -3,7 +3,7 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useRef, useState, type FormEvent } from "react";
-import { MAX_CHAT_MESSAGES } from "@/lib/chat-contract";
+import { prepareChatHistory } from "@/lib/chat-history";
 import styles from "./ChatAgent.module.css";
 
 type ContactLink = { label: string; url: string };
@@ -18,7 +18,7 @@ const MAX_VISIBLE_MESSAGES = 25;
 const chatTransport = new DefaultChatTransport({
   api: "/api/chat",
   prepareSendMessagesRequest: ({ messages }) => ({
-    body: { messages: messages.slice(-MAX_CHAT_MESSAGES) },
+    body: { messages: prepareChatHistory(messages) },
   }),
 });
 
@@ -95,6 +95,7 @@ export function ChatAgent({
           className={compact ? `${styles.messages} ${styles.compactMessages}` : styles.messages}
           aria-label="Conversation"
           aria-live="polite"
+          tabIndex={0}
         >
           {messages.length === 0 && (
             <li className={styles.assistantMessage}>

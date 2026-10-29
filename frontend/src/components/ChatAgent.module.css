@@ -5,6 +5,10 @@
   gap: 34px;
 }
 .chat {
+  display: flex;
+  flex-direction: column;
+  height: min(700px, calc(100dvh - 32px));
+  min-height: 0;
   border: 1px solid var(--line);
   border-radius: 5px;
   background: #fffefa;
@@ -58,11 +62,14 @@
   gap: 14px;
   padding: 24px 22px;
   margin: 0;
-  min-height: 220px;
-  max-height: 480px;
-  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 0;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 .messages li {
+  flex-shrink: 0;
   max-width: 90%;
   border-radius: 4px;
   padding: 12px 15px;
@@ -121,7 +128,7 @@
 }
 .form textarea {
   width: 100%;
-  resize: vertical;
+  resize: none;
   border: 1px solid #bdc8be;
   border-radius: 3px;
   background: white;
@@ -187,12 +194,14 @@
   display: flex;
   height: 100%;
   min-height: 0;
+  width: 100%;
 }
 .compactChat {
   display: flex;
   width: 100%;
   min-width: 0;
   min-height: 0;
+  height: 100%;
   flex-direction: column;
   border: 0;
   border-radius: 0;
@@ -202,9 +211,31 @@
   max-height: none;
   flex: 1 1 0;
 }
-.compactChat .chatHeader,
-.compactChat .form {
+.chatHeader,
+.form,
+.suggestions,
+.error,
+.notice {
   flex-shrink: 0;
+}
+.messages:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+}
+@media (max-height: 600px) {
+  .compactChat .suggestions,
+  .compactChat .formFooter > span {
+    display: none;
+  }
+  .compactChat .form {
+    padding: 10px 16px;
+  }
+  .compactChat .form textarea {
+    height: 56px;
+  }
+  .compactChat .chatHeader {
+    padding: 10px 16px;
+  }
 }
 @media (max-width: 760px) {
   .layout {

@@ -20,7 +20,7 @@ export function streamPortfolioChat({
   system: string;
   messages: ModelMessage[];
   onCompleted: () => void;
-  onFailed: () => void;
+  onFailed: (error: unknown) => void;
 }): Response {
   const result = streamText({
     model: gateway(model),
@@ -31,7 +31,7 @@ export function streamPortfolioChat({
     maxOutputTokens: CHAT_OUTPUT_TOKENS,
     maxRetries: 0,
     timeout: CHAT_TIMEOUT_MS,
-    onError: onFailed,
+    onError: ({ error }) => onFailed(error),
     onFinish: ({ finishReason }) => {
       if (finishReason !== "error") onCompleted();
     },

@@ -4,6 +4,7 @@ import { isChatEnabled, systemPrompt, toModelMessages } from "@/lib/chat";
 import { MAX_CHAT_BODY_BYTES, chatRequestSchema } from "@/lib/chat-contract";
 import { log } from "@/lib/logger";
 import { streamPortfolioChat } from "@/lib/chat-runtime";
+import { chatFailureDetails } from "@/lib/chat-errors";
 
 const UNAVAILABLE_MESSAGE = "Chat is unavailable right now. Please use the contact links instead.";
 const INVALID_MESSAGE = "Send a shorter message and try again.";
@@ -35,12 +36,10 @@ export async function POST(request: Request) {
       messages: toModelMessages(parsed.data.messages),
       onCompleted: () =>
         log("info", "portfolio_chat_completed", { messageCount: parsed.data.messages.length }),
-      onFailed: () => log("error", "portfolio_chat_failed", { reason: "upstream_error" }),
+      onFailed: (error) => log("error", "portfolio_chat_failed", chatFailureDetails(error)),
     });
-  } catch {
-    log("error", "portfolio_chat_failed", {
-      reason: "upstream_error",
-    });
+  } catch (error) {
+    log("error", "portfolio_chat_failed", chatFailureDetails(error));
     return NextResponse.json({ error: UNAVAILABLE_MESSAGE }, { status: 503 });
   }
 }
