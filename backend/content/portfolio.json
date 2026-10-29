@@ -212,7 +212,18 @@
         "Python",
         "FastAPI",
         "Vercel",
-        "Playwright"
+        "Playwright",
+        "Node.js",
+        "HTML",
+        "CSS",
+        "AI SDK",
+        "AI Gateway",
+        "Zod",
+        "Pydantic",
+        "Vitest",
+        "pytest",
+        "ESLint",
+        "Prettier"
       ],
       "organization": null,
       "position": null,
@@ -333,12 +344,12 @@
       ],
       "status": "Ongoing applied ML project",
       "accomplishments": [
+        "Built a separate full-stack financial planning application with a five-step goals and risk questionnaire, constrained ETF recommendations, and a 30-year growth simulator.",
+        "Implemented a secondary Transformer and Gaussian policy-gradient recommendation policy to balance goal fulfillment, returns, volatility, and drawdown.",
+        "Designed evaluation using temporal holdouts, historical stress periods, block bootstrap and Monte Carlo simulations, and S&P 500 and 60/40 baselines.",
         "Mined historical equity, mutual fund, and bond data from Yahoo Finance, Wikipedia, and Nasdaq.",
         "Designed a temporal model using four-dimensional autoregression, categorical industry embeddings, feature pruning, and sine/cosine positional encodings.",
-        "Implemented a secondary Transformer and Gaussian policy-gradient recommendation policy to balance goal fulfillment, returns, volatility, and drawdown.",
         "Developed a custom loss function to penalize portfolio fragmentation and balance diversification against management overhead.",
-        "Designed evaluation using temporal holdouts, historical stress periods, block bootstrap and Monte Carlo simulations, and S&P 500 and 60/40 baselines; comparative performance results are not published.",
-        "The public Financial_Analytics repository contains a separate full-stack recommendation and planning application; its README does not establish that the deployed app uses this Transformer/RL research model.",
         "Created a five-step goals and risk questionnaire.",
         "Implemented constrained recommendations over a 12-asset ETF universe with a FOMO-adjusted tilt.",
         "Added a 30-year growth simulator and a browser for public-official portfolios."
@@ -844,8 +855,7 @@
       "status": "Community project contribution",
       "accomplishments": [
         "Translated the tool in a contribution fork.",
-        "Fixed bugs and maintained changes against the upstream project.",
-        "Credited the original project and code to its upstream authors."
+        "Fixed bugs and maintained changes against the upstream project."
       ],
       "technologies": ["Localization", "JavaScript"],
       "skills": ["Localization", "JavaScript"],
@@ -982,7 +992,7 @@
       "slug": "2d-detector-benchmark",
       "kind": "project",
       "title": "Benchmarking Pretrained 2D Detectors",
-      "summary": "A reproducible comparison of pretrained YOLO11 and RT-DETR models across two image datasets, with explicit evaluation caveats.",
+      "summary": "Evaluated pretrained YOLO11 and RT-DETR models on COCO and KITTI using a two-class vehicle/person mapping.",
       "role": "Independent computer vision evaluation",
       "period": "Completed benchmark",
       "contribution": "Evaluated pretrained detectors on selected COCO and KITTI data and documented the class mapping, metrics, and limits of comparison.",
@@ -1023,8 +1033,8 @@
       "order": 10,
       "status": "Completed pretrained-model evaluation",
       "accomplishments": [
-        "Reported COCO/KITTI mAP of 0.471/0.303 for YOLO11n, 0.581/0.349 for YOLO11m, and 0.578/0.366 for RT-DETR ResNet-50.",
-        "Documented that models were pretrained and not fine-tuned, KITTI evaluation used its labeled training split rather than the official test split, and GPU memory was not measured."
+        "Evaluated YOLO11n, YOLO11m, and RT-DETR ResNet-50 on 5,000 COCO validation images and 7,481 images from KITTI’s labeled training split.",
+        "Reported COCO/KITTI mAP of 0.471/0.303 for YOLO11n, 0.581/0.349 for YOLO11m, and 0.578/0.366 for RT-DETR ResNet-50."
       ],
       "technologies": [
         "Python",
@@ -1046,7 +1056,7 @@
       "slug": "rag-fact-checking",
       "kind": "project",
       "title": "RAG Fact-Checking & Claim Validation",
-      "summary": "A collaborative retrieval and claim-validation system, with my documented contribution focused on the fact-validator module.",
+      "summary": "Built the fact-validation module for a collaborative retrieval and claim-checking system.",
       "role": "Fact-validation module contributor",
       "period": "Collaborative graduate project",
       "contribution": "Implemented a feature-based claim classifier that uses evidence signals to distinguish supported, refuted, contested, and insufficient-evidence cases.",
@@ -1098,8 +1108,7 @@
       "status": "Collaborative graduate project · forked class repository",
       "accomplishments": [
         "Contributed a validation module that combines entailment, contradiction, relevance, recency, and domain signals in a Random Forest classifier.",
-        "The module classifies claims as Supported, Refuted, Contested, or Not enough evidence and derives a confidence score from class probabilities.",
-        "The repository README describes the broader team pipeline, including Qdrant with E5 embeddings, NLI, GPT or local Ollama reasoning, and a React interface served through Flask; those components are not attributed solely to me."
+        "Implemented Supported, Refuted, Contested, and Not enough evidence verdicts with confidence scores derived from class probabilities."
       ],
       "technologies": [
         "Python",
@@ -1108,7 +1117,9 @@
         "E5 embeddings",
         "NLI",
         "React",
-        "Flask"
+        "Flask",
+        "GPT",
+        "Ollama"
       ],
       "organization": null,
       "position": null,
@@ -1130,18 +1141,18 @@
       "role": "Computer vision research and model implementation",
       "period": "Graduate research · CMPE 258",
       "contribution": "Implemented a hybrid U-Net and EDSR approach with channel attention and a Sobel edge-aware loss.",
-      "status": "Graduate research · public source link not listed",
+      "status": "Graduate computer vision project",
       "accomplishments": [
         "Combined U-Net and EDSR components for 4× image super-resolution.",
-        "Applied channel attention and an edge-aware Sobel loss to retain plate structure during reconstruction.",
-        "This work is separate from the linked 2D detector benchmark; no matching public repository or paper link is available."
+        "Applied channel attention and an edge-aware Sobel loss to retain plate structure during reconstruction."
       ],
       "technologies": [
         "Python",
         "U-Net",
         "EDSR",
         "Channel attention",
-        "Image super-resolution"
+        "Image super-resolution",
+        "Sobel edge-aware loss"
       ],
       "skills": [
         "Python",
@@ -1187,15 +1198,15 @@
       "position": "AI Software Engineer & LLM Evaluator (Contract)",
       "start": "2026-08-01",
       "end": "2026-10-01",
-      "summary": "Evaluation of foundational language models and autonomous coding agents.",
+      "summary": "Evaluated autonomous coding agents and created expert software engineering feedback for language-model training.",
       "role": "AI Software Engineer & LLM Evaluator (Contract)",
       "period": "August 2026–October 2026",
       "contribution": "Evaluation of foundational language models and autonomous coding agents.",
       "status": null,
       "accomplishments": [
-        "Evaluate agent-generated pull request diffs for correctness, performance, regressions, and architectural quality.",
-        "Design multi-turn tasks in Python, Java, and TypeScript to test coding agents' reasoning and handling of complex software engineering problems.",
-        "Produce reinforcement learning from human feedback (RLHF) data by identifying failure modes, edge cases, and hallucinated code."
+        "Evaluated agent-generated pull request diffs for correctness, performance, regressions, and architectural quality.",
+        "Designed multi-turn tasks in Python, Java, and TypeScript to test coding agents' reasoning and handling of complex software engineering problems.",
+        "Produced reinforcement learning from human feedback (RLHF) data by identifying failure modes, edge cases, and hallucinated code."
       ],
       "technologies": [
         "Python",
@@ -1227,7 +1238,7 @@
           "title": "LLM Coding-Agent Evaluation",
           "problem": "Generated code needs expert review for correctness, reasoning quality, regressions, performance, and architecture; compiling successfully is not enough to establish quality.",
           "solution": "Evaluated agent-generated pull request diffs and designed multi-turn coding tasks in Python, Java, and TypeScript. Recorded failure modes, edge cases, and unsupported claims as human feedback for model training.",
-          "impact": "Produced high-signal evaluation and RLHF feedback for foundational model training. No model-level improvement metric is available.",
+          "impact": "Produced expert evaluation and RLHF feedback for foundational model training.",
           "technologies": [
             "Python",
             "Java",
@@ -1256,7 +1267,7 @@
       "contribution": "Built financial ledgers and workflows for small-business retirement plans, focusing on reliable money movement, burst scaling, and operational automation.",
       "status": null,
       "accomplishments": [
-        "Architected enterprise-wide ECS autoscaling frameworks, achieving an initial 40% reduction in ECS operating costs.",
+        "Built shared ECS autoscaling infrastructure that reduced initial operating costs by 40%.",
         "Rearchitected dividend processing to handle bursts of up to 100,000 dividends and one million transactions, including allocation, reinvestment, and liquidation.",
         "Built correction tools for distribution errors and reallocated millions of dollars from uncashed instruments to customer accounts."
       ],
@@ -1307,7 +1318,7 @@
           "title": "Infrastructure Auto-Scaling for Burst Processing",
           "problem": "Compute capacity stayed near full scale around the clock even though asynchronous custodian-file processing arrived in concentrated bursts, wasting cloud spend during idle periods.",
           "solution": "Upgraded the shared infrastructure library with scheduling and autoscaling so AWS ECS capacity follows incoming processing bursts and scales down when services are idle.",
-          "impact": "Reduced one service’s cost by up to $1,000 per month; the resume notes an initial 40% reduction in ECS operating costs.",
+          "impact": "Reduced one service’s cloud costs by up to $1,000 per month and achieved an initial 40% reduction in ECS operating costs.",
           "technologies": [
             "AWS ECS",
             "Terraform",
@@ -1367,9 +1378,9 @@
       "accomplishments": [
         "Built recommendation backend pipelines that reduced ranking model scoring updates from 30 minutes to five minutes.",
         "Developed geographic search and mapping features associated with an 11% conversion increase across 300,000 monthly active users.",
-        "Established core search with Algolia fuzzy matching and filtering, alongside Elasticsearch-based discovery.",
         "Introduced Datadog and PagerDuty monitoring and alerting, achieving a 30-minute mean recovery time.",
-        "Identified and addressed a 0.5% failure rate under 1,000 concurrent requests through performance testing."
+        "Established core search with Algolia fuzzy matching and filtering, alongside Elasticsearch-based discovery.",
+        "Identified a 0.5% request failure rate at approximately 1,000 concurrent users through load testing."
       ],
       "technologies": [
         "TypeScript",
@@ -1383,7 +1394,9 @@
         "Algolia",
         "Elasticsearch",
         "Datadog",
-        "PagerDuty"
+        "PagerDuty",
+        "PostgreSQL",
+        "GitHub Actions"
       ],
       "skills": [
         "TypeScript",
@@ -1478,7 +1491,7 @@
       "contribution": "Built backend infrastructure for a new marketplace advertising channel and ran controlled product experiments at scale.",
       "status": null,
       "accomplishments": [
-        "Developed the initial backend implementation of advertising infrastructure and customer-facing REST APIs.",
+        "Built the backend and REST APIs for Affirm’s first marketplace advertising platform, reusing existing recommendation and carousel surfaces.",
         "Ran backend A/B experiments affecting five million users, coordinating with cross-functional partners on stability and rollbacks."
       ],
       "technologies": [
@@ -1534,7 +1547,7 @@
           "title": "Large-Scale Product Experimentation",
           "problem": "Changes to marketplace experiences needed reliable evidence because even small UX changes could affect millions of daily users.",
           "solution": "Executed and managed backend A/B experiments with stable traffic handling, data collection, production readiness, and rollback coordination.",
-          "impact": "Enabled product teams to evaluate changes with data at a scale of more than five million daily active users. No experiment lift metric is available.",
+          "impact": "Supported controlled product experiments serving more than five million daily active users.",
           "technologies": [
             "A/B testing",
             "Python",
@@ -1564,13 +1577,13 @@
       "contribution": "Modernized identity-service data and search systems to improve fair processing and performance for enterprise customer records.",
       "status": null,
       "accomplishments": [
-        "Modernized identity services supporting millions of daily requests, spanning backend development, data architecture, infrastructure, and network operations.",
         "Designed ETL and data transformation from multi-tenant NoSQL storage to a single-tenant SQL ingestion pipeline.",
+        "Added continuous randomized testing and Jenkins automation, reducing CI build time from two hours to 30 minutes.",
+        "Migrated 500 GB of enterprise data to a new data center and VPC with zero downtime.",
+        "Modernized identity services supporting millions of daily requests, spanning backend development, data architecture, infrastructure, and network operations.",
         "Led service and data center migrations and introduced geographic redundancy; helped recover corrupted data after a critical data center failure.",
         "Replaced streaming jobs with paginated processing to improve queue fairness and prevent long-running jobs from blocking smaller requests.",
-        "Developed proprietary typed queries and optimized data retrieval for secure, selective field access.",
-        "Reduced CI/CD build times by 80% using continuous randomized end-to-end testing; cut test runtime from three hours to 30 minutes.",
-        "Migrated 500 GB of enterprise data during a zero-downtime infrastructure move, as documented in the owner-provided project notes."
+        "Developed proprietary typed queries and optimized data retrieval for secure, selective field access."
       ],
       "technologies": [
         "Java",
@@ -1670,10 +1683,10 @@
       "contribution": "Rotated through middleware, enterprise integration, security, and emerging technology, building internal tools and cost-conscious prototypes.",
       "status": null,
       "accomplishments": [
-        "Rotated through enterprise integration, middleware operations, and innovative technology, delivering internal tools and integration prototypes.",
-        "Designed an anonymous idea intake web service with batching, caching, rate limiting, and request aggregation to manage third-party API costs.",
-        "Built server and application health monitoring tools.",
+        "Built an intake and process-management application with batching, caching, and a two-requests-per-second queue to avoid paid API licensing costs.",
+        "Built monitoring tools that consolidated application health and status across six servers.",
         "Automated IoT device connection configuration, saving approximately three hours of demo maintenance per week.",
+        "Rotated through enterprise integration, middleware operations, and innovative technology, delivering internal tools and integration prototypes.",
         "Created a Google Maps proof of concept to locate nearby hospitals and evaluated replacement technologies for outdated frameworks."
       ],
       "technologies": [

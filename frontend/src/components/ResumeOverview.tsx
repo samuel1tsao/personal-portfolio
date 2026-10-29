@@ -1,17 +1,23 @@
 import type { PortfolioEntry } from "@/lib/schema";
+import { entryTechnologies } from "@/lib/projects";
 import { detailAnchor, detailPath, SUMMARY_BULLET_LIMIT } from "@/lib/detail-links";
 
 // JSX components follow the existing component-length exception in Shell.tsx.
+export function Technologies({ entry }: { entry: PortfolioEntry }) {
+  const technologies = entryTechnologies(entry);
+  if (!technologies.length) return null;
+  return (
+    <p className="resume-technologies">
+      <strong>Technologies:</strong> {technologies.join(" · ")}
+    </p>
+  );
+}
+
 export function AchievementList({ entry }: { entry: PortfolioEntry }) {
   return (
     <ul className="resume-accomplishments">
       {entry.accomplishments.slice(0, SUMMARY_BULLET_LIMIT).map((item) => (
-        <li key={item}>
-          {item}{" "}
-          <a className="detail-link" href={`${detailPath(entry)}#${detailAnchor(item)}`}>
-            Read details<span className="sr-only">: {item}</span>
-          </a>
-        </li>
+        <li key={item}>{item}</li>
       ))}
     </ul>
   );
@@ -26,7 +32,6 @@ export function EmployerProjects({ entry }: { entry: PortfolioEntry }) {
         {entry.work_projects.map((project) => (
           <li key={project.title}>
             <a href={`${detailPath(entry)}#${detailAnchor(project.title)}`}>{project.title}</a>
-            <p>{project.impact}</p>
           </li>
         ))}
       </ul>

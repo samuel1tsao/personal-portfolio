@@ -1,5 +1,6 @@
 import { DetailNavigation } from "./DetailNavigation";
 import { detailAnchor } from "@/lib/detail-links";
+import { entryTechnologies } from "@/lib/projects";
 import Link from "next/link";
 import { ExperienceProjectCard } from "@/components/ExperienceProjectCard";
 import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
@@ -33,7 +34,7 @@ export function EntryDetails({
           <p className="story-lede">{entry.summary}</p>
           {isProject && <p className="story-role">{entry.role}</p>}
           <ul className="tags" aria-label="Skills and technologies">
-            {[...new Set([...entry.skills, ...entry.technologies])].map((skill) => (
+            {[...new Set([...entry.skills, ...entryTechnologies(entry)])].map((skill) => (
               <li key={skill}>{skill}</li>
             ))}
           </ul>

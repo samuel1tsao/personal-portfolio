@@ -419,6 +419,12 @@ nav a {
   padding-left: 22px;
   margin: 14px 0;
 }
+.resume-technologies {
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 16px 0;
+  overflow-wrap: anywhere;
+}
 .resume-accomplishments li {
   padding-left: 3px;
   margin-bottom: 9px;

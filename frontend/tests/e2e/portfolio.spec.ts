@@ -88,6 +88,9 @@ test("overview lists every role and project without full case studies", async ({
   }
   await expect(page.locator(".project-case-study")).toHaveCount(0);
   await expect(page.locator("details")).toHaveCount(0);
+  await expect(page.getByRole("link", { name: /Read details/ })).toHaveCount(0);
+  await expect(page.locator(".resume-accomplishments a")).toHaveCount(0);
+  await expect(page.locator("main")).not.toContainText("the resume notes");
   await page.screenshot({ path: "artifacts/resume-overview.png", fullPage: true });
   await page.emulateMedia({ media: "print" });
   await expect(page.locator(".overview-nav")).toBeHidden();
@@ -234,6 +237,33 @@ const portfolio = JSON.parse(
   readFileSync(new URL("../../../backend/content/portfolio.json", import.meta.url), "utf8"),
 );
 
+for (const width of [320, 1440]) {
+  test(`resume shows every recorded technology at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/resume");
+    for (const entry of portfolio.entries.filter(
+      (item: { published: boolean; slug: string }) => item.published && item.slug !== "personal",
+    )) {
+      const expected = [
+        ...new Set([
+          ...entry.technologies,
+          ...(entry.work_projects ?? []).flatMap(
+            (project: { technologies: string[] }) => project.technologies,
+          ),
+        ]),
+      ];
+      await expect(page.locator(`article[id="${entry.slug}"] .resume-technologies`)).toHaveText(
+        `Technologies: ${expected.join(" · ")}`,
+      );
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await page.emulateMedia({ media: "print" });
+    await expect(page.locator(".resume-technologies").first()).toBeVisible();
+  });
+}
+
 test("homepage uses profile content and omits decorative copy", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(portfolio.profile.headline);
@@ -315,11 +345,11 @@ for (const entry of portfolio.entries.filter((entry: { published: boolean }) => 
 }
 
 for (const width of [320, 1440]) {
-  test(`achievement deep links, focus and recovery at ${width}px`, async ({ page }) => {
+  test(`employer project links, focus and recovery at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/resume");
-    const link = page.locator(".detail-link").first();
+    const link = page.locator(".overview-projects a").first();
     const href = await link.getAttribute("href");
     await link.click();
     await expect(page).toHaveURL(href!);
@@ -329,7 +359,7 @@ for (const width of [320, 1440]) {
     await expect(page.locator(":target")).toBeFocused();
     await page.goBack();
     await expect(page).toHaveURL("/resume");
-    await expect(page.locator(".detail-link").first()).toBeFocused();
+    await expect(page.locator(".overview-projects a").first()).toBeFocused();
     await page.goto(`${href!.split("#")[0]}#outdated-anchor`);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await page.getByRole("link", { name: "← Resume & Work", exact: true }).click();

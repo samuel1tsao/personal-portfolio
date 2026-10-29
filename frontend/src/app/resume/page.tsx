@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { OverviewReturn } from "@/components/OverviewReturn";
 
-import { AchievementList, EmployerProjects } from "@/components/ResumeOverview";
+import { AchievementList, EmployerProjects, Technologies } from "@/components/ResumeOverview";
 import { getPortfolio } from "@/lib/api";
 import { professionalRoles, splitProjects } from "@/lib/projects";
 import { pageMetadata, rolePeriod } from "@/lib/seo";
@@ -53,6 +53,7 @@ export default async function Resume() {
             <p>{role.summary}</p>
             <AchievementList entry={role} />
             <EmployerProjects entry={role} />
+            <Technologies entry={role} />
             <Link href={`/experience/${role.slug}`}>Full experience details</Link>
           </article>
         ))}
@@ -97,6 +98,7 @@ function ResumeProjectGroup({
           <p className="muted">{project.period}</p>
           <p>{project.summary}</p>
           <AchievementList entry={project} />
+          <Technologies entry={project} />
           <Link href={`/work/${project.slug}`}>Full project details</Link>
         </article>
       ))}

@@ -70,3 +70,24 @@ Cause: flex message bubbles could shrink and overflow their allocated area, whil
 Use the updated development server at http://127.0.0.1:3217/. Port 3219 remains an older production preview and does not hot-reload source edits.
 
 Retro: no working-agreement change needed; long-response viewport regressions now cover the layout behavior that short-response/API tests cannot establish.
+
+## Resume copy and link review
+
+- DONE — Removed per-bullet detail links and repeated employer-project impact paragraphs. Reviewed all published summaries/highlights, prioritized concrete contributions, removed source-review narration from accomplishments and preserved detailed evidence and research limits.
+- DONE — 35 backend tests and 22 browser tests pass, including overview content, all 19 full entries and employer-project deep links on desktop/mobile. Frontend typecheck, scoped lint/formatting and whitespace checks pass. No provider requests made.
+
+Editorial findings: overview copy mixed achievements with source-review commentary and duplicated the same impact in role bullets and project descriptions. Plain bullets now state contributions; linked project titles retain the detailed reading path. Nursa's latency/conversion/recovery outcomes, Proofpoint's migration/build-time outcomes and Kaiser's concrete tooling lead their respective entries. Missing-repository notices and upstream-credit statements no longer appear as accomplishments; attribution and research caveats remain in full details. Financial app features remain distinct from collaborative Transformer/RL research; detector metrics retain dataset and class-mapping scope.
+
+Metric reconciliation: Proofpoint had an 80% reduction, a three-hour test baseline and a two-hour CI baseline. Use the project account's two-hours-to-30-minutes CI comparison without combining the incompatible claims. Nursa copy states the observed load-test failure threshold rather than an unsupported remediation claim. Human Interest retains the initial 40% ECS reduction and the separate up-to-$1,000 monthly saving, without “the resume notes” narration.
+
+Concurrent documentation cleanup removed the separate review/plan files during this task. Preserve those removals; retain this review here rather than recreating deleted documents. Source notes were moved to `docs/portfolio-info.txt` by the concurrent work.
+
+Retro: no guidance changes needed. Existing source and rendered-page checks were used; updated browser assertions protect plain bullets and project-title navigation.
+
+## Technologies per entry
+
+- DONE — Displayed an untruncated, deduplicated technology line on every resume role and personal project. Shared `entryTechnologies` combines entry and employer-project technologies; role detail tags include the same union. Lists wrap and remain visible in print without adding per-bullet links.
+- DONE — Filled source-supported omissions: Nursa PostgreSQL/GitHub Actions; super-resolution Sobel loss; collaborative RAG GPT/Ollama stack; portfolio runtime, validation, AI, testing and formatting tools verified against current implementation. Broad unassigned profile skills were not guessed onto specific projects. RAG team attribution remains explicit in full details.
+- DONE — 35 backend tests, 67 frontend unit/integration tests and 22 browser checks pass, including exact complete technology lines at 320px/1440px, print visibility, no horizontal overflow and full detail-page coverage. Typecheck, scoped ESLint/Prettier and whitespace checks pass. No provider calls.
+
+Retro: no durable guidance change needed; reuse the shared technology union and exact rendered-list assertions to prevent future truncation or employer-project omissions.

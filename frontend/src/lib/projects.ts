@@ -1,5 +1,14 @@
 import type { PortfolioEntry } from "./schema";
 
+export function entryTechnologies(entry: PortfolioEntry) {
+  return [
+    ...new Set([
+      ...entry.technologies,
+      ...entry.work_projects.flatMap((project) => project.technologies),
+    ]),
+  ];
+}
+
 const ML_PROJECT_SLUGS = new Set([
   "asset-recommendation-engine",
   "fog-density-detection",

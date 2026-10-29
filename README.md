@@ -8,7 +8,7 @@ A personal portfolio for software engineering and applied ML work. The site brin
 
 - **Home:** Introduction, engineering philosophy, interests, and contact links.
 - **Projects and case studies:** Browse published projects at `/projects` or read a project story at `/work/<slug>`.
-- **Resume & Work:** Scan every role and project at `/resume`, then follow achievement links to highlighted details on full project or experience pages. Use Print / Save as PDF for the concise overview.
+- **Resume & Work:** Scan every role and project at `/resume`, then open full-entry links or linked employer-project titles for the details. Use Print / Save as PDF for the concise overview.
 - **Portfolio chat:** Ask about Samuel’s experience, projects, or how to connect at `/chat`. A pinned button also opens chat while browsing. Responses use published portfolio content; email and profile links are available directly.
 - **Accessible and discoverable pages:** Responsive layouts, keyboard navigation, page metadata, structured profile data, sitemap, and production-only indexing.
 
@@ -58,7 +58,7 @@ Then open [http://127.0.0.1:3005](http://127.0.0.1:3005). The service URL overri
 
 ## Develop and deploy
 
-Reading experience: [Portfolio UX plan](docs/portfolio-ux-plan.md), [content coverage](docs/portfolio-content-coverage.md), and [implementation verification](progress.md).
+Resume copy decisions and verification: [Implementation log](progress.md#resume-copy-and-link-review).
 
 See [Development and deployment](docs/development-and-deployment.md) for local setup, content editing, checks, and Vercel configuration. The local portfolio can run without Gateway credentials; configure chat separately when needed.
 
