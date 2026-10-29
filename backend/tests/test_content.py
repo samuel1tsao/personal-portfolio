@@ -29,6 +29,42 @@ def test_public_content_and_entry():
     assert client.get(f"/api/v1/entries/{slug}").json() == content["entries"][0]
 
 
+def test_experience_entries_have_structured_projects(source):
+    portfolio = Portfolio.model_validate(source)
+    experiences = [entry for entry in portfolio.entries if entry.kind == "experience"]
+    assert experiences
+    for entry in experiences:
+        assert not entry.sections
+        assert entry.work_projects or entry.related_projects
+        assert all(
+            project.title and project.problem and project.solution and project.impact
+            for project in entry.work_projects
+        )
+        assert all(
+            reference.url.scheme == "https"
+            for project in entry.work_projects
+            for reference in project.references
+        )
+
+
+def test_personal_experience_attaches_each_personal_project(source):
+    portfolio = Portfolio.model_validate(source)
+    personal = next(entry for entry in portfolio.entries if entry.slug == "personal")
+    project_slugs = {entry.slug for entry in portfolio.entries if entry.kind == "project"}
+    assert personal.kind == "experience"
+    assert personal.organization == "Personal"
+    assert set(personal.related_projects) == project_slugs
+    assert "lucra-backend-exercise" not in project_slugs
+
+
+def test_project_details_are_grouped_under_problem_solution_and_impact(source):
+    portfolio = Portfolio.model_validate(source)
+    projects = [entry for entry in portfolio.entries if entry.kind == "project"]
+    assert projects
+    for entry in projects:
+        assert {section.group for section in entry.sections} == {"problem", "solution", "impact"}
+
+
 @pytest.mark.parametrize("path", ["/api/v1/entries/missing", "/api/v2/portfolio", "/docs"])
 def test_missing_paths(path):
     response = client.get(path)
@@ -96,7 +132,10 @@ def test_twenty_concurrent_reads_are_isolated():
 
 
 def test_draft_entry_is_not_accessible(source, tmp_path, monkeypatch):
-    source["entries"][0]["published"] = False
+    asset_engine = next(
+        entry for entry in source["entries"] if entry["slug"] == "asset-recommendation-engine"
+    )
+    asset_engine["published"] = False
     path = tmp_path / "draft.json"
     path.write_text(json.dumps(source))
     monkeypatch.setattr(api, "read_portfolio", lambda: read_portfolio(path))

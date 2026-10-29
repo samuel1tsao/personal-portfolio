@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ExperienceDetails({ params }: Props) {
   const { slug } = await params;
-  const { profile, entries } = await getPortfolio();
+  const { entries, profile } = await getPortfolio();
   const entry = entries.find((item) => item.slug === slug && item.kind === "experience");
   if (!entry) notFound();
-  return <EntryDetails entry={entry} profile={profile} />;
+  return <EntryDetails entry={entry} profile={profile} entries={entries} />;
 }

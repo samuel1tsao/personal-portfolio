@@ -1,133 +1,46 @@
 import Link from "next/link";
 import type { PortfolioEntry, Profile } from "@/lib/schema";
+import { professionalRoles, splitProjects } from "@/lib/projects";
 import { rolePeriod } from "@/lib/seo";
 import { CopyEmail } from "./CopyEmail";
+import { ExperienceProjectCard } from "./ExperienceProjectCard";
 import styles from "./Portfolio.module.css";
-
-const FOCUS_AREAS = [
-  {
-    number: "01",
-    title: "Production systems",
-    detail: "Financial workflows, backend services, and dependable execution.",
-  },
-  {
-    number: "02",
-    title: "Marketplace discovery",
-    detail: "Search, geographic context, and recommendation infrastructure.",
-  },
-  {
-    number: "03",
-    title: "Applied intelligence",
-    detail: "Transformer models, reinforcement learning, and thoughtful evaluation.",
-  },
-];
 
 export function Hero({ profile }: { profile: Profile }) {
   return (
     <section className={`${styles.hero} wrap`} aria-labelledby="intro-heading">
       <div className={styles.heroMain}>
         <p className="eyebrow">
-          <span className="status-dot" /> Samuel Tsao · Software engineer
+          <span className="status-dot" /> {profile.name}
         </p>
-        <h1 id="intro-heading">
-          Reliable systems.
-          <br />
-          <em>Thoughtful</em>
-          <br />
-          intelligence.
-        </h1>
+        <h1 id="intro-heading">{profile.headline}</h1>
         <p className={styles.intro}>{profile.intro}</p>
         <div className="actions">
           <a
             className="button primary"
-            href="#work"
+            href="/resume"
             data-analytics-event="WorkClick"
             data-analytics-location="hero"
           >
             Explore my work <span aria-hidden="true">↘</span>
           </a>
-          <Link
-            className="button"
-            href="/resume"
-            data-analytics-event="ResumeClick"
-            data-analytics-location="hero"
-          >
-            View resume <span aria-hidden="true">↗</span>
-          </Link>
         </div>
         <p className={styles.location}>
           <span aria-hidden="true">◎</span> {profile.location}
         </p>
       </div>
-      <div className={styles.heroAside}>
-        <div className={styles.systemCard}>
-          <div className={styles.systemTop}>
-            <span>ENGINEERING PERSPECTIVE</span>
-            <span aria-hidden="true">↗</span>
-          </div>
-          <p className={styles.systemTitle}>
-            From complexity
-            <br />
-            to clarity.
-          </p>
-          <div
-            className={styles.systemFlow}
-            aria-label="Engineering perspective: understand the problem, design the system, evaluate the outcome"
-          >
-            <span>
-              01 <b>Understand</b>
-              <small>The problem & constraints</small>
-            </span>
-            <i aria-hidden="true">↓</i>
-            <span>
-              02 <b>Design</b>
-              <small>The system & tradeoffs</small>
-            </span>
-            <i aria-hidden="true">↓</i>
-            <span>
-              03 <b>Evaluate</b>
-              <small>The outcome & limitations</small>
-            </span>
-          </div>
-          <p className={styles.systemNote}>Systems thinking, from infrastructure to ML.</p>
-        </div>
-        <p className={styles.marginNote}>
-          A selection of work at the intersection
-          <br />
-          of software, systems, and intelligence.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-export function Focus() {
-  return (
-    <section className={`${styles.focus} wrap`} aria-label="Engineering focus">
-      {FOCUS_AREAS.map((area) => (
-        <div key={area.number}>
-          <span className="eyebrow">{area.number} / FOCUS</span>
-          <h2>{area.title}</h2>
-          <p>{area.detail}</p>
-        </div>
-      ))}
     </section>
   );
 }
 
 export function Work({ entries }: { entries: PortfolioEntry[] }) {
-  const projects = entries.filter((entry) => entry.kind === "project");
+  const { machineLearning, softwareEngineering } = splitProjects(entries);
   return (
     <section className="section wrap" id="work" aria-labelledby="work-heading">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Selected work / 01</p>
-          <h2 id="work-heading">Engineering in practice.</h2>
+          <h2 id="work-heading">Selected projects</h2>
         </div>
-        <p>
-          Real problems. Deliberate decisions.
-          <br />A closer look at my contributions.
-        </p>
       </div>
       <p>
         <Link
@@ -139,10 +52,21 @@ export function Work({ entries }: { entries: PortfolioEntry[] }) {
           Explore all projects ↗
         </Link>
       </p>
+      {machineLearning.length === 0 && softwareEngineering.length === 0 && (
+        <p>Selected work is being updated. Explore my experience below.</p>
+      )}
+      <ProjectGroup title="Machine learning projects" projects={machineLearning} />
+      <ProjectGroup title="Software engineering projects" projects={softwareEngineering} />
+    </section>
+  );
+}
+
+function ProjectGroup({ title, projects }: { title: string; projects: PortfolioEntry[] }) {
+  if (projects.length === 0) return null;
+  return (
+    <section className={styles.projectGroup} aria-label={title}>
+      <h3>{title}</h3>
       <div className={styles.stories}>
-        {projects.length === 0 && (
-          <p>Selected work is being updated. Explore my experience below.</p>
-        )}
         {projects.map((project, index) => (
           <StoryCard key={project.slug} entry={project} index={index} />
         ))}
@@ -152,6 +76,7 @@ export function Work({ entries }: { entries: PortfolioEntry[] }) {
 }
 
 export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: number }) {
+  const href = entry.kind === "project" ? `/work/${entry.slug}` : `/resume#${entry.slug}`;
   return (
     <article className={styles.storyCard}>
       <div className={styles.storyNumber} aria-hidden="true">
@@ -165,7 +90,7 @@ export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: numb
         </p>
         <h3>
           <Link
-            href={entry.kind === "project" ? `/work/${entry.slug}` : `/experience/${entry.slug}`}
+            href={href}
             data-analytics-event="CaseStudyClick"
             data-analytics-target={entry.slug}
           >
@@ -181,7 +106,7 @@ export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: numb
         </ul>
       </div>
       <Link
-        href={entry.kind === "project" ? `/work/${entry.slug}` : `/experience/${entry.slug}`}
+        href={href}
         className={styles.storyArrow}
         aria-label={`Read ${entry.title}`}
         data-analytics-event="CaseStudyClick"
@@ -194,36 +119,47 @@ export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: numb
 }
 
 export function Experience({ entries }: { entries: PortfolioEntry[] }) {
-  const roles = entries.filter((entry) => entry.kind === "experience");
+  const roles = professionalRoles(entries);
   return (
     <section className="section wrap" id="experience" aria-labelledby="experience-heading">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">Career / 02</p>
-          <h2 id="experience-heading">Built on experience.</h2>
+          <h2 id="experience-heading">Experience</h2>
         </div>
         <Link
           className="inline-link"
-          href="/experience"
+          href="/resume#experience"
           data-analytics-event="ResumeClick"
           data-analytics-location="experience"
         >
-          All roles ↗
+          Full resume ↗
         </Link>
       </div>
       <div className={styles.timeline}>
         {roles.map((role) => (
-          <Link key={role.slug} href={`/experience/${role.slug}`} className={styles.role}>
-            <p className={styles.roleDate}>{rolePeriod(role.start!, role.end)}</p>
+          <article key={role.slug} className={styles.role}>
+            <p className={styles.roleDate}>
+              {role.start ? rolePeriod(role.start, role.end) : role.period}
+            </p>
             <div>
-              <h3>{role.organization}</h3>
+              <h3>
+                <Link href={`/resume#${role.slug}`}>{role.organization}</Link>
+              </h3>
               <p className={styles.roleTitle}>{role.position}</p>
               <p>{role.summary}</p>
+              {role.work_projects.length > 0 && (
+                <div className={styles.roleProjects}>
+                  <h4>Projects</h4>
+                  {role.work_projects.map((project) => (
+                    <ExperienceProjectCard key={project.title} project={project} headingLevel={5} />
+                  ))}
+                </div>
+              )}
+              <Link className="inline-link" href={`/resume#${role.slug}`}>
+                Full role description ↗
+              </Link>
             </div>
-            <span className={styles.roleMark} aria-hidden="true">
-              ↗
-            </span>
-          </Link>
+          </article>
         ))}
       </div>
     </section>
@@ -234,26 +170,11 @@ export function About({ profile }: { profile: Profile }) {
   return (
     <section className={`${styles.about} section wrap`} id="about" aria-labelledby="about-heading">
       <div>
-        <p className="eyebrow">Beyond the code / 03</p>
-        <h2 id="about-heading">
-          Curious by nature.
-          <br />
-          <em>Engineer</em> by practice.
-        </h2>
+        <h2 id="about-heading">My philosophy & direction</h2>
         <p>{profile.about}</p>
       </div>
       <div className={styles.aboutDetails}>
-        <h3>Always learning</h3>
-        {profile.education.map((item) => (
-          <p key={item}>{item}</p>
-        ))}
-        <h3>Tools of the craft</h3>
-        <ul className="tags">
-          {profile.skills.map((skill) => (
-            <li key={skill}>{skill}</li>
-          ))}
-        </ul>
-        <h3>Outside work</h3>
+        <h3>Interests</h3>
         {profile.interests.map((interest) => (
           <p key={interest}>{interest}</p>
         ))}
@@ -265,19 +186,9 @@ export function About({ profile }: { profile: Profile }) {
 export function Contact({ profile }: { profile: Profile }) {
   return (
     <section className={`${styles.contact} wrap`} id="connect" aria-labelledby="connect-heading">
-      <p className="eyebrow">Start a conversation / 04</p>
       <div className={styles.contactBody}>
         <div>
-          <h2 id="connect-heading">
-            Good work starts
-            <br />
-            with a <em>conversation.</em>
-          </h2>
-          <p>
-            Hiring, collaborating, or exchanging ideas?
-            <br />
-            I’d be glad to hear from you.
-          </p>
+          <h2 id="connect-heading">Contact</h2>
         </div>
         <div className={styles.contactLinks}>
           <a
@@ -304,27 +215,5 @@ export function Contact({ profile }: { profile: Profile }) {
         </div>
       </div>
     </section>
-  );
-}
-
-export function Diagram({
-  steps,
-  caption = "Conceptual flow",
-  description = "A simplified view of the project workflow.",
-}: {
-  steps: string[];
-  caption?: string;
-  description?: string;
-}) {
-  return (
-    <figure className={styles.diagram}>
-      <figcaption>{caption}</figcaption>
-      <ol>
-        {steps.map((step) => (
-          <li key={step}>{step}</li>
-        ))}
-      </ol>
-      <p>{description}</p>
-    </figure>
   );
 }

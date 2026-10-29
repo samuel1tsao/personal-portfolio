@@ -4,6 +4,15 @@ const config: NextConfig = {
   partialPrefetching: true,
   agentRules: false,
   poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/work/financial-analytics-app",
+        destination: "/work/asset-recommendation-engine",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

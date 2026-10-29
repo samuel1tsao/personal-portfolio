@@ -4,23 +4,23 @@ Production: [samuel-tsao.vercel.app](https://samuel-tsao.vercel.app). Vercel pro
 
 ## Local setup
 
-Requires Node 22 or 24, pnpm 11.25.0, uv, and Python 3.12. Locked dependencies are in `frontend/pnpm-lock.yaml` and `backend/uv.lock`. The bundled pnpm runtime used Node 24 locally; CI is configured for Node 22.
+Requires Node 22 or 24, Corepack, uv, and Python 3.12. Corepack runs the pnpm version pinned in `frontend/package.json`. Locked dependencies are in `frontend/pnpm-lock.yaml` and `backend/uv.lock`. CI is configured for Node 22.
 
 In a terminal at `backend/`:
 
-```powershell
+```bash
 uv sync --frozen
-uv run uvicorn app:app --host 127.0.0.1 --port 8000
+uv run python -m uvicorn app:app --host 127.0.0.1 --port 8111 --reload
 ```
 
 In a second terminal at `frontend/`:
 
-```powershell
-pnpm install --frozen-lockfile
-pnpm dev
+```bash
+corepack pnpm install --frozen-lockfile
+corepack pnpm dev
 ```
 
-Visit `http://127.0.0.1:3000`. Content is served by FastAPI and rendered into HTML by Next.js. Next.js has no browser-facing API proxy; both separate-server development and deployed server rendering fetch content server-side. Deployed functions use the runtime `CONTENT_SERVICE_URL` binding, and builds make no content requests. Copy `.env.example` to `.env.local` in the frontend when configuring a deployment. Local defaults require no secrets.
+Visit `http://127.0.0.1:3217`. Content is served by FastAPI and rendered into HTML by Next.js. Next.js has no browser-facing API proxy; both separate-server development and deployed server rendering fetch content server-side. Deployed functions use the runtime `CONTENT_SERVICE_URL` binding, and builds make no content requests. Copy `.env.example` to `.env.local` in the frontend when configuring a deployment. Local defaults require no secrets; existing `SITE_URL` and `CONTENT_API_URL` overrides must match ports 3217 and 8111.
 
 ## Checks
 
@@ -38,7 +38,7 @@ The `/resume` page includes employer accomplishments, technologies, and publishe
 
 ## One Vercel project with services
 
-Personal projects link from `/resume` to `/work/<slug>`; `/projects` lists all published personal project stories. The homepage selects the first three stories by editorial order. Structured decisions and diagram captions are optional story fields. Each resume `story_slug` must refer to an existing project story, and links to draft stories are suppressed.
+Personal projects link from `/resume` to `/work/<slug>`; `/projects` lists all published personal project stories. The homepage selects the first three stories by editorial order. Structured decisions are displayed on detail pages. Legacy `diagram`, `diagram_caption`, and `diagram_description` fields remain accepted for content compatibility but are intentionally not rendered. Profile fields appear on the homepage and resume; entry summaries appear in listings, and detail pages display contributions, accomplishments, skills/technologies, sections, decisions, evidence, and links. Identity, publication, ordering, and revision fields control routing, visibility, ordering, validation, and metadata rather than appearing as prose.
 
 The root `vercel.json` replaces the earlier two-project proposal. Set the Vercel project's Root Directory to the repository root, not `frontend/` or `backend/`. Do not add top-level build/runtime overrides; the frontend build command belongs to its service. The user confirmed the service names and requested an internal-only backend on 2026-10-20.
 
@@ -70,7 +70,7 @@ $env:SITE_URL = 'http://127.0.0.1:3010'
 npm exec --yes --package=vercel@64.7.0 -- vercel dev -L --listen 127.0.0.1:3010
 ```
 
-This starts both services and injects the binding without a cloud login. The frontend service explicitly uses `pnpm dev`, with webpack matching production builds; this avoids the observed Turbopack hydration/HMR issue behind the local services router. Never run `next build` and `vercel dev` concurrently against the same frontend directory; they share `.next` artifacts. For browser regression against this router, run `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3010` through your shell and `pnpm test:e2e --grep-invert 'initial JavaScript'` in `frontend/`. The JS budget applies to production builds, not development bundles.
+This starts both services and injects the binding without a cloud login. The frontend service uses webpack and lets Vercel choose its internal port; this avoids the observed Turbopack hydration/HMR issue behind the local services router. Never run `next build` and `vercel dev` concurrently against the same frontend directory; they share `.next` artifacts. For browser regression against this router, run `PLAYWRIGHT_BASE_URL=http://127.0.0.1:3010` through your shell and `pnpm test:e2e --grep-invert 'initial JavaScript'` in `frontend/`. The JS budget applies to production builds, not development bundles.
 
 Push to the linked GitHub `main` branch and deploy the root Vercel project. Check homepage/resume/story HTML, public API 404 behavior, frontend assets, runtime binding, preview protection, canonical/robots/sitemap and absence of binding URLs/secrets in HTML. Rollback operates on the single deployment. Custom domain DNS and Search Console verification can follow. Runtime backend failures now affect page rendering; monitor API latency and errors, and measure field vitals after deployment.
 

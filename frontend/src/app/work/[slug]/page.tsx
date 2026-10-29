@@ -20,5 +20,5 @@ export default async function ProjectPage({ params }: Props) {
   const { profile, entries } = await getPortfolio();
   const entry = entries.find((item) => item.slug === slug && item.kind === "project");
   if (!entry) notFound();
-  return <EntryDetails entry={entry} profile={profile} />;
+  return <EntryDetails entry={entry} profile={profile} entries={entries} />;
 }

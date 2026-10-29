@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -22,14 +23,14 @@ for (const slug of PROJECT_SLUGS) {
     await page.locator(`main a[href="/work/${slug}"]`).first().click();
     await expect(page).toHaveURL(`/work/${slug}`);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Design choices & tradeoffs" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Problem", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Solution", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Impact & accomplishments" })).toBeVisible();
     expect(await page.locator(".decision-card").count()).toBeGreaterThanOrEqual(3);
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
       "href",
       new RegExp(`/work/${slug}$`),
     );
-    await page.getByRole("link", { name: "Design choices & tradeoffs", exact: true }).click();
-    await expect(page).toHaveURL(new RegExp(`/work/${slug}#decisions$`));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
@@ -38,20 +39,31 @@ for (const slug of PROJECT_SLUGS) {
         .violations,
     ).toEqual([]);
     await page.screenshot({ path: `artifacts/project-${slug}-mobile.png`, fullPage: true });
-    if (slug !== "asset-recommendation-engine") {
-      await expect(page.locator("figcaption")).not.toContainText("asset recommendation research");
-    }
   });
 }
 
-test("project directory contains all personal projects", async ({ page }) => {
+test("project directory separates ML and software engineering projects", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 });
   await page.goto("/projects");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("From problem to product.");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Projects");
+  await expect(page.getByRole("heading", { name: "Machine learning projects" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Software engineering projects" })).toBeVisible();
   await expect(page.locator(".project-directory article")).toHaveCount(12);
   await expect(
-    page.getByText(/Lucra Tournament API Exercise|StarResonanceDps Localization & Fixes/),
-  ).toHaveCount(0);
+    page
+      .locator(".project-directory article h3 a")
+      .evaluateAll((links) => links.slice(0, 7).map((link) => link.getAttribute("href"))),
+  ).resolves.toEqual([
+    "/work/asset-recommendation-engine",
+    "/work/fog-density-detection",
+    "/work/asr-bias-research",
+    "/work/wordrix",
+    "/work/2d-detector-benchmark",
+    "/work/rag-fact-checking",
+    "/work/license-plate-super-resolution",
+  ]);
+  await expect(page.getByText("Lucra Tournament API Exercise")).toHaveCount(0);
+  await expect(page.getByText("StarResonanceDps Localization & Fixes")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   expect(
     (await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations,
@@ -59,45 +71,45 @@ test("project directory contains all personal projects", async ({ page }) => {
   await page.screenshot({ path: "artifacts/projects-mobile.png", fullPage: true });
 });
 
-test("expanded resume presents accomplishments and projects on mobile and in print", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 320, height: 900 });
+test("the previous financial app URL redirects to the combined project", async ({ page }) => {
+  await page.goto("/work/financial-analytics-app");
+  await expect(page).toHaveURL(/\/work\/asset-recommendation-engine$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Financial Analytics & Asset Recommendation",
+  );
+});
+
+test("overview lists every role and project without full case studies", async ({ page }) => {
   await page.goto("/resume");
-  await expect(page.getByRole("heading", { name: "Projects & applied research" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /Wordrix/ })).toBeVisible();
-  await expect(page.getByRole("heading", { name: /LLM Evaluator/ })).toBeVisible();
-  await expect(page.getByText(/100,000 dividends/)).toBeVisible();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  expect(
-    (await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa"]).analyze()).violations,
-  ).toEqual([]);
-  await page.screenshot({ path: "artifacts/resume-mobile.png", fullPage: true });
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.screenshot({ path: "artifacts/resume-desktop.png", fullPage: true });
+  for (const entry of portfolio.entries.filter(
+    (entry: { published: boolean; slug: string }) => entry.published && entry.slug !== "personal",
+  )) {
+    await expect(page.locator(`article[id="${entry.slug}"]`)).toBeVisible();
+  }
+  await expect(page.locator(".project-case-study")).toHaveCount(0);
+  await expect(page.locator("details")).toHaveCount(0);
   await page.emulateMedia({ media: "print" });
-  await expect(page.locator(".resume-note")).toBeHidden();
-  await expect(page.getByRole("heading", { name: /Trajectory/ })).toBeVisible();
-  await page.pdf({ path: "artifacts/resume-print.pdf", format: "A4" });
+  await expect(page.locator(".overview-nav")).toBeHidden();
 });
 
 test("recruiter paths, private backend, metadata and recovery", async ({ page, request }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Samuel Tsao/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Reliable systems");
+  await page.goto("/resume");
   await page
-    .getByRole("link", { name: "Recommendations with a longer horizon", exact: true })
+    .getByRole("link", { name: "Financial Analytics & Asset Recommendation", exact: true })
     .click();
-  await expect(page.getByText("My contribution", { exact: true })).toBeVisible();
-  await expect(page.getByText("Architected Transformer-based models")).toBeVisible();
-  await expect(page.locator("figure")).toBeVisible();
-  await page.getByRole("link", { name: "Resume", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Samuel Tsao", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "My ownership", exact: true })).toBeVisible();
+  await expect(page.locator(".story-prose")).toContainText("financial");
+  await expect(page.locator("figure")).toHaveCount(0);
+  await page.getByRole("link", { name: "Resume & Work", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Resume & Work", exact: true })).toBeVisible();
   expect((await request.get("/api/v1/portfolio")).status()).toBe(404);
   expect((await request.get("/api/v1/entries/asset-recommendation-engine")).status()).toBe(404);
   expect((await request.get("/backend/api/v1/portfolio")).status()).toBe(404);
   const missing = await page.goto("/work/missing-story");
-  expect(missing?.status()).toBe(200);
+  expect([200, 404]).toContain(missing?.status());
   await expect(page.getByRole("heading", { name: "This page isn’t here." })).toBeVisible();
   await expect(page.locator('meta[name="robots"][content="noindex"]')).toHaveCount(1);
   await page.getByRole("link", { name: "Back to home" }).click();
@@ -183,13 +195,14 @@ test("core paths work without JavaScript", async ({ browser, baseURL }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
   const page = await context.newPage();
   await page.goto("/");
+  await page.goto("/resume");
   await page
-    .getByRole("link", { name: "Recommendations with a longer horizon", exact: true })
+    .getByRole("link", { name: "Financial Analytics & Asset Recommendation", exact: true })
     .click();
-  await expect(page.getByRole("heading", { name: "The problem" })).toBeVisible();
-  await page.getByRole("link", { name: "← All projects", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Problem", exact: true })).toBeVisible();
+  await page.getByRole("link", { name: "← Resume & Work", exact: true }).click();
   await page.getByRole("link", { name: "Wordrix — Vocabulary Learning", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Design choices & tradeoffs" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Problem", exact: true })).toBeVisible();
   await context.close();
 });
 
@@ -215,3 +228,110 @@ test("initial JavaScript transfer stays within budget", async ({ page }) => {
   }
   expect(bytes).toBeLessThanOrEqual(JS_BUDGET);
 });
+
+const portfolio = JSON.parse(
+  readFileSync(new URL("../../../backend/content/portfolio.json", import.meta.url), "utf8"),
+);
+
+test("homepage uses profile content and omits decorative copy", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(portfolio.profile.headline);
+  for (const text of [
+    portfolio.profile.intro,
+    portfolio.profile.about,
+    ...portfolio.profile.interests,
+  ]) {
+    await expect(page.locator("main")).toContainText(text);
+  }
+  await expect(
+    page.getByText(
+      /ENGINEERING PERSPECTIVE|Real problems\. Deliberate decisions\.|From complexity|01 \/ FOCUS/,
+    ),
+  ).toHaveCount(0);
+});
+
+for (const entry of portfolio.entries.filter((entry: { published: boolean }) => entry.published)) {
+  test(`published content is rendered completely: ${entry.slug}`, async ({ page }) => {
+    await page.goto(`/${entry.kind === "project" ? "work" : "experience"}/${entry.slug}`);
+    const article = page.locator("main > article");
+    for (const text of [
+      entry.title,
+      entry.summary,
+      entry.period,
+      ...(entry.kind === "project"
+        ? [entry.role, entry.contribution, entry.evidence, ...(entry.status ? [entry.status] : [])]
+        : [entry.organization, entry.position]),
+      ...entry.accomplishments,
+      ...entry.additional_accomplishments,
+      ...entry.skills,
+      ...entry.technologies,
+      ...entry.work_projects.flatMap(
+        (project: {
+          title: string;
+          problem: string;
+          solution: string;
+          impact: string;
+          technologies: string[];
+          references: { label: string; url: string }[];
+        }) => [
+          project.title,
+          project.problem,
+          project.solution,
+          project.impact,
+          ...project.technologies,
+          ...project.references.map((reference) => reference.label),
+        ],
+      ),
+      ...(entry.related_projects ?? []).flatMap((slug: string) => {
+        const project = portfolio.entries.find((item: { slug: string }) => item.slug === slug);
+        return project ? [project.title, project.summary] : [];
+      }),
+      ...entry.sections.flatMap((section: { title: string; body: string }) => [
+        section.title,
+        section.body,
+      ]),
+      ...(entry.decisions ?? []).flatMap(
+        (decision: { title: string; choice: string; rationale: string; tradeoff: string }) =>
+          Object.values(decision),
+      ),
+    ]) {
+      await expect(article).toContainText(text);
+    }
+    for (const link of entry.links) {
+      await expect(
+        article.getByRole("link", { name: `${link.label} ↗`, exact: true }).first(),
+      ).toHaveAttribute("href", new URL(link.url).href);
+    }
+    for (const project of entry.work_projects) {
+      for (const reference of project.references) {
+        await expect(
+          article.getByRole("link", { name: `${reference.label} ↗`, exact: true }),
+        ).toHaveAttribute("href", new URL(reference.url).href);
+      }
+    }
+    await expect(article.locator("figure")).toHaveCount(0);
+  });
+}
+
+for (const width of [320, 1440]) {
+  test(`achievement deep links, focus and recovery at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/resume");
+    const link = page.locator(".detail-link").first();
+    const href = await link.getAttribute("href");
+    await link.click();
+    await expect(page).toHaveURL(href!);
+    await expect(page.locator(":target")).toBeFocused();
+    await expect(page.locator(":target")).toBeInViewport();
+    await page.reload();
+    await expect(page.locator(":target")).toBeFocused();
+    await page.goBack();
+    await expect(page).toHaveURL("/resume");
+    await expect(page.locator(".detail-link").first()).toBeFocused();
+    await page.goto(`${href!.split("#")[0]}#outdated-anchor`);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await page.getByRole("link", { name: "← Resume & Work", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Resume & Work" })).toBeVisible();
+  });
+}

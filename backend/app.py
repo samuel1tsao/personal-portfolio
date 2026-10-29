@@ -4,6 +4,7 @@ from uuid import uuid4
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from pydantic import ValidationError
 from starlette.exceptions import HTTPException
 
 from config import API_PREFIX, JSON_HEADERS
@@ -39,6 +40,18 @@ async def missing_route(request: Request, exc: HTTPException):
 @app.exception_handler(OSError)
 @app.exception_handler(ValueError)
 async def unavailable_content(request: Request, exc: Exception):
+    if isinstance(exc, ValidationError):
+        issues = [
+            {"location": list(error["loc"]), "type": error["type"]}
+            for error in exc.errors(include_input=False, include_context=False, include_url=False)
+        ]
+        log("error", "content_validation_failed", {"issues": issues})
+    else:
+        log(
+            "error",
+            "content_read_failed",
+            {"exception": type(exc).__name__, "errno": getattr(exc, "errno", None)},
+        )
     return error_response(
         HTTPStatus.SERVICE_UNAVAILABLE, "content_unavailable", "Content is temporarily unavailable."
     )

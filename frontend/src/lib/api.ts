@@ -34,5 +34,6 @@ async function getCachedPortfolio() {
 
 export const getPortfolio = cache(async () => {
   await io();
+  if (process.env.NODE_ENV === "development") return fetchPortfolio();
   return getCachedPortfolio();
 });

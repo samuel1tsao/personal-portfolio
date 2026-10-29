@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { StoryCard } from "@/components/Portfolio";
 import { getPortfolio } from "@/lib/api";
+import { splitProjects } from "@/lib/projects";
+import type { PortfolioEntry } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const instant = false;
@@ -13,25 +15,30 @@ export const metadata = pageMetadata(
 
 export default async function Projects() {
   const { entries } = await getPortfolio();
-  const projects = entries.filter((entry) => entry.kind === "project");
+  const { machineLearning, softwareEngineering } = splitProjects(entries);
   return (
     <main id="main" className="story-page wrap">
-      <Link className="back-link" href="/#work">
-        ← Selected work
+      <Link className="back-link" href="/resume#projects">
+        ← Resume & Work
       </Link>
       <header className="story-header">
-        <p className="eyebrow">Projects & applied research</p>
-        <h1>From problem to product.</h1>
-        <p className="story-lede">
-          The people I’m building for, the systems behind the experience, and the choices that shape
-          each project.
-        </p>
+        <h1>Projects</h1>
       </header>
+      <ProjectDirectory title="Machine learning projects" projects={machineLearning} />
+      <ProjectDirectory title="Software engineering projects" projects={softwareEngineering} />
+    </main>
+  );
+}
+
+function ProjectDirectory({ title, projects }: { title: string; projects: PortfolioEntry[] }) {
+  return (
+    <section className="project-group" aria-labelledby={`${title.replaceAll(" ", "-")}-heading`}>
+      <h2 id={`${title.replaceAll(" ", "-")}-heading`}>{title}</h2>
       <div className="project-directory">
         {projects.map((project, index) => (
           <StoryCard key={project.slug} entry={project} index={index} />
         ))}
       </div>
-    </main>
+    </section>
   );
 }

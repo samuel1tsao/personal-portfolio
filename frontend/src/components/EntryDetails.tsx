@@ -1,21 +1,35 @@
+import { DetailNavigation } from "./DetailNavigation";
+import { detailAnchor } from "@/lib/detail-links";
 import Link from "next/link";
+import { ExperienceProjectCard } from "@/components/ExperienceProjectCard";
+import { ProjectCaseStudy } from "@/components/ProjectCaseStudy";
 import type { PortfolioEntry, Profile } from "@/lib/schema";
-import { Contact, Diagram } from "./Portfolio";
+import { Contact } from "./Portfolio";
 
-export function EntryDetails({ entry, profile }: { entry: PortfolioEntry; profile: Profile }) {
+export function EntryDetails({
+  entry,
+  profile,
+  entries,
+}: {
+  entry: PortfolioEntry;
+  profile: Profile;
+  entries: PortfolioEntry[];
+}) {
   const isProject = entry.kind === "project";
+  const relatedProjects = entry.related_projects
+    .map((slug) => entries.find((item) => item.slug === slug && item.kind === "project"))
+    .filter((project): project is PortfolioEntry => project !== undefined);
   return (
     <main id="main">
       <article className="story-page wrap">
-        <Link href={isProject ? "/projects" : "/experience"} className="back-link">
-          ← {isProject ? "All projects" : "All roles"}
+        <Link href={`/resume#${entry.slug}`} className="back-link">
+          ← Resume & Work
         </Link>
         <header className="story-header">
-          <p className="eyebrow">
-            {isProject ? (entry.status ?? "Project") : entry.organization} / {entry.period}
-          </p>
-          <h1>{entry.title}</h1>
-          {!isProject && entry.position && <p className="story-role">{entry.position}</p>}
+          <p className="eyebrow">{isProject ? (entry.status ?? "Project") : entry.organization}</p>
+          {!isProject && <p className="muted">{entry.period}</p>}
+          <h1>{isProject ? entry.title : (entry.position ?? entry.title)}</h1>
+          {isProject && <p className="muted">{entry.period}</p>}
           <p className="story-lede">{entry.summary}</p>
           {isProject && <p className="story-role">{entry.role}</p>}
           <ul className="tags" aria-label="Skills and technologies">
@@ -24,79 +38,90 @@ export function EntryDetails({ entry, profile }: { entry: PortfolioEntry; profil
             ))}
           </ul>
         </header>
-        {isProject && (
-          <div className="contribution">
-            <p className="eyebrow">My contribution</p>
-            <p>{entry.contribution}</p>
-          </div>
-        )}
-        {entry.accomplishments.length > 0 && (
-          <section className="story-prose" aria-labelledby="accomplishments-heading">
-            <h2 id="accomplishments-heading">Selected accomplishments</h2>
-            <ul className="resume-accomplishments">
-              {entry.accomplishments.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-        <nav className="story-contents" aria-label="On this page">
-          {entry.sections.map((section, index) => (
-            <a key={section.title} href={`#section-${index}`}>
-              {section.title}
-            </a>
-          ))}
-          {entry.decisions.length > 0 && <a href="#decisions">Design choices & tradeoffs</a>}
-        </nav>
-        {entry.diagram.length > 0 && (
-          <Diagram
-            steps={entry.diagram}
-            caption={entry.diagram_caption}
-            description={entry.diagram_description}
-          />
-        )}
+        <DetailNavigation entry={entry} />
         <div className="story-prose">
-          {entry.sections.map((section, index) => (
-            <section key={section.title} id={`section-${index}`}>
-              <h2>{section.title}</h2>
-              <p>{section.body}</p>
-            </section>
-          ))}
-          {entry.decisions.length > 0 && (
-            <section id="decisions" aria-labelledby="decisions-heading">
-              <h2 id="decisions-heading">Design choices & tradeoffs</h2>
-              {entry.decisions.map((decision) => (
-                <article key={decision.title} className="decision-card">
-                  <h3>{decision.title}</h3>
-                  <dl>
-                    <dt>Choice</dt>
-                    <dd>{decision.choice}</dd>
-                    <dt>Why this approach</dt>
-                    <dd>{decision.rationale}</dd>
-                    <dt>Tradeoff</dt>
-                    <dd>{decision.tradeoff}</dd>
-                  </dl>
-                </article>
-              ))}
+          {isProject && <ProjectCaseStudy entry={entry} />}
+          {!isProject && <ExperienceContext entry={entry} />}
+          {!isProject && entry.accomplishments.length > 0 && (
+            <section aria-labelledby="experience-accomplishments-heading">
+              <h2 id="experience-accomplishments-heading">Resume accomplishments</h2>
+              <ul className="resume-accomplishments">
+                {entry.accomplishments.map((item) => (
+                  <li key={item} id={detailAnchor(item)} tabIndex={-1}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </section>
           )}
-          <aside className="evidence">
-            <h2>Source & scope</h2>
-            <p>{entry.evidence}</p>
-          </aside>
+          {!isProject && (entry.work_projects.length > 0 || relatedProjects.length > 0) && (
+            <section aria-labelledby="experience-projects-heading">
+              <h2 id="experience-projects-heading">Projects</h2>
+              <div className="experience-project-list">
+                {entry.work_projects.map((project) => (
+                  <ExperienceProjectCard key={project.title} project={project} headingLevel={3} />
+                ))}
+                {relatedProjects.map((project) => (
+                  <article className="experience-project-card" key={project.slug}>
+                    <h3>
+                      <Link href={`/work/${project.slug}`}>{project.title}</Link>
+                    </h3>
+                    <p>{project.summary}</p>
+                    <Link className="inline-link" href={`/work/${project.slug}`}>
+                      View project details ↗
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
+          {!isProject && entry.additional_accomplishments.length > 0 && (
+            <section aria-labelledby="additional-accomplishments-heading">
+              <h2 id="additional-accomplishments-heading">Additional accomplishments</h2>
+              <ul className="resume-accomplishments">
+                {entry.additional_accomplishments.map((item) => (
+                  <li key={item} id={detailAnchor(item)} tabIndex={-1}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
           <div className="actions">
             {entry.links.map((link) => (
               <a className="button" href={link.url} key={link.url}>
                 {link.label} ↗
               </a>
             ))}
-            <Link className="button" href="/resume">
-              Full profile ↗
+            <Link
+              className="button"
+              href={isProject ? "/resume#projects" : `/resume#${entry.slug}`}
+            >
+              {isProject ? "View in resume" : "Full resume entry"} ↗
             </Link>
           </div>
         </div>
       </article>
       <Contact profile={profile} />
     </main>
+  );
+}
+
+function ExperienceContext({ entry }: { entry: PortfolioEntry }) {
+  return (
+    <>
+      <section>
+        <h2>Role & scope</h2>
+        <p>{entry.role}</p>
+        <p>{entry.contribution}</p>
+        <p>{entry.evidence}</p>
+      </section>
+      {entry.sections.map((section) => (
+        <section key={section.title}>
+          <h2>{section.title}</h2>
+          <p>{section.body}</p>
+        </section>
+      ))}
+    </>
   );
 }

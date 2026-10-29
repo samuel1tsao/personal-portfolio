@@ -20,6 +20,18 @@ export function portfolioContext(portfolio: Portfolio): string {
   const details = entries.map((entry) => {
     const sections = (entry.sections ?? []).map(({ title, body }) => `${title}: ${body}`);
     const accomplishments = (entry.accomplishments ?? []).join("; ");
+    const additionalAccomplishments = (entry.additional_accomplishments ?? []).join("; ");
+    const workProjects = (entry.work_projects ?? []).map(
+      ({ title, problem, solution, impact, technologies, references }) =>
+        [
+          title,
+          `Problem: ${problem}`,
+          `Technical solution: ${solution}`,
+          `Impact: ${impact}`,
+          `Technologies: ${technologies.join(", ") || "not specified"}`,
+          `References: ${references.map((link) => `${link.label}: ${link.url}`).join("; ") || "none"}`,
+        ].join("\n"),
+    );
     const decisions = (entry.decisions ?? []).map(
       ({ title, choice, rationale, tradeoff }) =>
         `${title}: Choice: ${choice} Rationale: ${rationale} Tradeoff: ${tradeoff}`,
@@ -31,6 +43,8 @@ export function portfolioContext(portfolio: Portfolio): string {
       `Summary: ${entry.summary}`,
       `Contribution: ${entry.contribution}`,
       `Accomplishments: ${accomplishments || "none listed"}`,
+      `Additional accomplishments: ${additionalAccomplishments || "none listed"}`,
+      `Work projects:\n${workProjects.join("\n\n") || "none listed"}`,
       `Skills and technologies: ${[...new Set([...(entry.skills ?? []), ...(entry.technologies ?? [])])].join(", ")}`,
       `Sections:\n${sections.join("\n")}`,
       `Decisions:\n${decisions.join("\n") || "No documented decisions."}`,

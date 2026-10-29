@@ -28,6 +28,7 @@ class Link(ContentModel):
 class Section(ContentModel):
     title: Text
     body: Text
+    group: Literal["problem", "solution", "impact"]
 
 
 class Decision(ContentModel):
@@ -35,6 +36,15 @@ class Decision(ContentModel):
     choice: Text
     rationale: Text
     tradeoff: Text
+
+
+class ExperienceProject(ContentModel):
+    title: Text
+    problem: Text
+    solution: Text
+    impact: Text
+    technologies: tuple[Text, ...] = Field(default=(), max_length=12)
+    references: tuple[Link, ...] = Field(default=(), max_length=12)
 
 
 class PortfolioEntry(ContentModel):
@@ -51,9 +61,12 @@ class PortfolioEntry(ContentModel):
     contribution: Text
     status: Text | None = None
     accomplishments: tuple[Text, ...] = ()
+    additional_accomplishments: tuple[Text, ...] = ()
+    work_projects: tuple[ExperienceProject, ...] = Field(default=(), max_length=8)
+    related_projects: tuple[Slug, ...] = ()
     technologies: tuple[Text, ...] = ()
     skills: tuple[Text, ...] = Field(min_length=1, max_length=12)
-    sections: tuple[Section, ...] = Field(min_length=1, max_length=12)
+    sections: tuple[Section, ...] = Field(default=(), max_length=12)
     evidence: Text
     links: tuple[Link, ...] = ()
     diagram: tuple[Text, ...] = Field(default=(), max_length=6)
@@ -66,9 +79,21 @@ class PortfolioEntry(ContentModel):
     @model_validator(mode="after")
     def valid_entry_identity(self):
         if self.kind == "experience" and (
-            not self.organization or not self.position or not self.start
+            not self.organization
+            or not self.position
+            or (not self.start and self.slug != "personal")
         ):
-            raise ValueError("Experience entries require organization, position, and start date")
+            raise ValueError("Experience entries require organization, position, and a start date")
+        if self.kind == "experience" and not (self.work_projects or self.related_projects):
+            raise ValueError(
+                "Experience entries require structured work projects or related projects"
+            )
+        if self.kind == "project" and not self.sections:
+            raise ValueError("Project entries require detailed sections")
+        if self.kind == "project" and (
+            self.work_projects or self.additional_accomplishments or self.related_projects
+        ):
+            raise ValueError("Portfolio projects cannot contain experience-only fields")
         if self.end and self.start and self.end < self.start:
             raise ValueError("Entry ends before it starts")
         return self
@@ -105,4 +130,10 @@ class Portfolio(ContentModel):
             values = [getattr(entry, key) for entry in self.entries]
             if len(values) != len(set(values)):
                 raise ValueError(f"Duplicate portfolio entry {key}")
+        project_slugs = {entry.slug for entry in self.entries if entry.kind == "project"}
+        for entry in self.entries:
+            if entry.related_projects and entry.slug != "personal":
+                raise ValueError("Only the Personal experience can link personal projects")
+            if any(slug not in project_slugs for slug in entry.related_projects):
+                raise ValueError("Related projects must reference published portfolio projects")
         return self

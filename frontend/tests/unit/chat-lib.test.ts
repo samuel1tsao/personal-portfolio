@@ -48,5 +48,8 @@ describe("chat instructions", () => {
     expect(prompt).toContain(`Contact email: ${fixture.profile.email}`);
     expect(prompt).toContain("Use only the portfolio facts above.");
     expect(prompt).toContain("Do not invent outcomes");
+    expect(prompt).toContain("Infrastructure Auto-Scaling for Burst Processing");
+    expect(prompt).toContain("Technical solution: Upgraded the shared infrastructure library");
+    expect(prompt).toContain("Additional accomplishments: Led a financial-instrument project");
   });
 });

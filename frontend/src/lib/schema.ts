@@ -2,6 +2,14 @@ import { z } from "zod";
 
 const text = z.string().trim().min(1).max(8000);
 const link = z.object({ label: text, url: z.url().startsWith("https://") });
+const experienceProject = z.object({
+  title: text,
+  problem: text,
+  solution: text,
+  impact: text,
+  technologies: z.array(text).max(12).default([]),
+  references: z.array(link).max(12).default([]),
+});
 export const portfolioEntrySchema = z.object({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   kind: z.enum(["project", "experience"]),
@@ -16,9 +24,20 @@ export const portfolioEntrySchema = z.object({
   contribution: text,
   status: text.nullable(),
   accomplishments: z.array(text),
+  additional_accomplishments: z.array(text).default([]),
+  work_projects: z.array(experienceProject).max(8).default([]),
+  related_projects: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),
   technologies: z.array(text),
   skills: z.array(text).min(1).max(12),
-  sections: z.array(z.object({ title: text, body: text })),
+  sections: z
+    .array(
+      z.object({
+        title: text,
+        body: text,
+        group: z.enum(["problem", "solution", "impact"]),
+      }),
+    )
+    .default([]),
   evidence: text,
   links: z.array(link),
   diagram: z.array(text).default([]),

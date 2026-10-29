@@ -1,9 +1,11 @@
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { fetchPortfolio } from "../../src/lib/api";
+import { fetchPortfolio, getPortfolio } from "../../src/lib/api";
 import { contentEndpoint, validOrigin } from "../../src/lib/config";
 import { safeJsonLd } from "../../src/lib/seo";
+
+vi.mock("next/cache", () => ({ cacheLife: vi.fn(), io: vi.fn(async () => undefined) }));
 
 const fixture = JSON.parse(
   readFileSync(new URL("../../../backend/content/portfolio.json", import.meta.url), "utf8"),
@@ -16,11 +18,35 @@ const success = () => new Response(JSON.stringify(content));
 afterEach(() => vi.unstubAllEnvs());
 
 describe("content contract", () => {
+  it("uses the dedicated local backend port when no override is set", () => {
+    vi.stubEnv("VERCEL", "");
+    vi.stubEnv("CONTENT_SERVICE_URL", "");
+    vi.stubEnv("CONTENT_API_URL", "");
+    expect(contentEndpoint().href).toBe("http://127.0.0.1:8111/api/v1/portfolio");
+  });
   it("accepts a valid response and safe metadata", async () => {
     const fetcher = vi.fn().mockResolvedValue(success());
     expect((await fetchPortfolio(fetcher)).profile.name).toBe("Samuel Tsao");
     expect(fetcher.mock.calls[0][1]).toMatchObject({ cache: "no-store", redirect: "error" });
     expect(safeJsonLd({ text: "</script>" })).not.toContain("</script>");
+  });
+  it("reads fresh portfolio content on each development request", async () => {
+    vi.stubEnv("NODE_ENV", "development");
+    const updated = {
+      ...content,
+      profile: { ...content.profile, headline: "Updated local content" },
+    };
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(success())
+      .mockResolvedValueOnce(new Response(JSON.stringify(updated)));
+    vi.stubGlobal("fetch", fetcher);
+
+    await getPortfolio();
+    const refreshed = await getPortfolio();
+
+    expect(refreshed.profile.headline).toBe("Updated local content");
+    expect(fetcher).toHaveBeenCalledTimes(2);
   });
   it("recovers once from a timeout", async () => {
     const fetcher = vi

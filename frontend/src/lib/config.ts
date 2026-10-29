@@ -6,7 +6,7 @@ export const API_PATH = "/api/v1/portfolio";
 export const FETCH_TIMEOUT_MS = 5000;
 export const MAX_RESPONSE_BYTES = 200_000;
 export const MAX_ATTEMPTS = 2;
-export const LOCAL_CONTENT_ORIGIN = "http://127.0.0.1:8000";
+export const LOCAL_CONTENT_ORIGIN = "http://127.0.0.1:8111";
 export const isIndexable = process.env.VERCEL_ENV === "production";
 
 export function validOrigin(value: string, name: string): string {
@@ -47,5 +47,5 @@ export function contentEndpoint(): URL {
 export function siteOrigin(): string {
   const value = process.env.SITE_URL;
   if (!value && process.env.VERCEL) throw new Error("SITE_URL is required on Vercel.");
-  return validOrigin(value || "http://127.0.0.1:3000", "SITE_URL");
+  return validOrigin(value || "http://127.0.0.1:3217", "SITE_URL");
 }

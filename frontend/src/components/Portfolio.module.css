@@ -1,6 +1,6 @@
 .hero {
   display: grid;
-  grid-template-columns: 1.45fr 1fr;
+  grid-template-columns: 1fr;
   gap: 60px;
   padding-top: 80px;
   padding-bottom: 68px;
@@ -13,7 +13,7 @@
 }
 .intro {
   font-size: 16px;
-  max-width: 470px;
+  max-width: 720px;
   color: var(--muted);
   margin-bottom: 28px;
 }
@@ -25,109 +25,15 @@
 .location span {
   margin-right: 7px;
 }
-.heroAside {
-  padding-top: 26px;
-}
-.systemCard {
-  background: #e8ede3;
-  border: 1px solid #d6dfd0;
-  padding: 28px;
-  max-width: 340px;
-  margin-left: auto;
-  border-radius: 4px;
-  position: relative;
-  box-shadow: 12px 12px 0 #efeee7;
-}
-.systemTop {
-  display: flex;
-  justify-content: space-between;
-  font-size: 8px;
-  letter-spacing: 0.13em;
-  color: #52634d;
-  border-bottom: 1px solid #c4d0bb;
-  padding-bottom: 16px;
-}
-.systemTop span:last-child {
-  font-size: 19px;
-  line-height: 1;
-}
-.systemTitle {
-  font-family: var(--serif);
-  font-size: 35px;
-  line-height: 1.12;
-  letter-spacing: -0.04em;
-  margin: 24px 0;
-}
-.systemFlow > span {
-  display: grid;
-  grid-template-columns: 27px 1fr;
-  font-size: 10px;
-  color: #597052;
-  border: 1px solid #b9c9af;
-  background: #f7f9f3;
-  padding: 12px 15px;
-  border-radius: 3px;
-  align-items: center;
-}
-.systemFlow b {
-  font-size: 13px;
-  letter-spacing: -0.02em;
-  font-weight: 500;
-  color: var(--ink);
-}
-.systemFlow small {
-  font-size: 9px;
-  grid-column: 2;
-  color: #5d6d56;
-}
-.systemFlow i {
-  font-style: normal;
-  display: block;
-  text-align: center;
-  line-height: 1.7;
-  color: #6c8062;
-  font-size: 16px;
-}
-.systemNote {
-  font-size: 9px;
-  line-height: 1.5;
-  color: #53634c;
-  margin: 20px 0 0;
-}
-.marginNote {
-  font-size: 10px;
-  color: var(--muted);
-  max-width: 340px;
-  margin: 28px 0 0 auto;
-  line-height: 1.7;
-}
-.focus {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding-top: 29px;
-  padding-bottom: 29px;
-  gap: 40px;
-}
-.focus h2 {
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  margin: 0 0 10px;
-}
-.focus p {
-  font-size: 12px;
-  color: var(--muted);
-  max-width: 270px;
-  margin: 0;
-}
-.focus .eyebrow {
-  font-size: 9px;
-  margin-bottom: 14px;
-}
 .stories {
   border-top: 1px solid var(--line);
+}
+.projectGroup {
+  margin-top: 44px;
+}
+.projectGroup > h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
 }
 .storyCard {
   display: grid;
@@ -180,10 +86,10 @@
 }
 .role {
   display: grid;
-  grid-template-columns: 220px 1fr 30px;
+  grid-template-columns: 180px 1fr;
   gap: 20px;
   border-bottom: 1px solid var(--line);
-  padding: 28px 0;
+  padding: 40px 0;
 }
 .roleDate {
   font-size: 11px;
@@ -204,9 +110,21 @@
   color: var(--ink);
   margin-bottom: 8px;
 }
-.roleMark {
-  font-size: 18px;
-  color: #7b8976;
+.roleProjects {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 18px;
+}
+.roleProjects > h4 {
+  font-size: 14px;
+  margin: 0;
+}
+.roleProjects article {
+  background: var(--surface, #fff);
+}
+.roleProjects article p,
+.roleProjects article dd {
+  font-size: 14px;
 }
 .about {
   display: grid;
@@ -285,56 +203,15 @@
   display: flex;
   align-items: center;
 }
-.diagram {
-  max-width: 850px;
-  background: #e9ede4;
-  padding: 28px;
-  margin: 40px 0;
-}
-.diagram figcaption {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-.diagram ol {
-  list-style: none;
-  display: flex;
-  gap: 16px;
-  padding: 0;
-  counter-reset: step;
-}
-.diagram li {
-  flex: 1;
-  border: 1px solid #b4c0af;
-  background: var(--paper);
-  padding: 14px;
-  font-size: 12px;
-  counter-increment: step;
-}
-.diagram li:before {
-  content: "0" counter(step);
-  display: block;
-  color: var(--accent);
-  font-size: 10px;
-  margin-bottom: 8px;
-}
-.diagram p {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 0;
-}
 @media (max-width: 1000px) {
   .hero {
     gap: 30px;
-  }
-  .systemCard {
-    padding: 22px;
   }
   .about {
     gap: 45px;
   }
   .role {
-    grid-template-columns: 180px 1fr 30px;
+    grid-template-columns: 150px 1fr;
   }
   .contactBody {
     gap: 30px;
@@ -352,29 +229,6 @@
   }
   .intro {
     max-width: 540px;
-  }
-  .heroAside {
-    display: none;
-  }
-  .focus {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-  .focus > div {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 0 15px;
-  }
-  .focus > div > span {
-    grid-column: 1/-1;
-  }
-  .focus h2 {
-    font-size: 16px;
-  }
-  .focus p {
-    font-size: 12px;
   }
   .storyCard {
     grid-template-columns: 32px 1fr;
@@ -397,9 +251,6 @@
     grid-template-columns: 1fr;
     gap: 10px;
     padding: 24px 0;
-  }
-  .roleMark {
-    display: none;
   }
   .role h3 {
     font-size: 21px;
@@ -431,17 +282,5 @@
   }
   .email {
     font-size: 16px;
-  }
-  .diagram {
-    padding: 20px;
-  }
-  .diagram ol {
-    flex-direction: column;
-  }
-  .diagram li {
-    font-size: 14px;
-  }
-  .diagram figcaption {
-    font-size: 12px;
   }
 }
