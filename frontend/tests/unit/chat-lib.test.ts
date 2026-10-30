@@ -45,11 +45,10 @@ describe("chat instructions", () => {
       readFileSync(new URL("../../../backend/content/portfolio.json", import.meta.url), "utf8"),
     );
     const prompt = systemPrompt(fixture);
-    expect(prompt).toContain(`Contact email: ${fixture.profile.email}`);
+    expect(prompt).toContain(`Contact email: ${fixture.contact.email}`);
     expect(prompt).toContain("Use only the portfolio facts above.");
     expect(prompt).toContain("Do not invent outcomes");
     expect(prompt).toContain("Infrastructure Auto-Scaling for Burst Processing");
-    expect(prompt).toContain("Technical solution: Upgraded the shared infrastructure library");
-    expect(prompt).toContain("Additional accomplishments: Led a financial-instrument project");
+    expect(prompt).toContain("Solution: Upgraded the shared infrastructure library");
   });
 });

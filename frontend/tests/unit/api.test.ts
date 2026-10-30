@@ -26,7 +26,7 @@ describe("content contract", () => {
   });
   it("accepts a valid response and safe metadata", async () => {
     const fetcher = vi.fn().mockResolvedValue(success());
-    expect((await fetchPortfolio(fetcher)).profile.name).toBe("Samuel Tsao");
+    expect((await fetchPortfolio(fetcher)).name).toBe("Samuel Tsao");
     expect(fetcher.mock.calls[0][1]).toMatchObject({ cache: "no-store", redirect: "error" });
     expect(safeJsonLd({ text: "</script>" })).not.toContain("</script>");
   });
@@ -34,7 +34,7 @@ describe("content contract", () => {
     vi.stubEnv("NODE_ENV", "development");
     const updated = {
       ...content,
-      profile: { ...content.profile, headline: "Updated local content" },
+      headline_summary: "Updated local content",
     };
     const fetcher = vi
       .fn()
@@ -45,7 +45,7 @@ describe("content contract", () => {
     await getPortfolio();
     const refreshed = await getPortfolio();
 
-    expect(refreshed.profile.headline).toBe("Updated local content");
+    expect(refreshed.headline_summary).toBe("Updated local content");
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
   it("recovers once from a timeout", async () => {
@@ -53,17 +53,18 @@ describe("content contract", () => {
       .fn()
       .mockRejectedValueOnce(new Error("timeout"))
       .mockResolvedValue(success());
-    expect((await fetchPortfolio(fetcher)).entries).toHaveLength(content.entries.length);
+    expect((await fetchPortfolio(fetcher)).work_experience).toHaveLength(
+      content.work_experience.length,
+    );
     expect(fetcher).toHaveBeenCalledTimes(2);
   });
-  it.each(["revision", "schema", "partial", "oversized", "unavailable", "draft"])(
+  it.each(["revision", "schema", "partial", "oversized", "unavailable"])(
     "rejects %s",
     async (caseName) => {
       const body = structuredClone(content);
       if (caseName === "revision") body.content_revision = "incorrect";
-      if (caseName === "schema") body.schema_version = "3";
-      if (caseName === "partial") body.profile = {};
-      if (caseName === "draft") body.entries[0].published = false;
+      if (caseName === "schema") body.schema_version = "4";
+      if (caseName === "partial") body.name = "";
       const raw = caseName === "oversized" ? "x".repeat(200001) : JSON.stringify(body);
       const fetcher = vi
         .fn()

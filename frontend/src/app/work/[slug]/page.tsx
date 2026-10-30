@@ -1,24 +1,29 @@
 import { notFound } from "next/navigation";
 import { EntryDetails } from "@/components/EntryDetails";
 import { getPortfolio } from "@/lib/api";
+import { findProject } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 
 export const instant = false;
 
 type Props = { params: Promise<{ slug: string }> };
+
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
-  const entry = (await getPortfolio()).entries.find(
-    (item) => item.slug === slug && item.kind === "project",
+  const portfolio = await getPortfolio();
+  const project = findProject(portfolio, slug);
+  if (!project) return pageMetadata("Project unavailable | Samuel Tsao");
+  return pageMetadata(
+    `${project.title} | Samuel Tsao`,
+    project.impacts[0]?.one_line_summary ?? project.problem_statement,
+    `/work/${slug}`,
   );
-  if (!entry) return pageMetadata("Project unavailable | Samuel Tsao");
-  return pageMetadata(`${entry.title} | Samuel Tsao`, entry.summary, `/work/${slug}`);
 }
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const { profile, entries } = await getPortfolio();
-  const entry = entries.find((item) => item.slug === slug && item.kind === "project");
-  if (!entry) notFound();
-  return <EntryDetails entry={entry} profile={profile} entries={entries} />;
+  const portfolio = await getPortfolio();
+  const project = findProject(portfolio, slug);
+  if (!project) notFound();
+  return <EntryDetails item={project} portfolio={portfolio} />;
 }

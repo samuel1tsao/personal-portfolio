@@ -63,12 +63,16 @@ def get_portfolio():
 
 
 @app.get(f"{API_PREFIX}/stories/{{slug}}")
+@app.get(f"{API_PREFIX}/projects/{{slug}}")
+@app.get(f"{API_PREFIX}/experiences/{{slug}}")
 @app.get(f"{API_PREFIX}/entries/{{slug}}")
 def get_entry(slug: str):
-    entries = read_portfolio()["entries"]
-    entry = next((item for item in entries if item["slug"] == slug), None)
-    return (
-        JSONResponse(entry, headers=JSON_HEADERS)
-        if entry
-        else error_response(HTTPStatus.NOT_FOUND, "entry_not_found", "This entry is unavailable.")
-    )
+    portfolio = read_portfolio()
+    all_exps = portfolio.get("work_experience", []) + portfolio.get("personal_experience", [])
+    for exp in all_exps:
+        if exp["experience_id"] == slug:
+            return JSONResponse(exp, headers=JSON_HEADERS)
+        for proj in exp.get("projects", []):
+            if proj["project_id"] == slug:
+                return JSONResponse(proj, headers=JSON_HEADERS)
+    return error_response(HTTPStatus.NOT_FOUND, "entry_not_found", "This entry is unavailable.")

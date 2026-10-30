@@ -1,13 +1,11 @@
 import { detailAnchor } from "@/lib/detail-links";
-import type { PortfolioEntry } from "@/lib/schema";
-
-type ExperienceProject = PortfolioEntry["work_projects"][number];
+import type { Project } from "@/lib/schema";
 
 export function ExperienceProjectCard({
   project,
   headingLevel,
 }: {
-  project: ExperienceProject;
+  project: Project;
   headingLevel: 3 | 5;
 }) {
   const Heading = headingLevel === 3 ? "h3" : "h5";
@@ -18,7 +16,7 @@ export function ExperienceProjectCard({
       <dl className="experience-project-fields">
         <div>
           <dt>Problem</dt>
-          <dd>{project.problem}</dd>
+          <dd>{project.problem_statement}</dd>
         </div>
         <div>
           <dt>Solution</dt>
@@ -26,18 +24,27 @@ export function ExperienceProjectCard({
         </div>
         <div>
           <dt>Impact</dt>
-          <dd>{project.impact}</dd>
+          <dd>
+            {project.impacts.map((i) => (
+              <p key={i.id}>{i.one_line_summary}</p>
+            ))}
+          </dd>
         </div>
       </dl>
-      {project.technologies.length > 0 && (
+      {project.ml_technologies.length > 0 && (
         <p className="experience-project-technologies">
-          <strong>Technologies:</strong> {project.technologies.join(" · ")}
+          <strong>ML Technologies:</strong> {project.ml_technologies.join(" · ")}
         </p>
       )}
-      {project.references.length > 0 && (
+      {project.software_technologies.length > 0 && (
+        <p className="experience-project-technologies">
+          <strong>Software Technologies:</strong> {project.software_technologies.join(" · ")}
+        </p>
+      )}
+      {project.links.length > 0 && (
         <p className="experience-project-references">
           <strong>References:</strong>{" "}
-          {project.references.map((reference) => (
+          {project.links.map((reference) => (
             <a href={reference.url} key={reference.url}>
               {reference.label} ↗
             </a>

@@ -1,20 +1,20 @@
 import Link from "next/link";
-import type { PortfolioEntry, Profile } from "@/lib/schema";
-import { professionalRoles, splitProjects } from "@/lib/projects";
+import type { Portfolio, Project } from "@/lib/schema";
+import { professionalRoles, splitProjects, entryTechnologies } from "@/lib/projects";
 import { rolePeriod } from "@/lib/seo";
 import { CopyEmail } from "./CopyEmail";
 import { ExperienceProjectCard } from "./ExperienceProjectCard";
 import styles from "./Portfolio.module.css";
 
-export function Hero({ profile }: { profile: Profile }) {
+export function Hero({ portfolio }: { portfolio: Portfolio }) {
   return (
     <section className={`${styles.hero} wrap`} aria-labelledby="intro-heading">
       <div className={styles.heroMain}>
         <p className="eyebrow">
-          <span className="status-dot" /> {profile.name}
+          <span className="status-dot" /> {portfolio.name}
         </p>
-        <h1 id="intro-heading">{profile.headline}</h1>
-        <p className={styles.intro}>{profile.intro}</p>
+        <h1 id="intro-heading">{portfolio.headline_summary}</h1>
+        <p className={styles.intro}>{portfolio.engineering_philosophy}</p>
         <div className="actions">
           <a
             className="button primary"
@@ -26,15 +26,15 @@ export function Hero({ profile }: { profile: Profile }) {
           </a>
         </div>
         <p className={styles.location}>
-          <span aria-hidden="true">◎</span> {profile.location}
+          <span aria-hidden="true">◎</span> {portfolio.location}
         </p>
       </div>
     </section>
   );
 }
 
-export function Work({ entries }: { entries: PortfolioEntry[] }) {
-  const { machineLearning, softwareEngineering } = splitProjects(entries);
+export function Work({ portfolio }: { portfolio: Portfolio }) {
+  const { machineLearning, softwareEngineering } = splitProjects(portfolio);
   return (
     <section className="section wrap" id="work" aria-labelledby="work-heading">
       <div className="section-heading">
@@ -61,22 +61,23 @@ export function Work({ entries }: { entries: PortfolioEntry[] }) {
   );
 }
 
-function ProjectGroup({ title, projects }: { title: string; projects: PortfolioEntry[] }) {
+function ProjectGroup({ title, projects }: { title: string; projects: Project[] }) {
   if (projects.length === 0) return null;
   return (
     <section className={styles.projectGroup} aria-label={title}>
       <h3>{title}</h3>
       <div className={styles.stories}>
         {projects.map((project, index) => (
-          <StoryCard key={project.slug} entry={project} index={index} />
+          <StoryCard key={project.project_id} project={project} index={index} />
         ))}
       </div>
     </section>
   );
 }
 
-export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: number }) {
-  const href = entry.kind === "project" ? `/work/${entry.slug}` : `/resume#${entry.slug}`;
+export function StoryCard({ project, index }: { project: Project; index: number }) {
+  const href = `/work/${project.project_id}`;
+  const techs = entryTechnologies(project);
   return (
     <article className={styles.storyCard}>
       <div className={styles.storyNumber} aria-hidden="true">
@@ -84,33 +85,30 @@ export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: numb
       </div>
       <div className={styles.storyContent}>
         <p className="eyebrow">
-          {entry.kind === "project"
-            ? (entry.status ?? "Project")
-            : `${entry.organization} · ${entry.period}`}
+          {project.ml_technologies.length > 0 ? "Machine Learning" : "Software Engineering"}
         </p>
         <h3>
           <Link
             href={href}
             data-analytics-event="CaseStudyClick"
-            data-analytics-target={entry.slug}
+            data-analytics-target={project.project_id}
           >
-            {entry.title}
+            {project.title}
           </Link>
         </h3>
-        {entry.position && <p className={styles.roleTitle}>{entry.position}</p>}
-        <p>{entry.summary}</p>
+        <p>{project.impacts[0]?.one_line_summary ?? project.problem_statement}</p>
         <ul className="tags" aria-label="Technologies">
-          {entry.skills.slice(0, 4).map((skill) => (
-            <li key={skill}>{skill}</li>
+          {techs.all.slice(0, 4).map((tech) => (
+            <li key={tech}>{tech}</li>
           ))}
         </ul>
       </div>
       <Link
         href={href}
         className={styles.storyArrow}
-        aria-label={`Read ${entry.title}`}
+        aria-label={`Read ${project.title}`}
         data-analytics-event="CaseStudyClick"
-        data-analytics-target={entry.slug}
+        data-analytics-target={project.project_id}
       >
         <span aria-hidden="true">↗</span>
       </Link>
@@ -118,8 +116,8 @@ export function StoryCard({ entry, index }: { entry: PortfolioEntry; index: numb
   );
 }
 
-export function Experience({ entries }: { entries: PortfolioEntry[] }) {
-  const roles = professionalRoles(entries);
+export function ExperienceSection({ portfolio }: { portfolio: Portfolio }) {
+  const roles = professionalRoles(portfolio);
   return (
     <section className="section wrap" id="experience" aria-labelledby="experience-heading">
       <div className="section-heading">
@@ -137,25 +135,23 @@ export function Experience({ entries }: { entries: PortfolioEntry[] }) {
       </div>
       <div className={styles.timeline}>
         {roles.map((role) => (
-          <article key={role.slug} className={styles.role}>
-            <p className={styles.roleDate}>
-              {role.start ? rolePeriod(role.start, role.end) : role.period}
-            </p>
+          <article key={role.experience_id} className={styles.role}>
+            <p className={styles.roleDate}>{rolePeriod(role.from_date, role.to_date)}</p>
             <div>
               <h3>
-                <Link href={`/resume#${role.slug}`}>{role.organization}</Link>
+                <Link href={`/resume#${role.experience_id}`}>{role.organization}</Link>
               </h3>
-              <p className={styles.roleTitle}>{role.position}</p>
+              <p className={styles.roleTitle}>{role.title}</p>
               <p>{role.summary}</p>
-              {role.work_projects.length > 0 && (
+              {role.projects.length > 0 && (
                 <div className={styles.roleProjects}>
                   <h4>Projects</h4>
-                  {role.work_projects.map((project) => (
+                  {role.projects.map((project) => (
                     <ExperienceProjectCard key={project.title} project={project} headingLevel={5} />
                   ))}
                 </div>
               )}
-              <Link className="inline-link" href={`/resume#${role.slug}`}>
+              <Link className="inline-link" href={`/resume#${role.experience_id}`}>
                 Full role description ↗
               </Link>
             </div>
@@ -166,16 +162,16 @@ export function Experience({ entries }: { entries: PortfolioEntry[] }) {
   );
 }
 
-export function About({ profile }: { profile: Profile }) {
+export function About({ portfolio }: { portfolio: Portfolio }) {
   return (
     <section className={`${styles.about} section wrap`} id="about" aria-labelledby="about-heading">
       <div>
-        <h2 id="about-heading">My philosophy & direction</h2>
-        <p>{profile.about}</p>
+        <h2 id="about-heading">Engineering Philosophy</h2>
+        <p style={{ whiteSpace: "pre-line" }}>{portfolio.engineering_philosophy}</p>
       </div>
       <div className={styles.aboutDetails}>
         <h3>Interests</h3>
-        {profile.interests.map((interest) => (
+        {portfolio.interests.map((interest) => (
           <p key={interest}>{interest}</p>
         ))}
       </div>
@@ -183,7 +179,7 @@ export function About({ profile }: { profile: Profile }) {
   );
 }
 
-export function Contact({ profile }: { profile: Profile }) {
+export function Contact({ portfolio }: { portfolio: Portfolio }) {
   return (
     <section className={`${styles.contact} wrap`} id="connect" aria-labelledby="connect-heading">
       <div className={styles.contactBody}>
@@ -193,24 +189,28 @@ export function Contact({ profile }: { profile: Profile }) {
         <div className={styles.contactLinks}>
           <a
             className={styles.email}
-            href={`mailto:${profile.email}`}
+            href={`mailto:${portfolio.contact.email}`}
             data-analytics-event="EmailClick"
             data-analytics-location="contact"
           >
-            {profile.email} <span aria-hidden="true">↗</span>
+            {portfolio.contact.email} <span aria-hidden="true">↗</span>
           </a>
-          <CopyEmail email={profile.email} />
+          <CopyEmail email={portfolio.contact.email} />
           <div className={styles.socials}>
-            {profile.links.map((link) => (
-              <a
-                key={link.url}
-                href={link.url}
-                data-analytics-event="ProfileLinkClick"
-                data-analytics-target={link.label.toLowerCase()}
-              >
-                {link.label} ↗
-              </a>
-            ))}
+            <a
+              href={portfolio.contact.github_url}
+              data-analytics-event="ProfileLinkClick"
+              data-analytics-target="github"
+            >
+              GitHub ↗
+            </a>
+            <a
+              href={portfolio.contact.linkedin_url}
+              data-analytics-event="ProfileLinkClick"
+              data-analytics-target="linkedin"
+            >
+              LinkedIn ↗
+            </a>
           </div>
         </div>
       </div>

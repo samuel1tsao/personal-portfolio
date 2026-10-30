@@ -2,7 +2,7 @@ import Link from "next/link";
 import { StoryCard } from "@/components/Portfolio";
 import { getPortfolio } from "@/lib/api";
 import { splitProjects } from "@/lib/projects";
-import type { PortfolioEntry } from "@/lib/schema";
+import type { Project } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const instant = false;
@@ -14,8 +14,8 @@ export const metadata = pageMetadata(
 );
 
 export default async function Projects() {
-  const { entries } = await getPortfolio();
-  const { machineLearning, softwareEngineering } = splitProjects(entries);
+  const portfolio = await getPortfolio();
+  const { machineLearning, softwareEngineering } = splitProjects(portfolio);
   return (
     <main id="main" className="story-page wrap">
       <Link className="back-link" href="/resume#projects">
@@ -30,13 +30,13 @@ export default async function Projects() {
   );
 }
 
-function ProjectDirectory({ title, projects }: { title: string; projects: PortfolioEntry[] }) {
+function ProjectDirectory({ title, projects }: { title: string; projects: Project[] }) {
   return (
     <section className="project-group" aria-labelledby={`${title.replaceAll(" ", "-")}-heading`}>
       <h2 id={`${title.replaceAll(" ", "-")}-heading`}>{title}</h2>
       <div className="project-directory">
         {projects.map((project, index) => (
-          <StoryCard key={project.slug} entry={project} index={index} />
+          <StoryCard key={project.project_id} project={project} index={index} />
         ))}
       </div>
     </section>

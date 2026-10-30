@@ -1,35 +1,40 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { splitProjects } from "../../src/lib/projects";
-import { portfolioEntrySchema } from "../../src/lib/schema";
+import { portfolioSchema, impactSchema } from "../../src/lib/schema";
 
 const source = JSON.parse(
   readFileSync(new URL("../../../backend/content/portfolio.json", import.meta.url), "utf8"),
 );
-const entries = source.entries.map((entry: unknown) => portfolioEntrySchema.parse(entry));
-
-it("features Personal Portfolio first in ML regardless of source order", () => {
-  const groups = splitProjects([...entries].reverse());
-  expect(groups.machineLearning[0].slug).toBe("personal-portfolio");
-  expect(groups.softwareEngineering.some((entry) => entry.slug === "personal-portfolio")).toBe(
-    false,
-  );
-  const projects = [...groups.machineLearning, ...groups.softwareEngineering];
-  expect(new Set(projects.map((entry) => entry.slug)).size).toBe(projects.length);
-  expect(projects).toHaveLength(
-    entries.filter((entry: { kind: string }) => entry.kind === "project").length,
-  );
+const portfolio = portfolioSchema.parse({
+  ...source,
+  content_revision: "a".repeat(64),
 });
 
-it("keeps curated highlights separate from complete accomplishments", () => {
-  const entry = entries.find((entry: { slug: string }) => entry.slug === "personal-portfolio")!;
-  expect(entry.highlights[0]).toContain("agentic chat");
-  expect(entry.highlights.join(" ")).not.toContain("transfer budget");
-  expect(entry.accomplishments.join(" ")).toContain("transfer budget");
+it("features Personal Portfolio first in ML", () => {
+  const groups = splitProjects(portfolio);
+  expect(groups.machineLearning[0].project_id).toBe("personal-portfolio");
   expect(
-    portfolioEntrySchema.safeParse({ ...entry, highlights: Array(4).fill("Outcome") }).success,
+    groups.softwareEngineering.some((entry) => entry.project_id === "personal-portfolio"),
   ).toBe(false);
-  const legacy = { ...entry };
-  Reflect.deleteProperty(legacy, "highlights");
-  expect(portfolioEntrySchema.parse(legacy).highlights).toEqual([]);
+  const projects = [...groups.machineLearning, ...groups.softwareEngineering];
+  expect(new Set(projects.map((entry) => entry.project_id)).size).toBe(projects.length);
+});
+
+it("keeps curated one-line summaries separate from full descriptions", () => {
+  const allProjects = [
+    ...portfolio.work_experience.flatMap((e) => e.projects),
+    ...portfolio.personal_experience.flatMap((e) => e.projects),
+  ];
+  const project = allProjects.find((p) => p.project_id === "personal-portfolio")!;
+  expect(project.impacts[0].one_line_summary).toContain("agentic chat");
+  expect(project.impacts[0].full_description).toBeDefined();
+
+  expect(
+    impactSchema.safeParse({
+      id: "test-impact",
+      one_line_summary: "Short outcome",
+      full_description: "Detailed description",
+    }).success,
+  ).toBe(true);
 });

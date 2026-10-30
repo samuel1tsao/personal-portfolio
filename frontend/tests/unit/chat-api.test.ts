@@ -90,7 +90,7 @@ describe("chat API integration regressions (offline)", () => {
     expect(response.headers.get("x-vercel-ai-ui-message-stream")).toBe("v1");
     expect(await response.text()).toContain(ANSWER);
     expect(mocks.log).toHaveBeenCalledWith("info", "portfolio_chat_completed", { messageCount: 1 });
-    expect(JSON.stringify(model.doStreamCalls[0].prompt)).toContain(fixture.profile.name);
+    expect(JSON.stringify(model.doStreamCalls[0].prompt)).toContain(fixture.name);
     expect(JSON.stringify(model.doStreamCalls[0].prompt)).toContain(
       "What projects are you working on?",
     );

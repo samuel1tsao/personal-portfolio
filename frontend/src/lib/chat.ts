@@ -16,57 +16,60 @@ export function isChatEnabled(): boolean {
 }
 
 export function portfolioContext(portfolio: Portfolio): string {
-  const { profile, entries } = portfolio;
-  const details = entries.map((entry) => {
-    const sections = (entry.sections ?? []).map(({ title, body }) => `${title}: ${body}`);
-    const accomplishments = (entry.accomplishments ?? []).join("; ");
-    const additionalAccomplishments = (entry.additional_accomplishments ?? []).join("; ");
-    const workProjects = (entry.work_projects ?? []).map(
-      ({ title, problem, solution, impact, technologies, references }) =>
-        [
-          title,
-          `Problem: ${problem}`,
-          `Technical solution: ${solution}`,
-          `Impact: ${impact}`,
-          `Technologies: ${technologies.join(", ") || "not specified"}`,
-          `References: ${references.map((link) => `${link.label}: ${link.url}`).join("; ") || "none"}`,
-        ].join("\n"),
-    );
-    const decisions = (entry.decisions ?? []).map(
-      ({ title, choice, rationale, tradeoff }) =>
-        `${title}: Choice: ${choice} Rationale: ${rationale} Tradeoff: ${tradeoff}`,
-    );
+  const allExps = [...portfolio.work_experience, ...portfolio.personal_experience];
+  const details = allExps.map((exp) => {
+    const projects = exp.projects.map((proj) => {
+      const impacts = proj.impacts
+        .map((i) => `* Impact: ${i.one_line_summary}\n  Details: ${i.full_description}`)
+        .join("\n");
+      const links = proj.links.map((l) => `${l.label}: ${l.url}`).join("; ");
+      return [
+        `Project: ${proj.title} [id: ${proj.project_id}]`,
+        `Problem Statement: ${proj.problem_statement}`,
+        `Solution: ${proj.solution}`,
+        `Impacts:\n${impacts}`,
+        `ML Technologies: ${proj.ml_technologies.join(", ") || "None"}`,
+        `Software Technologies: ${proj.software_technologies.join(", ") || "None"}`,
+        `ML Skills: ${proj.ml_skills.join(", ") || "None"}`,
+        `Software Skills: ${proj.software_skills.join(", ") || "None"}`,
+        links ? `Links: ${links}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+    });
+
     return [
-      `${entry.title} [${entry.kind}; ${entry.slug}]`,
-      `Organization and position: ${entry.organization ?? "not applicable"}; ${entry.position ?? entry.role}`,
-      `Period and status: ${entry.period}; ${entry.status ?? "not specified"}`,
-      `Summary: ${entry.summary}`,
-      `Contribution: ${entry.contribution}`,
-      `Accomplishments: ${accomplishments || "none listed"}`,
-      `Additional accomplishments: ${additionalAccomplishments || "none listed"}`,
-      `Work projects:\n${workProjects.join("\n\n") || "none listed"}`,
-      `Skills and technologies: ${[...new Set([...(entry.skills ?? []), ...(entry.technologies ?? [])])].join(", ")}`,
-      `Sections:\n${sections.join("\n")}`,
-      `Decisions:\n${decisions.join("\n") || "No documented decisions."}`,
-      `Diagram: ${(entry.diagram ?? []).join(" → ")} (${entry.diagram_caption ?? "Conceptual flow"}) ${entry.diagram_description ?? ""}`,
-      `Evidence and limits: ${entry.evidence}`,
-      `Links: ${(entry.links ?? []).map((link) => `${link.label}: ${link.url}`).join("; ") || "none"}`,
-    ].join("\n");
+      `Experience: ${exp.organization} — ${exp.title} [id: ${exp.experience_id}, type: ${exp.type}]`,
+      `Period: ${exp.from_date ?? "Ongoing"} — ${exp.to_date ?? "Present"}`,
+      `Summary: ${exp.summary}`,
+      `ML Technologies: ${exp.ml_technologies.join(", ") || "None"}`,
+      `Software Technologies: ${exp.software_technologies.join(", ") || "None"}`,
+      `ML Skills: ${exp.ml_skills.join(", ") || "None"}`,
+      `Software Skills: ${exp.software_skills.join(", ") || "None"}`,
+      projects.length > 0 ? `Projects:\n${projects.join("\n\n")}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
   });
+
   const context = [
     "PUBLISHED PROFILE (canonical for current public facts)",
-    `Name: ${profile.name}`,
-    `Headline: ${profile.headline}`,
-    `Introduction: ${profile.intro}`,
-    `Contact email: ${profile.email}`,
-    `Profiles: ${profile.links.map((link) => `${link.label}: ${link.url}`).join("; ")}`,
-    `About: ${profile.about}`,
-    `Education: ${profile.education.join("; ")}`,
-    `Skills: ${profile.skills.join(", ")}`,
-    `Interests: ${profile.interests.join("; ")}`,
+    `Name: ${portfolio.name}`,
+    `Headline: ${portfolio.headline_summary}`,
+    `Location: ${portfolio.location}`,
+    `Contact email: ${portfolio.contact.email}`,
+    `Profiles: GitHub: ${portfolio.contact.github_url}; LinkedIn: ${portfolio.contact.linkedin_url}`,
+    `Engineering Philosophy: ${portfolio.engineering_philosophy}`,
+    `Education: ${portfolio.education.join("; ")}`,
+    `ML Skills: ${portfolio.ml_skills.join(", ")}`,
+    `Software Skills: ${portfolio.software_skills.join(", ")}`,
+    `ML Technologies: ${portfolio.ml_technologies.join(", ")}`,
+    `Software Technologies: ${portfolio.software_technologies.join(", ")}`,
+    `Interests: ${portfolio.interests.join("; ")}`,
     `Complete published experience and project entries:\n${details.join("\n\n")}`,
     "LinkedIn is listed as a profile link; this application does not fetch live LinkedIn data.",
   ].join("\n\n");
+
   if (context.length > MAX_CHAT_CONTEXT_CHARS) {
     throw new Error("Published chat context exceeds its configured size limit.");
   }

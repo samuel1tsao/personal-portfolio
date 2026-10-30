@@ -15,12 +15,7 @@ def read_portfolio(path: Path = CONTENT_PATH) -> dict:
 
 
 def published_content(portfolio: Portfolio) -> dict:
-    # Readable functions use the scoped size/nesting exception approved on 2026-10-20.
     result = portfolio.model_dump(mode="json")
-    result["entries"] = sorted(
-        [entry for entry in result["entries"] if entry["published"]],
-        key=lambda entry: entry["order"],
-    )
     canonical = json.dumps(result, sort_keys=True, separators=(",", ":")).encode()
     result["content_revision"] = hashlib.sha256(canonical).hexdigest()
     return result

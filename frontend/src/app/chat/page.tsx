@@ -13,7 +13,11 @@ export const metadata: Metadata = pageMetadata(
 export const instant = false;
 
 export default async function ChatPage() {
-  const { profile } = await getPortfolio();
+  const portfolio = await getPortfolio();
+  const links = [
+    { label: "GitHub", url: portfolio.contact.github_url },
+    { label: "LinkedIn", url: portfolio.contact.linkedin_url },
+  ];
   return (
     <main id="main" className={`wrap ${styles.page}`}>
       <p className="eyebrow">A little more about my work</p>
@@ -21,11 +25,7 @@ export default async function ChatPage() {
       <p className={styles.lede}>
         Explore my experience and published projects, or find the best way to connect.
       </p>
-      <ChatAgent
-        enabled={isChatEnabled()}
-        email={profile.email}
-        links={profile.links.map(({ label, url }) => ({ label, url }))}
-      />
+      <ChatAgent enabled={isChatEnabled()} email={portfolio.contact.email} links={links} />
     </main>
   );
 }

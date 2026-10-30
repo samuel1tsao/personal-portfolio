@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import type { PortfolioEntry } from "@/lib/schema";
+import type { Project, Experience } from "@/lib/schema";
 import { detailAnchor } from "@/lib/detail-links";
 
 function focusTarget() {
@@ -15,17 +15,19 @@ function observeTarget() {
   return () => window.removeEventListener("hashchange", focusTarget);
 }
 
-// JSX components follow the existing component-length exception in Shell.tsx.
-export function DetailNavigation({ entry }: { entry: PortfolioEntry }) {
-  useEffect(observeTarget, [entry.slug]);
+export function DetailNavigation({ item }: { item: Project | Experience }) {
+  const itemId = "project_id" in item ? item.project_id : item.experience_id;
+  useEffect(observeTarget, [itemId]);
+
   const targets =
-    entry.kind === "project"
+    "project_id" in item
       ? [
           ["problem", "Problem"],
           ["solution", "Solution"],
           ["impact", "Impact & accomplishments"],
         ]
-      : entry.work_projects.map((project) => [detailAnchor(project.title), project.title]);
+      : item.projects.map((project) => [detailAnchor(project.title), project.title]);
+
   if (!targets.length) return null;
   return (
     <nav className="overview-nav" aria-label="On this page">
