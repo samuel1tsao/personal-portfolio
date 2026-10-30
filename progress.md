@@ -91,3 +91,12 @@ Retro: no guidance changes needed. Existing source and rendered-page checks were
 - DONE — 35 backend tests, 67 frontend unit/integration tests and 22 browser checks pass, including exact complete technology lines at 320px/1440px, print visibility, no horizontal overflow and full detail-page coverage. Typecheck, scoped ESLint/Prettier and whitespace checks pass. No provider calls.
 
 Retro: no durable guidance change needed; reuse the shared technology union and exact rendered-list assertions to prevent future truncation or employer-project omissions.
+
+## Impact-led comprehensive overview
+
+- DONE — Featured Personal Portfolio first in machine learning projects on both directories and overview, regardless of input ordering. Lead copy with the agentic chat workflow, conversational exploration, shared grounding and the path to full case studies.
+- DONE — Added bounded `highlights` to both content schemas and curated impact/capability highlights for every visible entry. The overview renders these separately from full accomplishments; routine implementation and verification details remain on full pages. Scientific uncertainty and team attribution remain explicit; no unmeasured recruitment benefit is presented as a measured result.
+- DONE — Removed print/PDF marketing and stale printable-resume claims from the overview, README and portfolio case study. The page is a comprehensive career/project overview, separate from a condensed one-page resume. Existing generic print CSS does not constitute a resume-download feature.
+- DONE — 37 backend tests, 69 frontend tests and 21 browser tests pass. Coverage includes schema limits/backward compatibility, ordering from reversed input, exact overview highlights, absent print claims and all 19 detail pages. Typecheck, scoped lint/formatting and whitespace checks pass. No provider requests made.
+
+Retro: repeated user corrections showed that automatically selecting the first three detailed accomplishments promoted routine tasks over impact. Recorded the project-level editorial rule in AGENTS.md and added separate highlight data plus regression checks, preventing that selection mechanism from returning.

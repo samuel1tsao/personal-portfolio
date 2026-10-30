@@ -24,6 +24,7 @@ export const portfolioEntrySchema = z.object({
   contribution: text,
   status: text.nullable(),
   accomplishments: z.array(text),
+  highlights: z.array(text).max(3).default([]),
   additional_accomplishments: z.array(text).default([]),
   work_projects: z.array(experienceProject).max(8).default([]),
   related_projects: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).default([]),

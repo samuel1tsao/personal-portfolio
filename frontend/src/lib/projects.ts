@@ -10,6 +10,7 @@ export function entryTechnologies(entry: PortfolioEntry) {
 }
 
 const ML_PROJECT_SLUGS = new Set([
+  "personal-portfolio",
   "asset-recommendation-engine",
   "fog-density-detection",
   "asr-bias-research",
@@ -25,8 +26,14 @@ export function professionalRoles(entries: PortfolioEntry[]) {
 
 export function splitProjects(entries: PortfolioEntry[]) {
   const projects = entries.filter((entry) => entry.kind === "project");
+  const featured = projects.filter((project) => project.slug === "personal-portfolio");
   return {
-    machineLearning: projects.filter((project) => ML_PROJECT_SLUGS.has(project.slug)),
+    machineLearning: [
+      ...featured,
+      ...projects.filter(
+        (project) => project.slug !== "personal-portfolio" && ML_PROJECT_SLUGS.has(project.slug),
+      ),
+    ],
     softwareEngineering: projects.filter((project) => !ML_PROJECT_SLUGS.has(project.slug)),
   };
 }

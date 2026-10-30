@@ -8,7 +8,7 @@ A personal portfolio for software engineering and applied ML work. The site brin
 
 - **Home:** Introduction, engineering philosophy, interests, and contact links.
 - **Projects and case studies:** Browse published projects at `/projects` or read a project story at `/work/<slug>`.
-- **Resume & Work:** Scan every role and project at `/resume`, then open full-entry links or linked employer-project titles for the details. Use Print / Save as PDF for the concise overview.
+- **Resume & Work:** Explore the comprehensive career and project overview at `/resume`, with curated impact highlights and links to full case studies. This page is separate from a condensed one-page resume. Personal Portfolio leads the machine learning projects with its agentic chat workflow.
 - **Portfolio chat:** Ask about Samuel’s experience, projects, or how to connect at `/chat`. A pinned button also opens chat while browsing. Responses use published portfolio content; email and profile links are available directly.
 - **Accessible and discoverable pages:** Responsive layouts, keyboard navigation, page metadata, structured profile data, sitemap, and production-only indexing.
 

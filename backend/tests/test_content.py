@@ -29,6 +29,25 @@ def test_public_content_and_entry():
     assert client.get(f"/api/v1/entries/{slug}").json() == content["entries"][0]
 
 
+def test_published_overview_entries_have_curated_impact_highlights(source):
+    portfolio = Portfolio.model_validate(source)
+    for entry in portfolio.entries:
+        if entry.published and entry.slug != "personal":
+            assert 1 <= len(entry.highlights) <= 3
+    project = next(entry for entry in portfolio.entries if entry.slug == "personal-portfolio")
+    assert "agentic chat" in project.highlights[0]
+    assert "printable" not in str(project.model_dump()).lower()
+
+
+def test_highlight_limit_and_backwards_compatibility(source):
+    entry = source["entries"][0]
+    entry.pop("highlights")
+    assert Portfolio.model_validate(source).entries[0].highlights == ()
+    entry["highlights"] = ["Outcome"] * 4
+    with pytest.raises(ValueError):
+        Portfolio.model_validate(source)
+
+
 def test_experience_entries_have_structured_projects(source):
     portfolio = Portfolio.model_validate(source)
     experiences = [entry for entry in portfolio.entries if entry.kind == "experience"]

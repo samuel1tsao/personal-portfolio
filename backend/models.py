@@ -61,6 +61,7 @@ class PortfolioEntry(ContentModel):
     contribution: Text
     status: Text | None = None
     accomplishments: tuple[Text, ...] = ()
+    highlights: tuple[Text, ...] = Field(default=(), max_length=3)
     additional_accomplishments: tuple[Text, ...] = ()
     work_projects: tuple[ExperienceProject, ...] = Field(default=(), max_length=8)
     related_projects: tuple[Slug, ...] = ()

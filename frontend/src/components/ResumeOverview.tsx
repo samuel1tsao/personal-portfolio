@@ -1,6 +1,6 @@
 import type { PortfolioEntry } from "@/lib/schema";
 import { entryTechnologies } from "@/lib/projects";
-import { detailAnchor, detailPath, SUMMARY_BULLET_LIMIT } from "@/lib/detail-links";
+import { detailAnchor, detailPath } from "@/lib/detail-links";
 
 // JSX components follow the existing component-length exception in Shell.tsx.
 export function Technologies({ entry }: { entry: PortfolioEntry }) {
@@ -15,8 +15,8 @@ export function Technologies({ entry }: { entry: PortfolioEntry }) {
 
 export function AchievementList({ entry }: { entry: PortfolioEntry }) {
   return (
-    <ul className="resume-accomplishments">
-      {entry.accomplishments.slice(0, SUMMARY_BULLET_LIMIT).map((item) => (
+    <ul className="resume-accomplishments" aria-label="Impact highlights">
+      {entry.highlights.map((item) => (
         <li key={item}>{item}</li>
       ))}
     </ul>

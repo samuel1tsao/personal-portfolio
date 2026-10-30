@@ -3,7 +3,6 @@ import type { PortfolioEntry } from "./schema";
 const ANCHOR_HASH_BITS = 64;
 const ANCHOR_HASH_PRIME = 1099511628211n;
 const ANCHOR_HASH_SEED = 14695981039346656037n;
-export const SUMMARY_BULLET_LIMIT = 3;
 export const detailPath = (entry: PortfolioEntry) =>
   `/${entry.kind === "project" ? "work" : "experience"}/${entry.slug}`;
 export const detailAnchor = (text: string) =>

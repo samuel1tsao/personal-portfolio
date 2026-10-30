@@ -27,7 +27,9 @@ export default async function Resume() {
       <p>
         {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </p>
-      <p className="resume-note">Web resume · Use your browser’s Print / Save as PDF for a copy.</p>
+      <p className="resume-note">
+        A comprehensive overview of my experience and projects, with full case studies linked below.
+      </p>
       <p className="resume-links">
         {profile.links.map((link) => (
           <a key={link.url} href={link.url}>

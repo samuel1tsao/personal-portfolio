@@ -52,8 +52,9 @@ test("project directory separates ML and software engineering projects", async (
   await expect(
     page
       .locator(".project-directory article h3 a")
-      .evaluateAll((links) => links.slice(0, 7).map((link) => link.getAttribute("href"))),
+      .evaluateAll((links) => links.slice(0, 8).map((link) => link.getAttribute("href"))),
   ).resolves.toEqual([
+    "/work/personal-portfolio",
     "/work/asset-recommendation-engine",
     "/work/fog-density-detection",
     "/work/asr-bias-research",
@@ -84,13 +85,19 @@ test("overview lists every role and project without full case studies", async ({
   for (const entry of portfolio.entries.filter(
     (entry: { published: boolean; slug: string }) => entry.published && entry.slug !== "personal",
   )) {
-    await expect(page.locator(`article[id="${entry.slug}"]`)).toBeVisible();
+    const card = page.locator(`article[id="${entry.slug}"]`);
+    await expect(card).toBeVisible();
+    await expect(card.locator(".resume-accomplishments li")).toHaveText(entry.highlights);
   }
   await expect(page.locator(".project-case-study")).toHaveCount(0);
   await expect(page.locator("details")).toHaveCount(0);
   await expect(page.getByRole("link", { name: /Read details/ })).toHaveCount(0);
   await expect(page.locator(".resume-accomplishments a")).toHaveCount(0);
   await expect(page.locator("main")).not.toContainText("the resume notes");
+  await expect(page.locator("main")).not.toContainText(/Print \/ Save|printable/i);
+  await expect(
+    page.locator(".resume-project-group").first().locator("article").first(),
+  ).toHaveAttribute("id", "personal-portfolio");
   await page.screenshot({ path: "artifacts/resume-overview.png", fullPage: true });
   await page.emulateMedia({ media: "print" });
   await expect(page.locator(".overview-nav")).toBeHidden();
